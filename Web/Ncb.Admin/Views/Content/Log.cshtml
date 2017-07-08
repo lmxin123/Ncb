@@ -1,0 +1,110 @@
+﻿@using Framework.Common.Extensions;
+@using Framework.Common;
+@model ContentQueryViewModel
+@{
+    Layout = "~/Views/Shared/_LayoutTab.cshtml";
+    ViewBag.Title = "访问记录";
+}
+@section styles{
+    <link href="~/content/tables.css" type="text/css" rel="stylesheet" />
+    <link href="~/content/bootstrap.datepicker.css" type="text/css" rel="stylesheet">
+    <style>
+        .table-wrapper .table ul.actions {
+            float: none;
+        }
+
+        .table-wrapper, .table-wrapper .filter-block {
+            margin-bottom: 15px;
+        }
+
+            .table-wrapper td {
+                white-space: nowrap;
+                overflow: hidden;
+            }
+    </style>
+}
+
+<div id="pad-wrapper" ng-app="logApp" ng-controller="LogCtrl">
+    <div class="table-wrapper products-table section">
+        <form id="queryForm" class="form-inline">
+            <div class="row filter-block">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.AccessType):
+                    @Html.DropDownListFor(m => m.AccessType, EnumExtensions.GetDisplayNames<AccessTypes, string>(), new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.StartDate):
+                    @Html.TextBoxFor(m => m.StartDate, new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.EndDate):
+                    @Html.TextBoxFor(m => m.EndDate, new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        @Html.TextBoxFor(m => m.QueryText, new { @class = "form-control", placeholder = "请输入内容相关信息" })
+                        <span class="input-group-btn">
+                            <a href="javascript:;" class="btn btn-primary" ng-click="getList($event)">搜  索</a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="row">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th class="col-md-1">
+                            <span class="line"></span>
+                            @Html.DisplayNameFor(m => m.Title)
+                        </th>
+                        <th class="col-md-1">
+                            <span class="line"></span>
+                            @Html.DisplayNameFor(m => m.SubTitle)
+                        </th>
+                        <th class="col-md-1">
+                            <span class="line"></span>
+                            @Html.DisplayNameFor(m => m.AccessType)
+                        </th>
+                        <th class="col-md-1">
+                            <span class="line"></span>
+                            @Html.DisplayNameFor(m => m.FreeDate)
+                        </th>
+                        <th class="col-md-1">
+                            <span class="line"></span>
+                            @Html.DisplayNameFor(m => m.CreateDate)
+                        </th>
+                        <th class="col-md-1">
+                            <span class="line"></span>
+                            @Html.DisplayNameFor(m => m.Operator)
+                        </th>
+                        @*<th class="col-md-1">
+                            <span class="line"></span>
+                            @Html.DisplayNameFor(m => m.RecordState)
+                        </th>*@
+                        <th class="col-md-1">
+                            <span class="line"></span>
+                            @Html.DisplayNameFor(m => m.Remark)
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="c in List">
+                        <td ng-bind="c.Title"></td>
+                        <td ng-bind="c.SubTitle"></td>
+                        <td ng-bind="c.AccessTypeDisplay"></td>
+                        <td ng-bind="c.FreeDate"></td>
+                        <td ng-bind="c.CreateDateDisplay"></td>
+                        <td ng-bind="c.Operator"></td>
+                        <td ng-bind="c.Remark"></td>
+                    </tr>
+                </tbody>
+            </table>
+            @Html.Partial("_PaginationPartial")
+        </div>
+    </div>
+</div>
+@section scripts{
+    @Scripts.Render("~/bundles/angular")
+    <script src="~/Scripts/page/content.log.js"></script>
+}

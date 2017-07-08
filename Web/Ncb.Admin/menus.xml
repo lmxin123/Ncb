@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Menus>
+  <Menu Code="01" Name="首页" Url="/home/index" Icon="icon-home"/>
+  <Menu Code="02" Name="内容管理" Icon="icon-reorder">
+    <SubMenu SubCode="0201" Name="添加内容" Url="/content/create" Select="true" Create="true" Update="true" Delete="false" Auditing="false"/>
+    <SubMenu SubCode="0202" Name="内容列表" Url="/content/index" Select="true" Create="true" Update="true" Delete="true" Auditing="false"/>
+    <SubMenu SubCode="0203" Name="访问记录" Url="/content/log" Select="true" Create="false" Update="false" Delete="false" Auditing="false"/>
+  </Menu>
+  <Menu Code="03" Name="用户管理" Icon="icon-desktop">
+    <SubMenu SubCode="0301" Name="用户列表" Url="/device/index" Select="true" Create="true" Update="true" Delete="true" Auditing="false"/>
+    <SubMenu SubCode="0302" Name="用户分类" Url="/deviceCategory/index" Select="true" Create="true" Update="true" Delete="true" Auditing="false"/>
+    <SubMenu SubCode="0303" Name="充值记录" Url="/device/rechargeLog" Select="true" Create="true" Update="true" Delete="true" Auditing="false"/>
+  </Menu>
+  <Menu Code="09" Name="系统管理" Icon="icon-cog">
+    <SubMenu SubCode="0901" Name="区域管理" Url="/openArea/index" Select="true" Create="true" Update="true" Delete="true" Auditing="false"/>
+    <SubMenu SubCode="0902" Name="管理员" Url="/user/index" Select="true" Create="true" Update="true" Delete="true" Auditing="false"/>
+    <SubMenu SubCode="0903" Name="角色管理" Url="/role/index" Select="true" Create="true" Update="true" Delete="true" Auditing="false"/>
+    <SubMenu SubCode="0904" Name="权限管理" Url="/right/index" Select="true" Create="true" Update="true" Delete="true" Auditing="false"/>
+  </Menu>
+</Menus>
