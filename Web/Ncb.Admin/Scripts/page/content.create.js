@@ -59,29 +59,29 @@
                     common.clearValErrorMsg(contentContainer.attr('id'));
                 }
 
-                if (tbody.find('tr').length === 0) {
-                    fileContainer.addClass(errClass);
-                    errorMsg.push('请选择封面图片！');
-                    validError = true;
-                }
-                else if (tbody.find(':disabled').length > 0 && fileContainer.find('.error').text() !== '') {
-                    fileContainer.find('.error').each(function () {
-                        var $this = $(this);
-                        if ($this.text().trim().length) {
-                            $this.parents('tr').addClass(errClass)
-                        }
-                    });
-                    errorMsg.push('请取消无效文件！');
-                    validError = true;
-                }
-                else {
-                    fileContainer.find('.error').each(function () {
-                        var $this = $(this);
-                        if ($this.text().trim().length) {
-                            $this.parents('tr').removeClass(errClass)
-                        }
-                    });
-                }
+                //if (fileContainer.find('tr').length === 0) {
+                //    fileContainer.addClass(errClass);
+                //    errorMsg.push('请选择封面图片！');
+                //    validError = true;
+                //}
+                //else if (fileContainer.find(':disabled').length > 0 && fileContainer.find('.error').text() !== '') {
+                //    fileContainer.find('.error').each(function () {
+                //        var $this = $(this);
+                //        if ($this.text().trim().length) {
+                //            $this.parents('tr').addClass(errClass)
+                //        }
+                //    });
+                //    errorMsg.push('请取消无效文件！');
+                //    validError = true;
+                //}
+                //else {
+                //    fileContainer.find('.error').each(function () {
+                //        var $this = $(this);
+                //        if ($this.text().trim().length) {
+                //            $this.parents('tr').removeClass(errClass)
+                //        }
+                //    });
+                //}
 
                 if (validError) {
                     if (errorMsg.length > 0)
@@ -105,12 +105,6 @@
             }
         });
 
-        var jqXHR = form.fileupload({
-            dataType: 'json',
-            maxNumberOfFiles: 1,
-            maxFileSize: 1024 * 1024 * 5,
-            acceptFileTypes: /(\.|\/)(gif|jpe?g|png|)$/i
-        });
 
     });
 })($, document);

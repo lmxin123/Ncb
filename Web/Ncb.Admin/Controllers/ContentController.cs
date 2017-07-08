@@ -101,10 +101,15 @@ namespace Ncb.Admin.Controllers
                 if (Request.Files.Count > 0)
                 {
                     var banner = Request.Files[0];
-                    var filePath = (AppSetting.BannerPath + id) + Utility.GetFileSuffix(banner.FileName);
-                    if (System.IO.File.Exists(filePath))
-                        System.IO.File.Delete(filePath);
-                    banner.SaveAs(filePath);
+                    var filePath = AppSetting.BannerPath;
+                    var fileName = filePath + id + Utility.GetFileSuffix(banner.FileName);
+                    if (!System.IO.Directory.Exists(filePath))
+                        System.IO.Directory.CreateDirectory(filePath);
+
+                    if (System.IO.File.Exists(fileName))
+                        System.IO.File.Delete(fileName);
+                       
+                    banner.SaveAs(fileName);
                 }
 
                 if (string.IsNullOrEmpty(model.ID))

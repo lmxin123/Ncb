@@ -9,28 +9,6 @@
 }
 @section styles{
     <link href="~/Content/bootstrap-datetimepicker.min.css" rel="stylesheet" />
-    @Styles.Render("~/Content/jQuery-File-Upload")
-    <style>
-        .files audio, .files video {
-            width: 150px;
-            min-width: 150px;
-        }
-
-        .media-left {
-            width: 140px;
-            min-width: 140px;
-        }
-
-        .media-right {
-            vertical-align: middle;
-        }
-
-        .progress {
-            height: 5px;
-            margin-bottom: 0;
-            margin-top: 5px;
-        }
-    </style>
 }
 @model ContentModel
 @using Framework.Common;
@@ -62,14 +40,7 @@
                     @Html.DisplayNameFor(m => m.Banner)<span class="hdy-red">*</span>
                 </label>
                 <div class="col-sm-6" id="fileContainer">
-                    <span class="btn btn-success fileinput-button">
-                        <i class="glyphicon glyphicon-plus"></i>
-                        <span>选择文件</span>
-                        <input id="Banner" type="file" name="Banner">
-                    </span>
-                    <table role="presentation" class="table">
-                        <tbody class="files"></tbody>
-                    </table>
+                    <input id="Banner" type="file" name="Banner">
                 </div>
             </div>
             <div class="form-group">
@@ -218,8 +189,7 @@
 @section scripts{
     <script src="~/Scripts/bootstrap-datetimepicker.min.js"></script>
     <script src="~/Scripts/bootstrap-datetimepicker.zh-CN.js"></script>
-    <script src="~/Scripts/ueditor/ueditor.config.js"></script>
-    <script src="~/Scripts/ueditor/ueditor.all.min.js"></script>
-    @Scripts.Render("~/bundles/jQuery-File-Upload")
+    <script src="~/ueditor/ueditor.config.js"></script>
+    <script src="~/ueditor/ueditor.all.min.js"></script>
     <script src="~/Scripts/page/content.create.js"></script>
 }
