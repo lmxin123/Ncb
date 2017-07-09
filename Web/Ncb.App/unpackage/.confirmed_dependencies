@@ -1,44 +1,65 @@
 {
-	"index.html": {
-		"resources": [
-			"js/mui.min.js",
-			"fonts/mui.ttf",
-			"css/mui.min.css",
-			"js/update.js",
-			"js/content.index.js",
-			"html/content-index.html"
-		],
-		"refer": [
-			"index-menu.html",
-			"examples/best-practices/list-to-detail/listview.html",
-			"html/setting.html",
-			"html/content-detail.html",
-			"html/content-index.html"
-		]
-	},
-	"examples/best-practices/list-to-detail/detail.html": {
-		"resources": [
-			"examples/best-practices/list-to-detail/list-to-detail.css",
-			"css/mui.min.css"
-		]
-	},
-	"examples/best-practices/list-to-detail/listview.html": {
-		"resources": [
-			"css/mui.min.css",
-			"examples/best-practices/list-to-detail/vue.min.js"
-		],
-		"refer": [
-			"examples/best-practices/list-to-detail/detail.html"
-		]
-	},
-	"html/content-detail.html": {
-		"resources": [
-			"css/mui.min.css"
-		]
-	},
-	"html/content-index.html": {
-		"resources": [
-			"js/vue.min.js"
-		]
-	}
+  "index.html": {
+    "resources": [
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "js/update.js",
+      "js/content.index.js",
+      "html/content-index.html",
+      "js/common.js"
+    ],
+    "refer": [
+      "index-menu.html",
+      "examples/best-practices/list-to-detail/listview.html",
+      "html/setting.html",
+      "html/content-detail.html",
+      "html/content-index.html",
+      "html/guide.html"
+    ]
+  },
+  "examples/best-practices/list-to-detail/detail.html": {
+    "resources": [
+      "examples/best-practices/list-to-detail/list-to-detail.css",
+      "css/mui.min.css"
+    ],
+    "refer": []
+  },
+  "examples/best-practices/list-to-detail/listview.html": {
+    "resources": [
+      "css/mui.min.css",
+      "examples/best-practices/list-to-detail/vue.min.js"
+    ],
+    "refer": [
+      "examples/best-practices/list-to-detail/detail.html"
+    ]
+  },
+  "html/content-detail.html": {
+    "resources": [
+      "css/mui.min.css",
+      "js/mui.min.js",
+      "css/content.detail.css",
+      "js/vue.min.js"
+    ],
+    "refer": []
+  },
+  "html/content-index.html": {
+    "resources": [
+      "js/vue.min.js",
+      "css/mui.min.css"
+    ],
+    "refer": [
+      "html/content-detail.html"
+    ]
+  },
+  "html/setting.html": {
+    "resources": [
+      "css/mui.min.css",
+      "css/feedback.css",
+      "images/logo.png",
+      "js/feedback.js",
+      "js/mui.view.js"
+    ],
+    "refer": []
+  }
 }

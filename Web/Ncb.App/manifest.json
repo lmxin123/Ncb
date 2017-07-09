@@ -45,9 +45,7 @@
 		"XMLHttpRequest": {
 			"description": "跨域网络访问"
 		},
-		"Speech": {
-			"description": "管理语音识别插件"
-		},
+		
 		"Zip": {
 			"description": "文件压缩与解压缩"
 		},
@@ -100,7 +98,7 @@
 				"keystore": "",/*Android必选，打包证书文件*/
 				"password": "",/*Android必选，打包证书密码*/
 				"aliasname": "",/*Android必选，打包证书别名*/
-				"permissions": ["<uses-permission android:name=\"android.permission.RECORD_AUDIO\"/>","<uses-permission android:name=\"android.permission.CHANGE_NETWORK_STATE\"/>","<uses-feature android:name=\"android.hardware.camera\"/>","<uses-permission android:name=\"android.permission.MODIFY_AUDIO_SETTINGS\"/>","<uses-permission android:name=\"android.permission.READ_PHONE_STATE\"/>","<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>","<uses-permission android:name=\"android.permission.VIBRATE\"/>","<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>","<uses-permission android:name=\"android.permission.CALL_PHONE\"/>","<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>","<uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\"/>","<uses-permission android:name=\"android.permission.CAMERA\"/>"]
+				"permissions": ["<uses-permission android:name=\"android.permission.RECORD_AUDIO\"/>","<uses-permission android:name=\"android.permission.MODIFY_AUDIO_SETTINGS\"/>","<uses-feature android:name=\"android.hardware.camera\"/>","<uses-permission android:name=\"android.permission.READ_PHONE_STATE\"/>","<uses-permission android:name=\"android.permission.VIBRATE\"/>","<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>","<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>","<uses-permission android:name=\"android.permission.CALL_PHONE\"/>","<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>","<uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\"/>","<uses-permission android:name=\"android.permission.CAMERA\"/>"]
 				/*使用 Native.js 调用原生安卓 API 需要申请的系统权限，用户可以添加多个权限的字符串*/
 			},
 			"orientation": ["portrait-primary", "landscape-primary", "portrait-secondary", "landscape-secondary"],/*必选*/
@@ -177,13 +175,15 @@
 					"js/update.js",
 					"list.html",
 					"js/content.index.js",
-					"html/content-index.html"
+					"html/content-index.html",
+					"js/common.js"
 				],
 				"refer": [
 					"index-menu.html",
 					"examples/best-practices/list-to-detail/listview.html",
 					"html/setting.html",
-					"html/content-detail.html"
+					"html/content-detail.html",
+					"html/guide.html"
 				],
 				"priority": 0
 			},
@@ -1048,14 +1048,31 @@
 			},
 			"html/content-detail.html": {
 				"resources": [
-					"css/mui.min.css"
+					"css/mui.min.css",
+					"js/mui.min.js",
+					"css/content.detail.css",
+					"js/vue.min.js"
 				],
 				"refer": [],
 				"priority": 0
 			},
 			"html/content-index.html": {
 				"resources": [
-					"js/vue.min.js"
+					"js/vue.min.js",
+					"css/mui.min.css"
+				],
+				"refer": [
+					"html/content-detail.html"
+				],
+				"priority": 0
+			},
+			"html/setting.html": {
+				"resources": [
+					"css/mui.min.css",
+					"css/feedback.css",
+					"images/logo.png",
+					"js/feedback.js",
+					"js/mui.view.js"
 				],
 				"refer": [],
 				"priority": 0
