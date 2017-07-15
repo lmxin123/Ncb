@@ -176,12 +176,14 @@
 					"list.html",
 					"js/content.index.js",
 					"html/content-index.html",
-					"js/common.js"
+					"js/common.js",
+					"html/main.html",
+					"html/about.html",
+					"html/setting.html"
 				],
 				"refer": [
 					"index-menu.html",
 					"examples/best-practices/list-to-detail/listview.html",
-					"html/setting.html",
 					"html/content-detail.html",
 					"html/guide.html"
 				],
@@ -1072,7 +1074,45 @@
 					"css/feedback.css",
 					"images/logo.png",
 					"js/feedback.js",
-					"js/mui.view.js"
+					"js/mui.view.js",
+					"html/about.html",
+					"js/mui.min.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"html/tab-webview-subpage-contact.html": {
+				"resources": [
+					"images/60x60.gif"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"html/main.html": {
+				"resources": [
+					"html/tab-webview-subpage-about.html",
+					"css/mui.min.css",
+					"html/content-index.html"
+				],
+				"refer": [
+					"html/tab-webview-subpage-chat.html",
+					"html/tab-webview-subpage-contact.html",
+					"html/setting.html"
+				],
+				"priority": 0
+			},
+			"html/tab-webview-subpage-about.html": {
+				"resources": [
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"html/about.html": {
+				"resources": [
+					"images/qrcode.png",
+					"css/mui.min.css",
+					"js/mui.min.js"
 				],
 				"refer": [],
 				"priority": 0

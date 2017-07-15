@@ -25,11 +25,12 @@
 				color: #8f8f94;
 			}
 			
-			.meta-info .author,.meta-info .time{
+			.meta-info .author,
+			.meta-info .time {
 				display: inline-block;
 			}
 			
-			.meta-info .time{
+			.meta-info .time {
 				float: right;
 			}
 			
@@ -68,6 +69,7 @@
 			}
 		</style>
 	</head>
+
 	<body>
 		<div class="mui-content" id="news">
 			<!--顶部banner图 开始-->
@@ -147,8 +149,8 @@
 									guid: rsp.post_id,
 									title: rsp.title,
 									cover: rsp.cover,
-									author:rsp.author_name,
-									time:dateUtils.format(rsp.published_at)
+									author: rsp.author_name,
+									time: dateUtils.format(rsp.published_at)
 								};
 							});
 
@@ -196,7 +198,7 @@
 				var author = this.querySelector(".author").innerHTML;
 				var time = this.querySelector(".time").innerHTML;
 				var cover = this.querySelector("img").getAttribute("src");
-				open_detail(guid, title,author,time,cover);
+				open_detail(guid, title, author, time, cover);
 			});
 
 			/**
@@ -205,7 +207,7 @@
 			 * @param {String} guid 新闻ID
 			 * @param {String} title  新闻标题
 			 */
-			function open_detail(guid, title,author,time,cover) {
+			function open_detail(guid, title, author, time, cover) {
 				//若详情页尚未预加载完成，则延时等待再执行
 				if(!webview_detail) {
 					setTimeout(function() {
@@ -215,10 +217,10 @@
 				//触发子窗口变更新闻详情
 				mui.fire(webview_detail, 'get_detail', {
 					guid: guid,
-					title:title,
-					author:author,
-					time:time,
-					cover:cover
+					title: title,
+					author: author,
+					time: time,
+					cover: cover
 				});
 
 				//更改详情页原生导航条信息
@@ -226,9 +228,9 @@
 				webview_detail.setStyle({
 					"titleNView": titleNView
 				});
-				setTimeout(function () {
+				setTimeout(function() {
 					webview_detail.show("slide-in-right", 300);
-				},150);
+				}, 150);
 			}
 
 			/**
@@ -245,7 +247,7 @@
 						title: item.title,
 						author: item.author_name,
 						cover: item.cover,
-						time:dateUtils.format(item.published_at)
+						time: dateUtils.format(item.published_at)
 					});
 				});
 				return newItems;
@@ -280,15 +282,15 @@
 					if(diff < this.UNITS['天']) {
 						return this.humanize(diff);
 					}
-					
+
 					var _format = function(number) {
 						return(number < 10 ? ('0' + number) : number);
 					};
 					return date.getFullYear() + '/' + _format(date.getMonth() + 1) + '/' + _format(date.getDay()) + '-' + _format(date.getHours()) + ':' + _format(date.getMinutes());
 				},
-				parse:function (str) {//将"yyyy-mm-dd HH:MM:ss"格式的字符串，转化为一个Date对象
+				parse: function(str) { //将"yyyy-mm-dd HH:MM:ss"格式的字符串，转化为一个Date对象
 					var a = str.split(/[^0-9]/);
-					return new Date (a[0],a[1]-1,a[2],a[3],a[4],a[5] );
+					return new Date(a[0], a[1] - 1, a[2], a[3], a[4], a[5]);
 				}
 			};
 		</script>
