@@ -102,13 +102,15 @@ namespace Ncb.Admin.Controllers
                 {
                     var banner = Request.Files[0];
                     var filePath = AppSetting.BannerPath;
-                    var fileName = filePath + id + Utility.GetFileSuffix(banner.FileName);
+                    model.Suffix = Utility.GetFileSuffix(banner.FileName);
+
+                    var fileName = filePath + id + model.Suffix;
                     if (!System.IO.Directory.Exists(filePath))
                         System.IO.Directory.CreateDirectory(filePath);
 
                     if (System.IO.File.Exists(fileName))
                         System.IO.File.Delete(fileName);
-                       
+
                     banner.SaveAs(fileName);
                 }
 
@@ -129,59 +131,6 @@ namespace Ncb.Admin.Controllers
             }
         }
 
-        /// <summary>
-        /// 上传封面
-        /// </summary>
-        /// <param name="id">内容Id</param>
-        /// <returns></returns>
-        [HttpPost]
-        [AllowAnonymous]
-        public JsonResult Upload(string id)
-        {
-            try
-            {
-                lock (lockObj)
-                {
-                    if (string.IsNullOrEmpty(id))
-                        throw new ArgumentNullException("文件上传失败，缺少id参数！");
-
-                    FileHelper filesHelper = new FileHelper(AppSetting.BannerPath, Request.Url.Authority);
-
-                    var resultList = filesHelper.Upload(HttpContext);
-
-                    if (resultList.Count > 0)
-                    {
-                        var banner = resultList.FirstOrDefault();
-                        var content = _ContentModelManager.GetById(id);
-                        content.Banner = banner.path;
-
-                        var result = _ContentModelManager.SaveAsync(content).Result;
-
-                        var uploadResult = new List<UploadFilesResult>
-                        {
-                            new UploadFilesResult
-                        {
-                            deleteUrl = string.Concat("/content/DeleteBanner?id=", id),
-                            name = banner.name,
-                            size = banner.size,
-                            thumbnailUrl = filesHelper.GetThumbUrl(banner.type, banner.name),
-                            type = banner.type
-                            //  url = item.url
-                        }
-                        };
-                        return Json(uploadResult);
-                    }
-                    else
-                    {
-                        throw new Exception();
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                return Json(e.Message);
-            }
-        }
 
         [HttpGet]
         public async Task<JsonResult> DeleteFile(string id)
@@ -192,7 +141,6 @@ namespace Ncb.Admin.Controllers
                 var fileHelper = new FileHelper(AppSetting.BannerPath, Request.Url.Authority);
                 string file = fileHelper.GetStorageFullName(content.Banner);
                 FileHelper.DeleteFile(file);
-                content.Banner = string.Empty;
 
                 await _ContentModelManager.SaveAsync(content);
 

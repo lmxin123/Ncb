@@ -308,3 +308,4 @@ F:\project\Ncb\Web\Ncb.Admin\bin\zh-Hans\System.Web.Http.Owin.resources.dll
 F:\project\Ncb\Web\Ncb.Admin\obj\Debug\Ncb.Admin.csprojResolveAssemblyReference.cache
 F:\project\Ncb\Web\Ncb.Admin\obj\Debug\Ncb.Admin.dll
 F:\project\Ncb\Web\Ncb.Admin\obj\Debug\Ncb.Admin.pdb
+F:\project\Ncb\Web\Ncb.Admin\bin\Framework.Common.dll.config

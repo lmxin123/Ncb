@@ -79,3 +79,5 @@ F:\project\Ncb\Data\Ncb.Data\obj\Debug\Ncb.Data.dll
 F:\project\Ncb\Data\Ncb.Data\obj\Debug\Ncb.Data.pdb
 F:\project\Ncb\Data\Ncb.Data\obj\Debug\Ncb.Data.Migrations.te.resources
 F:\project\Ncb\Data\Ncb.Data\obj\Debug\Ncb.Data.csproj.GenerateResource.Cache
+F:\project\Ncb\Data\Ncb.Data\bin\Debug\Framework.Common.dll.config
+F:\project\Ncb\Data\Ncb.Data\obj\Debug\Ncb.Data.Migrations.aaa.resources

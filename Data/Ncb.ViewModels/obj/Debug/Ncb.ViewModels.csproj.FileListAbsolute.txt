@@ -72,3 +72,4 @@ F:\project\Ncb\Data\Ncb.ViewModels\bin\Debug\zh-Hans\System.Web.WebPages.Deploym
 F:\project\Ncb\Data\Ncb.ViewModels\obj\Debug\Ncb.ViewModels.csprojResolveAssemblyReference.cache
 F:\project\Ncb\Data\Ncb.ViewModels\obj\Debug\Ncb.ViewModels.dll
 F:\project\Ncb\Data\Ncb.ViewModels\obj\Debug\Ncb.ViewModels.pdb
+F:\project\Ncb\Data\Ncb.ViewModels\bin\Debug\Framework.Common.dll.config

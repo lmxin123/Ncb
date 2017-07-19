@@ -491,27 +491,3 @@ String.prototype.isUrl = function () {
     };
     window.common = Com;
 }(document, window, undefined);
-
-//
-/* ==============================================================
- *页面预处理内容
- * ============================================================= */
-+(function($,doc){
-	    // 全局配置
-    common.config = {
-    	appName:'农村宝',
-    	apiUrl:'',
-        rootPath: '',//当前站点的根目录路径
-        absPath: location.host, //当前站点的绝对路径
-        homeUrl: '', //当前站点的首页地址
-        cdnUrl: ''//资源分发地址，如css，js，img等静态文件单独放在一个服务器上
-    };
-    
-	$.ready(function(){
-		var title=doc.querySelector('title');
-		title.innerText=common.config.appName+'-'+title.innerText;
-		$.qsa('[data-appname]').forEach(function(item){
-			item.innerText=common.config.appName;
-		});
-	});
-})(mui,document);

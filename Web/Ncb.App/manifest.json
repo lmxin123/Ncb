@@ -65,13 +65,13 @@
 		"Invocation":{}
 	},
 	"plus": {
-		"launchwebview": {
+		/*"launchwebview": {
             "navigationbar": {
                "backgroundcolor": "#f7f7f7",
                "titletext": "首页",
                "titlecolor": "#000000"
             }
-        },
+        },*/
         "statusbar": {
             "immersed": "supportedDevice",
             "style":"dark"
@@ -179,7 +179,8 @@
 					"js/common.js",
 					"html/main.html",
 					"html/about.html",
-					"html/setting.html"
+					"html/setting.html",
+					"js/ncb.app.js"
 				],
 				"refer": [
 					"index-menu.html",
@@ -1076,7 +1077,10 @@
 					"js/feedback.js",
 					"js/mui.view.js",
 					"html/about.html",
-					"js/mui.min.js"
+					"js/mui.min.js",
+					"js/ncb.app.js",
+					"js/common.js",
+					"js/ncb.base64Data.js"
 				],
 				"refer": [],
 				"priority": 0

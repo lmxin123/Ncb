@@ -30,6 +30,8 @@
 
 		<body>
 			<script src="js/mui.min.js"></script>
+			<script src="js/common.js"></script>
+			<script src="js/ncb.app.js"></script>
 			<script src="js/update.js" type="text/javascript" charset="utf-8"></script>
 			<script>
 				mui.init({
@@ -37,31 +39,7 @@
 				});
 				var aniShow = {};
 				var self;
-				var titleView;
-				var subpages = [{
-						href: 'html/content-index.html',
-						style: {
-							top: '45px',
-							bottom: '51px'
-						}
-					},
-					{
-						href: 'html/setting.html',
-						style: {
-							top: '0px',
-							bottom: '51px',
-							titleNView: { //配置原生标题
-								'backgroundColor': '#f7f7f7',
-								'titleText': '设置',
-								'titleColor': '#000000',
-								splitLine: {
-									color: '#cccccc'
-								}
-							}
-						}
-					}
-				];
-
+				var subpages = [ 'html/content-index.html','html/setting.html'];
 				var _self;
 				//只有ios支持的功能需要在Android平台隐藏；
 				if(mui.os.android) {
@@ -106,13 +84,11 @@
 					}
 
 					self = plus.webview.currentWebview();
-					titleView = self.getNavigationbar();
-					if(!titleView) {
-						titleView = plus.webview.getLaunchWebview().getNavigationbar();
-					}
+					
 					for(var i = 0; i < subpages.length; i++) {
 						var temp = {};
-						var sub = plus.webview.create(subpages[i].href, subpages[i].href, subpages[i].style);
+						var title=document.querySelector('a[href="'+subpages[i]+'"]').querySelector('.mui-tab-label').innerHTML;
+						var sub =common.createWebview(subpages[i],title,false);
 						if(i > 0) {
 							sub.hide();
 						} else {
@@ -149,12 +125,6 @@
 					plus.webview.hide(activeTab);
 					//更改当前活跃的选项卡
 					activeTab = targetTab;
-
-					if(activeTab != subpages[0].href) {
-						titleView.hide();
-					} else {
-						titleView.show();
-					}
 				});
 
 				var _toast = false;

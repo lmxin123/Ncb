@@ -18,19 +18,32 @@
 	</head>
 
 	<body>
-		<br />
 		<div class="mui-content">
 			<ul class="mui-table-view">
 				<li class="mui-table-view-cell">
-					<a class="mui-navigate-right">
-						我的资料
+					<a class="mui-navigate-right" href="setting-account.html">
+						我的账户
 					</a>
 				</li>
-
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">
+						分享推荐
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" href="setting-feedback.html">
+						反馈建议
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">
+						检查更新
+					</a>
+				</li>
 			</ul>
 			<ul class="mui-table-view" style="margin-top: 25px;">
 				<li class="mui-table-view-cell">
-					<a id="about" class="mui-navigate-right" href="about.html">
+					<a id="about" class="mui-navigate-right" href="setting-about.html">
 						关于mui
 					</a>
 				</li>
@@ -40,60 +53,16 @@
 		</style>
 	</body>
 	<script src="../js/mui.min.js"></script>
+	<script src="../js/ncb.base64Data.js"></script>
+	<script src="../js/common.js"></script>
+	<script src="../js/ncb.app.js"></script>
 	<script>
 		mui.init({
 			swipeBack: true //启用右滑关闭功能
 		});
 
 		mui('.mui-table-view-cell').on('tap', 'a', function(e) {
-			mui.openWindowWithTitle({
-				url: this.href,
-				id: this.href
-			}, {
-				height: "44px", //导航栏高度值
-				backgroundColor: "#f7f7f7", //导航栏背景色
-				bottomBorderColor: "#cccccc", //底部边线颜色
-				title: { //标题配置
-					text: this.innerHTML, //标题文字
-					position: { //绘制文本的目标区域，参考：http://www.html5plus.org/doc/zh_cn/nativeobj.html#plus.nativeObj.Rect
-						top: 0,
-						left: 0,
-						width: "100%",
-						height: "100%"
-					},
-					styles: { //绘制文本样式，参考：http://www.html5plus.org/doc/zh_cn/nativeobj.html#plus.nativeObj.TextStyles
-						color: "#000000",
-						align: "center",
-						family: "'Helvetica Neue',Helvetica,sans-serif",
-						size: "17px",
-						style: "normal",
-						weight: "normal",
-						fontSrc: ""
-					}
-				},
-				back: { //左上角返回箭头
-					image: { //图片格式
-						base64Data: '', //加载图片的Base64编码格式数据 base64Data 和 imgSRC 必须指定一个.否则不显示返回箭头
-						imgSrc: '', //要加载的图片路径
-						sprite: { //图片源的绘制区域，参考：http://www.html5plus.org/doc/zh_cn/nativeobj.html#plus.nativeObj.Rect
-							top: '0px',
-							left: '0px',
-							width: '100%',
-							height: '100%'
-						},
-						position: { //绘制图片的目标区域，参考：http://www.html5plus.org/doc/zh_cn/nativeobj.html#plus.nativeObj.Rect
-							top: "10px",
-							left: "10px",
-							width: "24px",
-							height: "24px"
-						}
-					},
-					click: function() {
-						//重写 点击返回图标时执行的回调函数，默认执行mui.back();
-					}
-				}
-			})
-
+			common.openWebviewWithTile(this.getAttribute('href'), this.innerHTML.trim());
 		});
 	</script>
 

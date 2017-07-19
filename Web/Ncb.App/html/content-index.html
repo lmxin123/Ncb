@@ -74,12 +74,12 @@
 		<div class="mui-content" id="news">
 			<!--顶部banner图 开始-->
 			<div class="banner">
-				<a href="javascript:;" :data-guid="banner.guid">
-					<img :src="banner.cover" />
+				<a href="javascript:;" :data-guid="banner.id">
+					<img :src="banner.imageUrl" />
 					<h2 class="title mui-ellipsis-2">{{banner.title}}</h2>
 					<div style="display: none;">
 						<div class="author">{{banner.author}}</div>
-						<div class="time">{{banner.time}}</div>
+						<div class="time">{{banner.createTime}}</div>
 					</div>
 				</a>
 			</div>
@@ -88,14 +88,14 @@
 			<!--列表信息流 开始-->
 			<ul id="list" class="mui-table-view">
 				<li class="mui-table-view-cell mui-media" v-for="item in items">
-					<a href="javascript:;" :data-guid="item.guid">
-						<img class="mui-media-object mui-pull-left" :src="item.cover">
+					<a href="javascript:;" :data-guid="item.id">
+						<img class="mui-media-object mui-pull-left" :src="item.imageUrl">
 						<div class="mui-media-body">
 							<div class="mui-ellipsis-2">{{item.title}}</div>
 						</div>
 						<div class="meta-info">
 							<div class="author">{{item.author}}</div>
-							<div class="time">{{item.time}}</div>
+							<div class="time">{{item.createTime}}</div>
 						</div>
 					</a>
 				</li>
@@ -104,6 +104,8 @@
 		</div>
 		<script src="../js/mui.min.js"></script>
 		<script src="../js/vue.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/common.js"></script>
+		<script src="../js/ncb.app.js"></script>
 		<script type="text/javascript">
 			var lastId = ''; //最新新闻的id
 			var webview_detail = null; //详情页webview
@@ -134,34 +136,33 @@
 								return;
 							}
 
-							var data = {
-								column: "id,post_id,title,author_name,cover,published_at" //需要的字段名
-							}
-
-							if(lastId) { //说明已有数据，目前处于下拉刷新，增加时间戳，触发服务端立即刷新，返回最新数据
-								data.lastId = lastId;
-								data.time = new Date().getTime() + "";
-							}
-
 							//请求顶部banner信息
-							mui.getJSON("http://spider.dcloud.net.cn/api/banner/36kr", data, function(rsp) {
-								news.banner = {
-									guid: rsp.post_id,
-									title: rsp.title,
-									cover: rsp.cover,
-									author: rsp.author_name,
-									time: dateUtils.format(rsp.published_at)
-								};
+							mui.getJSON(common.config.apiUrl + '/content/getList', function(rsp) {
+								mui('#list').pullRefresh().endPulldown();
+								if(rsp.Success) {
+									lastId = rsp.Data[0].id;
+									news.banner=rsp.Data[0];
+									rsp.Data.remove(rsp.Data[0]);
+									for(var i=0;i<rsp.Data.length;i++)
+									{
+										rsp.Data[i].createTime=dateUtils.format(rsp.Data[i].createTime)
+									}
+									news.items.concat(rsp.Data);
+								} else {
+									plus.nativeUI.toast(rsp.Message || '获取数据出现错误！', {
+										verticalAlign: 'top'
+									});
+								}
 							});
 
 							//请求列表信息流
-							mui.getJSON("http://spider.dcloud.net.cn/api/news", data, function(rsp) {
-								mui('#list').pullRefresh().endPulldown();
-								if(rsp && rsp.length > 0) {
-									lastId = rsp[0].id; //保存最新消息的id，方便下拉刷新时使用
-									news.items = news.items.concat(convert(rsp));
-								}
-							});
+//							mui.getJSON("http://spider.dcloud.net.cn/api/news", data, function(rsp) {
+//								
+//								if(rsp && rsp.length > 0) {
+//									lastId = rsp[0].id; //保存最新消息的id，方便下拉刷新时使用
+//									news.items = news.items.concat(convert(rsp));
+//								}
+//							});
 						}
 					}
 				}
@@ -192,13 +193,13 @@
 
 			//点击列表，打开详情
 			//TODO 后续应该封装一个v-tap指令，实现tap监听
-			mui('.mui-content').on('tap', '[data-guid]', function() {
-				var guid = this.getAttribute('data-guid');
+			mui('.mui-content').on('tap', '[data-id]', function() {
+				var id = this.getAttribute('data-id');
 				var title = this.querySelector(".mui-ellipsis-2").innerHTML.trim();
 				var author = this.querySelector(".author").innerHTML;
 				var time = this.querySelector(".time").innerHTML;
 				var cover = this.querySelector("img").getAttribute("src");
-				open_detail(guid, title, author, time, cover);
+				open_detail(id, title, author, time, cover);
 			});
 
 			/**
@@ -231,26 +232,6 @@
 				setTimeout(function() {
 					webview_detail.show("slide-in-right", 300);
 				}, 150);
-			}
-
-			/**
-			 * 1、将服务端返回数据，转换成前端需要的格式
-			 * 2、若服务端返回格式和前端所需格式相同，则不需要改功能
-			 * 
-			 * @param {Array} items 
-			 */
-			function convert(items) {
-				var newItems = [];
-				items.forEach(function(item) {
-					newItems.push({
-						guid: item.post_id,
-						title: item.title,
-						author: item.author_name,
-						cover: item.cover,
-						time: dateUtils.format(item.published_at)
-					});
-				});
-				return newItems;
 			}
 
 			/**
