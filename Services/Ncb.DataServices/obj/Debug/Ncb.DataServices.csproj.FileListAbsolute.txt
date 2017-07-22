@@ -132,3 +132,4 @@ F:\project\Ncb\Services\Ncb.DataServices\bin\Debug\zh-Hans\System.Web.WebPages.D
 F:\project\Ncb\Services\Ncb.DataServices\obj\Debug\Ncb.DataServices.csprojResolveAssemblyReference.cache
 F:\project\Ncb\Services\Ncb.DataServices\obj\Debug\Ncb.DataServices.dll
 F:\project\Ncb\Services\Ncb.DataServices\obj\Debug\Ncb.DataServices.pdb
+F:\project\Ncb\Services\Ncb.DataServices\bin\Debug\Framework.Common.dll.config

@@ -34,9 +34,20 @@ namespace Ncb.Data
         [StringLength(10, MinimumLength = 10, ErrorMessage = LengthErrMsg)]
         public string FreeDate { get; set; }
 
+        /// <summary>
+        /// 封面图片的后缀
+        /// </summary>
+        public string Suffix { get; set; }
+
         [NotMapped]
         [Display(Name = "封面图片")]
-        public string Banner { get; set; }
+        public string Banner
+        {
+            get
+            {
+                return ID + Suffix;
+            }
+        }
 
         [NotMapped]
         public string AccessTypeDisplay

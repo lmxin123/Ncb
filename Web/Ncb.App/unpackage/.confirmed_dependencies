@@ -7,7 +7,9 @@
       "js/update.js",
       "js/content.index.js",
       "html/content-index.html",
-      "js/common.js"
+      "js/common.js",
+      "html/about.html",
+      "js/ncb.app.js"
     ],
     "refer": [
       "index-menu.html",
@@ -15,7 +17,8 @@
       "html/setting.html",
       "html/content-detail.html",
       "html/content-index.html",
-      "html/guide.html"
+      "html/guide.html",
+      "html/main.html"
     ]
   },
   "examples/best-practices/list-to-detail/detail.html": {
@@ -58,7 +61,48 @@
       "css/feedback.css",
       "images/logo.png",
       "js/feedback.js",
-      "js/mui.view.js"
+      "js/mui.view.js",
+      "html/about.html",
+      "js/mui.min.js",
+      "js/ncb.app.js",
+      "js/common.js",
+      "js/ncb.base64Data.js"
+    ],
+    "refer": [
+      "html/about.html"
+    ]
+  },
+  "html/tab-webview-subpage-contact.html": {
+    "resources": [
+      "images/60x60.gif"
+    ],
+    "refer": []
+  },
+  "html/main.html": {
+    "resources": [
+      "html/tab-webview-subpage-about.html",
+      "css/mui.min.css",
+      "html/content-index.html"
+    ],
+    "refer": [
+      "html/tab-webview-subpage-chat.html",
+      "html/tab-webview-subpage-contact.html",
+      "html/tab-webview-subpage-about.html",
+      "html/setting.html",
+      "html/content-index.html"
+    ]
+  },
+  "html/tab-webview-subpage-about.html": {
+    "resources": [
+      "css/mui.min.css"
+    ],
+    "refer": []
+  },
+  "html/about.html": {
+    "resources": [
+      "images/qrcode.png",
+      "css/mui.min.css",
+      "js/mui.min.js"
     ],
     "refer": []
   }
