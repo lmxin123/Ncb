@@ -117,8 +117,5 @@ E:\github\Ncb\Data\Ncb.Data\bin\Debug\zh-Hans\System.Web.WebPages.Razor.resource
 E:\github\Ncb\Data\Ncb.Data\bin\Debug\zh-Hans\System.Web.WebPages.resources.dll
 E:\github\Ncb\Data\Ncb.Data\bin\Debug\zh-Hans\System.Web.WebPages.Deployment.resources.dll
 E:\github\Ncb\Data\Ncb.Data\obj\Debug\Ncb.Data.csprojResolveAssemblyReference.cache
-E:\github\Ncb\Data\Ncb.Data\obj\Debug\Ncb.Data.Migrations.aaa.resources
-E:\github\Ncb\Data\Ncb.Data\obj\Debug\Ncb.Data.csproj.GenerateResource.Cache
 E:\github\Ncb\Data\Ncb.Data\obj\Debug\Ncb.Data.dll
 E:\github\Ncb\Data\Ncb.Data\obj\Debug\Ncb.Data.pdb
-E:\github\Ncb\Data\Ncb.Data\obj\Debug\Ncb.Data.Migrations.bbb.resources

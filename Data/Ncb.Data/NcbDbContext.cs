@@ -23,6 +23,9 @@ namespace Ncb.Data
         public DbSet<DeviceModel> Devices { get; set; }
         public DbSet<DeviceCategoryModel> DeviceCategories { get; set; }
         public DbSet<RechargeLogModel> RechargeLogs { get; set; }
-       
+        public DbSet<FeeBackModel> FeeBacks { get; set; }
+        public DbSet<UpdateModel> Updates { get; set; }
+        public DbSet<UpdateLogModel> UpdateLogs { get; set; }
+
     }
 }
