@@ -107,7 +107,7 @@
 		<script src="../js/common.js"></script>
 		<script src="../js/ncb.app.js"></script>
 		<script type="text/javascript">
-			var lastId = ''; //最新新闻的id
+			var lastTime = ''; //最新新闻的创建时间
 			var webview_detail = null; //详情页webview
 			var titleNView = { //详情页原生导航配置
 				backgroundColor: '#f7f7f7', //导航栏背景色
@@ -136,33 +136,24 @@
 								return;
 							}
 
-							//请求顶部banner信息
-							mui.getJSON(common.config.apiUrl + '/content/getList', function(rsp) {
+							mui.getJSON(common.config.apiUrl + '/content/getList?lastTime=' + lastTime, function(rsp) {
 								mui('#list').pullRefresh().endPulldown();
 								if(rsp.Success) {
-									lastId = rsp.Data[0].id;
-									news.banner=rsp.Data[0];
-									rsp.Data.remove(rsp.Data[0]);
-									for(var i=0;i<rsp.Data.length;i++)
-									{
-										rsp.Data[i].createTime=dateUtils.format(rsp.Data[i].createTime)
+									if(rsp.Data.length > 0) {
+										lastTime = rsp.Data[0].createTime;
+										news.banner = rsp.Data[0];
+										rsp.Data.remove(rsp.Data[0]);
+										for(var i = 0; i < rsp.Data.length; i++) {
+											rsp.Data[i].createTime = dateUtils.format(rsp.Data[i].createTime)
+										}
+										news.items = news.items.concat(rsp.Data);
 									}
-									news.items.concat(rsp.Data);
 								} else {
 									plus.nativeUI.toast(rsp.Message || '获取数据出现错误！', {
 										verticalAlign: 'top'
 									});
 								}
 							});
-
-							//请求列表信息流
-//							mui.getJSON("http://spider.dcloud.net.cn/api/news", data, function(rsp) {
-//								
-//								if(rsp && rsp.length > 0) {
-//									lastId = rsp[0].id; //保存最新消息的id，方便下拉刷新时使用
-//									news.items = news.items.concat(convert(rsp));
-//								}
-//							});
 						}
 					}
 				}
@@ -260,14 +251,14 @@
 				format: function(dateStr) {
 					var date = this.parse(dateStr)
 					var diff = Date.now() - date.getTime();
-					if(diff < this.UNITS['天']) {
+					//if(diff < this.UNITS['天']) {
 						return this.humanize(diff);
-					}
+					//}
 
-					var _format = function(number) {
-						return(number < 10 ? ('0' + number) : number);
-					};
-					return date.getFullYear() + '/' + _format(date.getMonth() + 1) + '/' + _format(date.getDay()) + '-' + _format(date.getHours()) + ':' + _format(date.getMinutes());
+					//var _format = function(number) {
+					//	return(number < 10 ? ('0' + number) : number);
+					//};
+					//return date.getFullYear() + '/' + _format(date.getMonth() + 1) + '/' + _format(date.getDay()) + '-' + _format(date.getHours()) + ':' + _format(date.getMinutes());
 				},
 				parse: function(str) { //将"yyyy-mm-dd HH:MM:ss"格式的字符串，转化为一个Date对象
 					var a = str.split(/[^0-9]/);

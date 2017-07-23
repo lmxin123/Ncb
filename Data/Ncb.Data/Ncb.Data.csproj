@@ -51,13 +51,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccountModels.cs" />
-    <Compile Include="Migrations\201707080531117_te.cs" />
-    <Compile Include="Migrations\201707080531117_te.Designer.cs">
-      <DependentUpon>201707080531117_te.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\201707181158598_aaa.cs" />
     <Compile Include="Migrations\201707181158598_aaa.Designer.cs">
       <DependentUpon>201707181158598_aaa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201707220801528_bbb.cs" />
+    <Compile Include="Migrations\201707220801528_bbb.Designer.cs">
+      <DependentUpon>201707220801528_bbb.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="RechargeLogModels.cs" />
@@ -81,11 +81,11 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201707080531117_te.resx">
-      <DependentUpon>201707080531117_te.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201707181158598_aaa.resx">
       <DependentUpon>201707181158598_aaa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707220801528_bbb.resx">
+      <DependentUpon>201707220801528_bbb.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -15,11 +15,17 @@ namespace Ncb.AppServices.Manager
 {
     public class ContentModelManager : BaseManager<NcbDbContext, ContentModel, string>
     {
-        public GeneralResponseModel<List<ContentListViewModel>> GetList(int pageIndex, int pageSize)
+        public GeneralResponseModel<List<ContentListViewModel>> GetList(DateTime? lastTime, int pageIndex, int pageSize)
         {
             using (Db = new NcbDbContext())
             {
-                var query = Db.Contents
+                var query = Db.Contents.AsQueryable();
+                if (lastTime.HasValue)
+                {
+                    query = query.Where(a => DateTime.Compare(a.CreateDate, lastTime.Value) > 0);
+                }
+
+                var query1 = query
                               .OrderByDescending(f => f.CreateDate)
                               .Select(c => new
                               {
@@ -33,7 +39,7 @@ namespace Ncb.AppServices.Manager
                               .Take(pageSize)
                               .ToList();
 
-                var items = query.Select(a => new ContentModel { ID = a.ID, Operator = a.Operator, CreateDate = a.CreateDate, Title = a.Title, Suffix = a.Suffix });
+                var items = query1.Select(a => new ContentModel { ID = a.ID, Operator = a.Operator, CreateDate = a.CreateDate, Title = a.Title, Suffix = a.Suffix });
 
                 var list = items.Select(a => new ContentListViewModel
                 {

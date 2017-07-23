@@ -37,6 +37,7 @@ namespace Ncb.Data
         /// <summary>
         /// 封面图片的后缀
         /// </summary>
+        [StringLength(50)]
         public string Suffix { get; set; }
 
         [NotMapped]
@@ -55,6 +56,14 @@ namespace Ncb.Data
             get
             {
                 return AccessType.GetDisplayName();
+            }
+        }
+
+        public override string CreateDateDisplay
+        {
+            get
+            {
+                return CreateDate.ToString("yyyy-MM-dd HH:mm:ss.fff");
             }
         }
 

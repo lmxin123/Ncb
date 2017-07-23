@@ -1082,7 +1082,13 @@
 					"js/common.js",
 					"js/ncb.base64Data.js"
 				],
-				"refer": [],
+				"refer": [
+					"html/setting-about.html",
+					"html/setting-feedback.html",
+					"html/setting-account.html",
+					"html/setting-shared.html",
+					"html/setting-qrcode.html"
+				],
 				"priority": 0
 			},
 			"html/tab-webview-subpage-contact.html": {
@@ -1117,6 +1123,44 @@
 					"images/qrcode.png",
 					"css/mui.min.css",
 					"js/mui.min.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"html/setting-about.html": {
+				"resources": [
+					"images/qrcode.png",
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"html/setting-feedback.html": {
+				"resources": [
+					"css/feedback.css",
+					"js/feedback.js",
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"html/setting-account.html": {
+				"resources": [
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"html/setting-shared.html": {
+				"resources": [
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"html/setting-qrcode.html": {
+				"resources": [
+					"css/mui.min.css"
 				],
 				"refer": [],
 				"priority": 0

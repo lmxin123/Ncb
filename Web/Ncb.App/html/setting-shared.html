@@ -10,6 +10,8 @@
 
 		<!--标准mui.css-->
 		<link rel="stylesheet" href="../css/mui.min.css">
+		<!--App自定义的css-->
+		<!-- <link rel="stylesheet" type="text/css" href="../css/app.css" /> -->
 		<style>
 			p {
 				text-indent: 22px;
@@ -39,18 +41,23 @@
 			.qrcode img {
 				margin: 0 auto;
 			}
+			
 		</style>
 	</head>
 
 	<body>
+<br />
 		<div class="mui-content">
 			<div class="mui-content-padded">
-				<p>这是一款神奇的app。</p>
-				<p>待完善...</p>
-				<p style="text-align: center;color: #ccc;text-indent: 0;">当前版本：<span id="version"> beta 1.0.0</span></p>
+				<div class="qrcode">
+					<img id="qrcode" width="80%" />
+				</div>
+				<p>长按二维码保存到相册或者截图发送给朋友，朋友可以扫码下载最新版的app</p>
 			</div>
 		</div>
 		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/common.js" ></script>
+		<script type="text/javascript" src="../js/ncb.app.js" ></script>
 		<script type="text/javascript" charset="utf-8">
 			mui.init({
 				gestureConfig: {
@@ -58,6 +65,28 @@
 				},
 				swipeBack: true //启用右滑关闭功能
 			});
+			
+			var qrcodeEl = document.getElementById("qrcode");
+			qrcodeEl.src=common.config.rootPath+'content/qrcode/dowload.png';
+			qrcodeEl.addEventListener('longtap', function() {
+				plus.nativeUI.actionSheet({
+					cancel: '取消',
+					buttons: [{
+						title: '保存到相册'
+					}]
+				}, function(e) {
+					var index = e.index;
+					if (e.index === 1) {
+						plus.gallery.save(qrcodeEl.src, function() {
+							mui.toast('保存成功');
+						}, function() {
+							mui.toast('保存失败，请重试！');
+						});
+					}
+				});
+			});
+			
 		</script>
 	</body>
+
 </html>

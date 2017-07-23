@@ -16,7 +16,7 @@
 		imageList: document.getElementById('image-list'),
 		submitBtn: document.getElementById('submit')
 	};
-	var url = 'https://service.dcloud.net.cn/feedback';
+	var url = common.config.apiUrl+'feedback/send';
 	feedback.files = [];
 	feedback.uploader = null;  
 	feedback.deviceInfo = null; 

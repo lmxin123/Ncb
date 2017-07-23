@@ -6,8 +6,8 @@
 	// 全局配置
 	common.config = {
 		appName: '农村宝',
-		apiUrl: 'http://ncb.cn',
-		rootPath: '', //当前站点的根目录路径
+		apiUrl: 'http://192.168.0.102',//api请求的根地址
+		rootPath: 'http://192.168.0.102:81', //服务器的静态资源地址
 		absPath: location.host, //当前站点的绝对路径
 		homeUrl: '', //当前站点的首页地址
 		cdnUrl: '' //资源分发地址，如css，js，img等静态文件单独放在一个服务器上
@@ -19,6 +19,12 @@
 		$.qsa('[data-appname]').forEach(function(item) {
 			item.innerText = common.config.appName;
 		});
+		
+		common.error=function(msg){
+			plus.nativeUI.toast(msg||'出错了', {
+									verticalAlign: 'top'
+								});
+		}
 	});
 
 	/**

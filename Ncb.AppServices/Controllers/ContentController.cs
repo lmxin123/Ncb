@@ -20,11 +20,11 @@ namespace Ncb.AppServices.Controllers
             _ContentModelManager = _ContentModelManager ?? new ContentModelManager();
         }
 
-        public JsonResult GetList()
+        public JsonResult GetList(DateTime? lastTime)
         {
             try
             {
-                var result = _ContentModelManager.GetList(1, 30);
+                var result = _ContentModelManager.GetList(lastTime, 1, 30);
                 return Success(result);
             }
             catch (Exception e)

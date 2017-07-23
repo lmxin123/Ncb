@@ -7,13 +7,13 @@ namespace Ncb.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class te : IMigrationMetadata
+    public sealed partial class bbb : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(te));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(bbb));
         
         string IMigrationMetadata.Id
         {
-            get { return "201707080531117_te"; }
+            get { return "201707220801528_bbb"; }
         }
         
         string IMigrationMetadata.Source
