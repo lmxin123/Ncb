@@ -54,18 +54,18 @@ namespace Ncb.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<JsonResult> Create(DeviceCategoryModel model)
+        public async Task<JsonResult> Create(UserCategoryModel model)
         {
             return await CreateOrUpdate(model);
         }
 
         [HttpPost]
-        public async Task<JsonResult> Update(DeviceCategoryModel model)
+        public async Task<JsonResult> Update(UserCategoryModel model)
         {
             return await CreateOrUpdate(model);
         }
 
-        private async Task<JsonResult> CreateOrUpdate(DeviceCategoryModel model)
+        private async Task<JsonResult> CreateOrUpdate(UserCategoryModel model)
         {
             try
             {

@@ -19,15 +19,6 @@ namespace Ncb.Data
         [StringLength(50, ErrorMessage = LengthErrMsg)]
         public string Mac { get; set; }
 
-        [Display(Name = "AppId")]
-        [Required(ErrorMessage = RequiredSelectErrMsg)]
-        [StringLength(50, ErrorMessage = LengthErrMsg)]
-        public string AppId { get; set; }
-
-        [Display(Name = "设备标识")]
-        [StringLength(50, ErrorMessage = LengthErrMsg)]
-        public string Imei { get; set; }
-
         [Display(Name = "图片文件")]
         public string Images { get; set; }
 
@@ -35,33 +26,6 @@ namespace Ncb.Data
         [DataType(DataType.PhoneNumber)]
         [StringLength(20, ErrorMessage = "{0}必需在{1}个字符以内")]
         public string Contact { get; set; }
-
-        [DisplayName("平台类型")]
-        public DeviceTypes DeviceType { get; set; }
-
-        [DisplayName("设备型号")]
-        [StringLength(50, ErrorMessage = "{0}必需在{1}个字符以内")]
-        public string Model { get; set; }
-
-        [Display(Name = "UserAgent")]
-        [StringLength(500, ErrorMessage = LengthErrMsg)]
-        public string UserAgent { get; set; }
-
-        [DisplayName("app版本")]
-        [StringLength(50, ErrorMessage = LengthErrMsg)]
-        public string AppVersion { get; set; }
-
-        [DisplayName("基座版本号")]
-        [StringLength(50, ErrorMessage = LengthErrMsg)]
-        public string PlusVersion { get; set; }
-
-        [DisplayName("操作系统版本")]
-        [StringLength(50, ErrorMessage = LengthErrMsg)]
-        public string OsVersion { get; set; }
-
-        [DisplayName("网络类型")]
-        [StringLength(50, ErrorMessage = LengthErrMsg)]
-        public string Net { get; set; }
 
         [DisplayName("反馈内容")]
         [StringLength(50, ErrorMessage = LengthErrMsg)]

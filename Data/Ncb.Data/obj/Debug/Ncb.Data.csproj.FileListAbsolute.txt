@@ -77,10 +77,7 @@ F:\project\Ncb\Data\Ncb.Data\bin\Debug\zh-Hans\System.Web.WebPages.Deployment.re
 F:\project\Ncb\Data\Ncb.Data\obj\Debug\Ncb.Data.csprojResolveAssemblyReference.cache
 F:\project\Ncb\Data\Ncb.Data\obj\Debug\Ncb.Data.dll
 F:\project\Ncb\Data\Ncb.Data\obj\Debug\Ncb.Data.pdb
-F:\project\Ncb\Data\Ncb.Data\obj\Debug\Ncb.Data.Migrations.te.resources
-F:\project\Ncb\Data\Ncb.Data\obj\Debug\Ncb.Data.csproj.GenerateResource.Cache
 F:\project\Ncb\Data\Ncb.Data\bin\Debug\Framework.Common.dll.config
-F:\project\Ncb\Data\Ncb.Data\obj\Debug\Ncb.Data.Migrations.aaa.resources
 E:\github\Ncb\Data\Ncb.Data\bin\Debug\Ncb.Data.dll.config
 E:\github\Ncb\Data\Ncb.Data\bin\Debug\Ncb.Data.dll
 E:\github\Ncb\Data\Ncb.Data\bin\Debug\Ncb.Data.pdb
@@ -119,3 +116,5 @@ E:\github\Ncb\Data\Ncb.Data\bin\Debug\zh-Hans\System.Web.WebPages.Deployment.res
 E:\github\Ncb\Data\Ncb.Data\obj\Debug\Ncb.Data.csprojResolveAssemblyReference.cache
 E:\github\Ncb\Data\Ncb.Data\obj\Debug\Ncb.Data.dll
 E:\github\Ncb\Data\Ncb.Data\obj\Debug\Ncb.Data.pdb
+F:\project\Ncb\Data\Ncb.Data\obj\Debug\Ncb.Data.Migrations.addFeeback.resources
+F:\project\Ncb\Data\Ncb.Data\obj\Debug\Ncb.Data.csproj.GenerateResource.Cache

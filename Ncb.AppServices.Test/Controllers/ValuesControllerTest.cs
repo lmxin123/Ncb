@@ -20,7 +20,7 @@ namespace Ncb.AppServices.Test.Controllers
             ContentController controller = new ContentController();
 
             // 操作
-            IEnumerable<string> result = controller.Get();
+            IEnumerable<string> result = controller.Get("123");
 
             // 断言
             Assert.IsNotNull(result);

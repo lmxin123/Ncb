@@ -102,6 +102,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Framework\Libraries\Framework.Common\Framework.Common.csproj">
+      <Project>{010B396C-F2B7-48D6-B6A3-98FF40996221}</Project>
+      <Name>Framework.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Ncb.AppServices\Ncb.AppServices.csproj">
       <Project>{5FC4F8DF-E09D-44D0-B2F5-FE3A8E7E5FEA}</Project>
       <Name>Ncb.AppServices</Name>
