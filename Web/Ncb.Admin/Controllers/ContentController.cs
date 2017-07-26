@@ -1,7 +1,7 @@
 ﻿using Framework.Common.IO;
 using Framework.Common.Json;
 using Ncb.Data;
-using Ncb.DataServices;
+using Ncb.DataManager;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +12,7 @@ using Framework.Common;
 
 namespace Ncb.Admin.Controllers
 {
-    public class ContentController : MediaBaseController
+    public class ContentController : AdminBaseController
     {
         private readonly ContentModelManager _ContentModelManager;
         private static object lockObj = new object();

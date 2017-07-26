@@ -197,6 +197,7 @@
     <Compile Include="Controllers\MediaBaseController.cs" />
     <Compile Include="Controllers\DeviceController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UserInfoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1116,10 +1117,6 @@
     <ProjectReference Include="..\..\Manager\Ncb.DataManager\Ncb.DataManager.csproj">
       <Project>{5442fdd0-393e-4f7c-b412-3087e032b649}</Project>
       <Name>Ncb.DataManager</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\ViewModels\Ncb.AppViewModel\Ncb.AppViewModels.csproj">
-      <Project>{4cfc480e-5300-4e52-8e2b-1f1b1c540980}</Project>
-      <Name>Ncb.AppViewModels</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\ViewModels\Ncb.ViewModels\Ncb.AdminViewModels.csproj">
       <Project>{cfc140cf-3ae6-4e4c-80ff-b7e81d14c9d8}</Project>

@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Ncb.AppServices")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Microsoft")]
 [assembly: AssemblyProduct("Ncb.AppServices")]
-[assembly: AssemblyCopyright("版权所有(C)  2017")]
+[assembly: AssemblyCopyright("版权所有(C) Microsoft 2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // 如果此项目向 COM 公开，则下列 GUID 用于 typelib 的 ID
-[assembly: Guid("f11e0cd1-5424-4b6a-8559-83b110f9277f")]
+[assembly: Guid("062b06ef-4900-46f1-bd6b-8a4fcc1f017b")]
 
 // 程序集的版本信息由下列四个值组成:
 //

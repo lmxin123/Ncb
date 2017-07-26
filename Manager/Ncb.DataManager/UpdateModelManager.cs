@@ -8,9 +8,9 @@ using Framework.Data;
 using Framework.Common.Json;
 using Ncb.Data;
 using Framework.Common;
-using Ncb.ViewModels;
+using Ncb.AdminViewModels;
 
-namespace Ncb.DataServices
+namespace Ncb.DataManager
 {
     public class UpdateModelManager : BaseManager<NcbDbContext, UpdateModel, string>
     {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Framework.Data;
 using Ncb.Data;
 
-namespace Ncb.DataServices
+namespace Ncb.DataManager
 {
     public class AccountModelManager : BaseManager<NcbDbContext, AccountModel, string>
     {

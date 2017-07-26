@@ -1,6 +1,7 @@
 ﻿using Framework.Common.Json;
 using Framework.Common.Mvc;
-using Ncb.AppServices.Manager;
+using Ncb.AppDataManager;
+using Ncb.AppViewModels;
 using Ncb.Data;
 using System;
 using System.Collections.Generic;
@@ -20,73 +21,37 @@ namespace Ncb.AppServices.Controllers
             _DeviceManager = _DeviceManager ?? new DeviceModelManager();
         }
 
-        [HttpPost]
-        public async Task<JsonResult> GetList(DeviceQueryViewModel model, int pageIndex, int pageSize)
-        {
-            try
-            {
-                var result = await _DeviceManager.QueryAsync(model, pageIndex, pageSize);
-
-                return Success(result);
-            }
-            catch (Exception e)
-            {
-                return Fail(ErrorCode.ProcessError, e.Message);
-            }
-        }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<JsonResult> Create(DeviceCreateOrUpdateViewModel model)
-        {
-            return await CreateOrUpdate(model);
-        }
-
-        [HttpPost]
-        public async Task<JsonResult> Update(DeviceCreateOrUpdateViewModel model)
-        {
-            return await CreateOrUpdate(model);
-        }
-
-        private async Task<JsonResult> CreateOrUpdate(DeviceCreateOrUpdateViewModel model)
+        public async Task<JsonResult> Create(DeviceModel model)
         {
             try
             {
                 bool result = false;
-                if (string.IsNullOrEmpty(model.ID))
+
+                var item = await _DeviceManager.GetByIdAsync(model.ID);
+                var device = new DeviceModel
                 {
-                    var device = new DeviceModel
-                    {
-                        ID = model.ID,
-                        Operator = User.Identity.Name,
-                        LastUpdateDate = DateTime.Now,
-                        Name = model.Name,
-                        PhoneNumber = model.PhoneNumber,
-                        CategoryID = model.CategoryID,
-                        Gender = model.Gender,
-                        RecordState = model.RecordState,
-                        Region = model.Region
-                    };
-                    result = await _DeviceManager.SaveAsync(device, Guid.NewGuid().ToString());
+                    Operator = User.Identity.Name,
+                    LastUpdateDate = DateTime.Now,
+                    AppVersion = model.AppVersion,
+                    DeviceType = model.DeviceType,
+                    Imei = model.Imei,
+                    Model = model.Model,
+                    RecordState = model.RecordState,
+                    Net = model.Net,
+                    OsVersion = model.OsVersion,
+                    PlusVersion = model.PlusVersion,
+                    UserAgent = model.UserAgent
+                };
+                if (item == null)
+                {
+                    result = await _DeviceManager.SaveAsync(device, model.ID);
                 }
                 else
                 {
-                    var item = await _DeviceManager.GetByIdAsync(model.ID);
-                    if (item == null) throw new Exception("更新实体不存在");
-
-                    item.Name = model.Name;
-                    item.PhoneNumber = model.PhoneNumber;
-                    item.CategoryID = model.CategoryID;
-                    item.Gender = model.Gender;
-                    item.RecordState = model.RecordState;
-                    item.Address = model.Address;
-                    item.Remark = model.Remark;
-                    item.Operator = User.Identity.Name;
-                    item.LastUpdateDate = DateTime.Now;
-
-                    result = await _DeviceManager.SaveAsync(item);
+                    result = await _DeviceManager.SaveAsync(device);
                 }
-
                 return Success(true);
             }
             catch (Exception e)

@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using Ncb.Data;
-using Ncb.AppServices.Manager;
-using Framework.Common.Json;
-using Ncb.AppServices.Models;
-using Framework.Common.Mvc;
 using System.Web.Mvc;
+using Framework.Common.Json;
+using Framework.Common.Mvc;
+
+using Ncb.Data;
+using Ncb.AppViewModels;
+using Ncb.AppDataManager;
+
 
 namespace Ncb.AppServices.Controllers
 {
@@ -24,7 +26,15 @@ namespace Ncb.AppServices.Controllers
         {
             try
             {
-                var result = _ContentModelManager.GetList(lastTime, 1, 30);
+                var items = _ContentModelManager.GetList(lastTime, 1, 30);
+                var result = items.Data.Select(a => new ContentListViewModel
+                {
+                    Id = a.ID,
+                    Author = a.Operator,
+                    CreateTime = a.CreateDateDisplay,
+                    Title = a.Title,
+                    ImageUrl = AppSetting.BannerUrl + a.Banner
+                }).ToList();
                 return Success(result);
             }
             catch (Exception e)

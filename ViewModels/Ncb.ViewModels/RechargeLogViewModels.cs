@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Ncb.AdminViewModels
 {
-    public class RechargeLogQueryViewModel : DeviceModel
+    public class RechargeLogQueryViewModel : UserInfoModel
     {
         public string QueryText { get; set; }
         [Display(Name ="充值日期")]

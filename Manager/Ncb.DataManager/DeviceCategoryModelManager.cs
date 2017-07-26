@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using Framework.Data;
 using Ncb.Data;
 
-namespace Ncb.DataServices
+namespace Ncb.DataManager
 {
-    public class DeviceCategoryModelManager : BaseManager<NcbDbContext, UserCategoryModel, Int16>
+    public class UserCategoryModelManager : BaseManager<NcbDbContext, UserCategoryModel, Int16>
     {
     }
 }

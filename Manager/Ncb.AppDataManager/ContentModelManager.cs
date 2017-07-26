@@ -8,14 +8,14 @@ using Framework.Common.Json;
 using Framework.Common;
 
 using Ncb.Data;
-using Ncb.AppServices.Models;
+using Ncb.AppViewModels;
 using System.Web;
 
 namespace Ncb.AppDataManager
 {
     public class ContentModelManager : BaseManager<NcbDbContext, ContentModel, string>
     {
-        public GeneralResponseModel<List<ContentListViewModel>> GetList(DateTime? lastTime, int pageIndex, int pageSize)
+        public GeneralResponseModel<List<ContentModel>> GetList(DateTime? lastTime, int pageIndex, int pageSize)
         {
             using (Db = new NcbDbContext())
             {
@@ -39,20 +39,18 @@ namespace Ncb.AppDataManager
                               .Take(pageSize)
                               .ToList();
 
-                var items = query1.Select(a => new ContentModel { ID = a.ID, Operator = a.Operator, CreateDate = a.CreateDate, Title = a.Title, Suffix = a.Suffix });
-
-                var list = items.Select(a => new ContentListViewModel
+                var items = query1.Select(a => new ContentModel
                 {
-                    Id = a.ID,
-                    Author = a.Operator,
-                    CreateTime = a.CreateDateDisplay,
+                    ID = a.ID,
+                    Operator = a.Operator,
+                    CreateDate = a.CreateDate,
                     Title = a.Title,
-                    ImageUrl = AppSetting.BannerUrl + a.Banner
+                    Suffix = a.Suffix
                 }).ToList();
 
-                var result = new GeneralResponseModel<List<ContentListViewModel>>
+                var result = new GeneralResponseModel<List<ContentModel>>
                 {
-                    Data = list,
+                    Data = items,
                     TotalCount = Db.Contents.Count()
                 };
 

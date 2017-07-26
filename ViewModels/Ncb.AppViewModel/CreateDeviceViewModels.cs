@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ncb.AppViewModel
+namespace Ncb.AppViewModels
 {
-    public class Class1
+    public class CreateDeviceViewModels
     {
+
     }
 }

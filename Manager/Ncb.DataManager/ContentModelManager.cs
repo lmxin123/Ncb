@@ -8,7 +8,7 @@ using Ncb.Data;
 using Framework.Common.Json;
 using Framework.Common;
 
-namespace Ncb.DataServices
+namespace Ncb.DataManager
 {
     public class ContentModelManager : BaseManager<NcbDbContext, ContentModel, string>
     {

@@ -8,13 +8,13 @@ using Framework.Data;
 using Framework.Common.Json;
 using Ncb.Data;
 using Framework.Common;
-using Ncb.ViewModels;
+using Ncb.AdminViewModels;
 
-namespace Ncb.DataServices
+namespace Ncb.DataManager
 {
     public class UserInfoModelManager : BaseManager<NcbDbContext, UserInfoModel, string>
     {
-        public async Task<GeneralResponseModel<List<UserInfoModel>>> QueryAsync(UserInfoViewModel model, int pageIndex, int pageSize, RecordStates state = RecordStates.AuditPass)
+        public async Task<GeneralResponseModel<List<UserInfoModel>>> QueryAsync(UserInfoQueryViewModel model, int pageIndex, int pageSize, RecordStates state = RecordStates.AuditPass)
         {
             if (model == null)
                 return await base.QueryAsync(pageIndex, pageSize);

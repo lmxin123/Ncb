@@ -11,7 +11,7 @@ namespace Ncb.Admin.Controllers
 {
     //  [NoCache]
     [ActionAuthorize]
-    public class MediaBaseController : BaseController
+    public class AdminBaseController : BaseController
     {
         protected string UserId
         {

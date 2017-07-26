@@ -6,19 +6,19 @@ using System.Web;
 using System.Web.Mvc;
 using Framework.Common.Json;
 using Ncb.Data;
-using Ncb.DataServices;
+using Ncb.DataManager;
 
 namespace Ncb.Admin.Controllers
 {
-    public class DeviceCategoryController : MediaBaseController
+    public class UserCategoryController : AdminBaseController
     {
-        private readonly DeviceModelManager _DeviceModelManager;
-        private readonly DeviceCategoryModelManager _DeviceCategoryManager;
+        private readonly UserInfoModelManager _UserModelManager;
+        private readonly UserCategoryModelManager _UserCategoryModelManager;
 
-        public DeviceCategoryController()
+        public UserCategoryController()
         {
-            _DeviceModelManager = _DeviceModelManager ?? new DeviceModelManager();
-            _DeviceCategoryManager = _DeviceCategoryManager ?? new DeviceCategoryModelManager();
+            _UserModelManager = _UserModelManager ?? new UserInfoModelManager();
+            _UserCategoryModelManager = _UserCategoryModelManager ?? new UserCategoryModelManager();
         }
 
         public ActionResult Index()
@@ -32,7 +32,7 @@ namespace Ncb.Admin.Controllers
             if (string.IsNullOrEmpty(name))
                 return Json(false, JsonRequestBehavior.AllowGet);
 
-            bool isExists = await _DeviceCategoryManager.GetByExpreAsync(item =>
+            bool isExists = await _UserCategoryModelManager.GetByExpreAsync(item =>
              item.Name == name.Trim().Replace("\t", "") && item.ID != id) == null;
 
             return Json(isExists, JsonRequestBehavior.AllowGet);
@@ -43,7 +43,7 @@ namespace Ncb.Admin.Controllers
         {
             try
             {
-                var result = await _DeviceCategoryManager.QueryAsync(pageIndex, pageSize);
+                var result = await _UserCategoryModelManager.QueryAsync(pageIndex, pageSize);
 
                 return Success(result);
             }
@@ -77,13 +77,13 @@ namespace Ncb.Admin.Controllers
                 model.Operator = User.Identity.Name;
                 if (model.ID == 0)
                 {
-                    var categories = await _DeviceCategoryManager.GetAllAsync();
+                    var categories = await _UserCategoryModelManager.GetAllAsync();
                     var maxId = categories.Count == 0 ? 1 : categories.Max(a => a.ID) + 1;
-                    result = await _DeviceCategoryManager.SaveAsync(model, (Int16)maxId);
+                    result = await _UserCategoryModelManager.SaveAsync(model, (Int16)maxId);
                 }
                 else
                 {
-                    result = await _DeviceCategoryManager.SaveAsync(model);
+                    result = await _UserCategoryModelManager.SaveAsync(model);
                 }
                 return Success(result);
             }
@@ -98,14 +98,14 @@ namespace Ncb.Admin.Controllers
         {
             try
             {
-                var device = await _DeviceModelManager.GetByExpreAsync(item => item.CategoryID == id);
+                var device = await _UserModelManager.GetByExpreAsync(item => item.CategoryID == id);
                 if (device != null)
                     throw new Exception("此分类下包含用户数据，不允许删除！");
 
-                var model = await _DeviceCategoryManager.GetByIdAsync(id);
+                var model = await _UserCategoryModelManager.GetByIdAsync(id);
                 model.Operator = UserId;
 
-                var result = await _DeviceCategoryManager.DeleteAsync(model);
+                var result = await _UserCategoryModelManager.DeleteAsync(model);
 
                 return Success(result);
             }
@@ -119,13 +119,13 @@ namespace Ncb.Admin.Controllers
         {
             if (disposing)
             {
-                if (_DeviceCategoryManager != null)
+                if (_UserCategoryModelManager != null)
                 {
-                    _DeviceCategoryManager.Dispose();
+                    _UserCategoryModelManager.Dispose();
                 }
-                if (_DeviceModelManager != null)
+                if (_UserModelManager != null)
                 {
-                    _DeviceModelManager.Dispose();
+                    _UserModelManager.Dispose();
                 }
             }
             base.Dispose(disposing);

@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace Ncb.Admin.Controllers
 {
-    public class HomeController : MediaBaseController
+    public class HomeController : AdminBaseController
     {
         public ActionResult Index()
         {

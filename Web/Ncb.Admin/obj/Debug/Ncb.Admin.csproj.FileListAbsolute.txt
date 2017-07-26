@@ -229,8 +229,6 @@ F:\project\Ncb\Web\Ncb.Admin\bin\Microsoft.Owin.Security.dll
 F:\project\Ncb\Web\Ncb.Admin\bin\Microsoft.Owin.Security.OAuth.dll
 F:\project\Ncb\Web\Ncb.Admin\bin\Microsoft.Web.Infrastructure.dll
 F:\project\Ncb\Web\Ncb.Admin\bin\Ncb.Data.dll
-F:\project\Ncb\Web\Ncb.Admin\bin\Ncb.DataServices.dll
-F:\project\Ncb\Web\Ncb.Admin\bin\Ncb.ViewModels.dll
 F:\project\Ncb\Web\Ncb.Admin\bin\Newtonsoft.Json.dll
 F:\project\Ncb\Web\Ncb.Admin\bin\Owin.dll
 F:\project\Ncb\Web\Ncb.Admin\bin\System.Net.Http.Formatting.dll
@@ -254,9 +252,6 @@ F:\project\Ncb\Web\Ncb.Admin\bin\Framework.Data.pdb
 F:\project\Ncb\Web\Ncb.Admin\bin\Framework.Data.dll.config
 F:\project\Ncb\Web\Ncb.Admin\bin\Ncb.Data.pdb
 F:\project\Ncb\Web\Ncb.Admin\bin\Ncb.Data.dll.config
-F:\project\Ncb\Web\Ncb.Admin\bin\Ncb.ViewModels.pdb
-F:\project\Ncb\Web\Ncb.Admin\bin\Ncb.DataServices.pdb
-F:\project\Ncb\Web\Ncb.Admin\bin\Ncb.DataServices.dll.config
 F:\project\Ncb\Web\Ncb.Admin\bin\Antlr3.Runtime.pdb
 F:\project\Ncb\Web\Ncb.Admin\bin\Microsoft.AI.DependencyCollector.xml
 F:\project\Ncb\Web\Ncb.Admin\bin\Microsoft.AI.ServerTelemetryChannel.xml
@@ -464,3 +459,8 @@ E:\github\Ncb\Web\Ncb.Admin\bin\zh-Hans\System.Web.Http.Owin.resources.dll
 E:\github\Ncb\Web\Ncb.Admin\obj\Debug\Ncb.Admin.csprojResolveAssemblyReference.cache
 E:\github\Ncb\Web\Ncb.Admin\obj\Debug\Ncb.Admin.dll
 E:\github\Ncb\Web\Ncb.Admin\obj\Debug\Ncb.Admin.pdb
+F:\project\Ncb\Web\Ncb.Admin\bin\Ncb.AdminViewModels.dll
+F:\project\Ncb\Web\Ncb.Admin\bin\Ncb.DataManager.dll
+F:\project\Ncb\Web\Ncb.Admin\bin\Ncb.DataManager.pdb
+F:\project\Ncb\Web\Ncb.Admin\bin\Ncb.DataManager.dll.config
+F:\project\Ncb\Web\Ncb.Admin\bin\Ncb.AdminViewModels.pdb

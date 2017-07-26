@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Ncb.AdminViewModels
 {
-    public class UserInfoViewModel : UserInfoModel
+    public class UserInfoQueryViewModel : UserInfoModel
     {
         public string QueryText { get; set; }
         [Display(Name ="注册日期")]
