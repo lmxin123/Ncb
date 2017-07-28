@@ -16,24 +16,9 @@
 		imageList: document.getElementById('image-list'),
 		submitBtn: document.getElementById('submit')
 	};
-	var url = common.config.apiUrl+'feedback/send';
+	var url = common.config.apiUrl+'feedback/create';
 	feedback.files = [];
 	feedback.uploader = null;  
-	feedback.deviceInfo = null; 
-	mui.plusReady(function() {
-		//设备信息，无需修改
-		feedback.deviceInfo = {
-			appid: plus.runtime.appid, 
-			imei: plus.device.imei, //设备标识
-			images: feedback.files, //图片文件
-			p: mui.os.android ? 'a' : 'i', //平台类型，i表示iOS平台，a表示Android平台。
-			md: plus.device.model, //设备型号
-			app_version: plus.runtime.version,
-			plus_version: plus.runtime.innerVersion, //基座版本号
-			os:  mui.os.version,
-			net: ''+plus.networkinfo.getCurrentType()
-		}
-	});
 	/**
 	 *提交成功之后，恢复表单项 
 	 */
@@ -157,7 +142,7 @@
 		if(plus.networkinfo.getCurrentType()==plus.networkinfo.CONNECTION_NONE){
 			return mui.toast("连接网络失败，请稍后再试");
 		}
-		feedback.send(mui.extend({}, feedback.deviceInfo, {
+		feedback.send({
 			content: feedback.question.value,
 			contact: feedback.contact.value,
 			images: feedback.files,

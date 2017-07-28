@@ -14,7 +14,7 @@ namespace Ncb.DataManager
 {
     public class DeviceModelManager : BaseManager<NcbDbContext, DeviceModel, string>
     {
-        public async Task<GeneralResponseModel<List<DeviceModel>>> QueryAsync(DeviceQueryViewModel model, int pageIndex, int pageSize, RecordStates state = RecordStates.AuditPass)
+        public async Task<GeneralResponseModel<List<DeviceModel>>> QueryAsync(FeebackQueryViewModel model, int pageIndex, int pageSize, RecordStates state = RecordStates.AuditPass)
         {
             if (model == null)
                 return await base.QueryAsync(pageIndex, pageSize);

@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FeebackQueryViewModels.cs" />
     <Compile Include="UserInfoViewModels.cs" />
     <Compile Include="RechargeViewModels.cs" />
     <Compile Include="RechargeLogViewModels.cs" />

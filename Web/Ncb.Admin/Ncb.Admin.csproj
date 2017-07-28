@@ -194,6 +194,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ContentController.cs" />
     <Compile Include="Controllers\DeviceCategoryController.cs" />
+    <Compile Include="Controllers\FeebackController.cs" />
     <Compile Include="Controllers\MediaBaseController.cs" />
     <Compile Include="Controllers\DeviceController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -229,6 +230,7 @@
     <Content Include="Content\assets\img\shareToFriend.png" />
     <Content Include="Content\assets\img\wx_friend.png" />
     <Content Include="Content\assets\img\wx_friendquan.png" />
+    <Content Include="Content\banner\49547a50-1ced-4fbb-8197-e7ba7aee0ad5.jpg" />
     <Content Include="Content\blueimp-gallery2\css\blueimp-gallery-indicator.css" />
     <Content Include="Content\blueimp-gallery2\css\blueimp-gallery-indicator.min.css" />
     <Content Include="Content\blueimp-gallery2\css\blueimp-gallery-video.css" />
@@ -526,6 +528,8 @@
     <Content Include="Content\jQuery.FileUpload\img\progressbar.gif" />
     <Content Include="Content\layout.css" />
     <Content Include="Content\login.css" />
+    <Content Include="Content\qrcode\alipayqrcode.jpg" />
+    <Content Include="Content\qrcode\wxqrcode.jpg" />
     <Content Include="Content\select2.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\tables.css" />
@@ -1090,6 +1094,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\feeback\" />
     <Folder Include="Scripts\jQuery.FileUpload\vendor\" />
   </ItemGroup>
   <ItemGroup>

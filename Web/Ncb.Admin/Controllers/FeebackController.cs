@@ -12,16 +12,16 @@ using System.Web.Mvc;
 
 namespace Ncb.Admin.Controllers
 {
-    public class DeviceController : AdminBaseController
+    public class FeebackController : AdminBaseController
     {
-        private readonly DeviceModelManager _DeviceManager;
+        private readonly FeebackModelManager _FeebackModelManager;
 
-        public DeviceController()
+        public FeebackController()
         {
-            _DeviceManager = _DeviceManager ?? new DeviceModelManager();
+            _FeebackModelManager = _FeebackModelManager ?? new FeebackModelManager();
         }
 
-        public async Task<ActionResult> Index()
+        public ActionResult Index()
         {
             return View();
         }
@@ -31,7 +31,7 @@ namespace Ncb.Admin.Controllers
         {
             try
             {
-                var result = await _DeviceManager.QueryAsync(model, pageIndex, pageSize);
+                var result = await _FeebackModelManager.QueryAsync(model, pageIndex, pageSize);
 
                 return Success(result);
             }
@@ -42,14 +42,16 @@ namespace Ncb.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<JsonResult> Delete(string id)
+        public async Task<JsonResult> UploadImage(string mac)
         {
             try
             {
-                var model = await _DeviceManager.GetByIdAsync(id);
-                model.Operator = UserId;
-                model.LastUpdateDate = DateTime.Now;
-                var result = await _DeviceManager.SaveAsync(model);
+                if(Request.Files.Count>0)
+                {
+
+                }
+                var model = await _FeebackModelManager.GetByIdAsync(mac);
+                var result = await _FeebackModelManager.SaveAsync(model);
 
                 return Success(result);
             }
@@ -63,9 +65,9 @@ namespace Ncb.Admin.Controllers
         {
             if (disposing)
             {
-                if (_DeviceManager != null)
+                if (_FeebackModelManager != null)
                 {
-                    _DeviceManager.Dispose();
+                    _FeebackModelManager.Dispose();
                 }
             }
             base.Dispose(disposing);

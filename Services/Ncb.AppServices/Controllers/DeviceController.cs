@@ -21,24 +21,21 @@ namespace Ncb.AppServices.Controllers
             _DeviceManager = _DeviceManager ?? new DeviceModelManager();
         }
 
-
         [HttpPost]
-        public async Task<JsonResult> Create(DeviceModel model)
+        public async Task<JsonResult> Create(CreateDeviceViewModel model)
         {
             try
             {
                 bool result = false;
 
-                var item = await _DeviceManager.GetByIdAsync(model.ID);
+                var item = await _DeviceManager.GetByIdAsync(model.Id);
+
                 var device = new DeviceModel
                 {
-                    Operator = User.Identity.Name,
                     LastUpdateDate = DateTime.Now,
                     AppVersion = model.AppVersion,
-                    DeviceType = model.DeviceType,
                     Imei = model.Imei,
                     Model = model.Model,
-                    RecordState = model.RecordState,
                     Net = model.Net,
                     OsVersion = model.OsVersion,
                     PlusVersion = model.PlusVersion,
@@ -46,10 +43,11 @@ namespace Ncb.AppServices.Controllers
                 };
                 if (item == null)
                 {
-                    result = await _DeviceManager.SaveAsync(device, model.ID);
+                    result = await _DeviceManager.SaveAsync(device, model.Id);
                 }
                 else
                 {
+                    device.ID = model.Id;
                     result = await _DeviceManager.SaveAsync(device);
                 }
                 return Success(true);
