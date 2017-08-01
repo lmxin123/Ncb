@@ -17,7 +17,7 @@ namespace Ncb.AppViewModels
         public string AppVersion { get; set; }
         public string PlusVersion { get; set; }
         public string OsVersion { get; set; }
-        public string Net { get; set; }
-        public string UserAgent { get; set; }
+        public NetTypes NetType { get; set; }
+        public string Vendor { get; set; }
     }
 }

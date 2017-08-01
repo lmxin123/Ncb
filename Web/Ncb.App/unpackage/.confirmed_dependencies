@@ -9,7 +9,8 @@
 			"html/content-index.html",
 			"js/common.js",
 			"html/about.html",
-			"js/ncb.app.js"
+			"js/ncb.app.js",
+			"js/ncb.userInfo.js"
 		],
 		"refer": [
 			"index-menu.html",

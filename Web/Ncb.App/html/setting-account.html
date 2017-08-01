@@ -3,7 +3,7 @@
 
 	<head>
 		<meta charset="utf-8">
-		<title>Hello MUI</title>
+		<title>我的账户</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -13,7 +13,8 @@
 			form {
 				margin-top: 20px;
 			}
-			button{
+			
+			button {
 				padding: 20px;
 			}
 		</style>
@@ -42,27 +43,18 @@
 		<script src="../js/mui.min.js"></script>
 		<script type="text/javascript" src="../js/common.js"></script>
 		<script type="text/javascript" src="../js/ncb.app.js"></script>
+		<script type="text/javascript" src="../js/ncb.userInfo.js"></script>
 		<script>
 			mui.init();
 			var flag = false;
-			var name = document.getElementById('txtName'),
-				phone = document.getElementById('txtPhone');
-			mui.ready(function() {
-					mui.getJSON(common.config.apiUrl + '', function(rsp) {
-						if(rsp.Success) {
-							name.value = rsp.Data.Name;
-							phone.value = rsp.Data.PhoneNumber;
-						} else {
-							mui.toast(rsp.Message);
-						}
-					})
-				}
-
-			);
+			var name, phone;
 			var setAccount = function(callback) {
 				flag = true;
-				mui.showWaiting();
-				mui.post(common.config.apiUrl + '', function(rsp) {
+				mui.post(common.config.apiUrl + '/userInfo/setAccount', {
+					id: common.USERINFO.id,
+					name: name.value,
+					phone: phone.value
+				}, function(rsp) {
 					if(rsp.Success) {
 						mui.toast('保存成功！');
 					} else {
@@ -70,8 +62,17 @@
 					}
 					callback && callback();
 				});
-			};
-			
+			}
+
+			;
+			mui.plusReady(function() {
+				name = document.getElementById('txtName');
+				phone = document.getElementById('txtPhone');
+				common.initUserInfo(function() {
+					name.value = common.USERINFO.name;
+					phone.value = common.USERINFO.phone;
+				});
+			});
 			var oldBack = mui.back;
 			mui.back = function() {
 				if(!flag) {
@@ -79,7 +80,10 @@
 				} else {
 					oldBack();
 				}
-			};
+			}
+
+			;
 		</script>
 	</body>
+
 </html>

@@ -11,7 +11,7 @@ using Framework.Common;
 
 namespace Ncb.Data
 {
-    [Table("Devices")]
+    [Table("UserInfos")]
     public partial class UserInfoModel : BaseModel<string>
     {
         [Display(Name = "类型")]
@@ -59,7 +59,7 @@ namespace Ncb.Data
         public decimal Amount { get; set; }
 
         [DisplayName("最后充值时间")]
-        public DateTime LastRechargeDate { get; set; }
+        public DateTime? LastRechargeDate { get; set; }
 
         [DisplayName("到期日期")]
         public string ExpiryDate { get; set; }
@@ -86,7 +86,7 @@ namespace Ncb.Data
         public string CategoryName { get; set; }
     }
 
-    [Table("DeviceCategories")]
+    [Table("UserCategories")]
     public class UserCategoryModel : BaseModel<Int16>
     {
         [Display(Name = "分类名")]

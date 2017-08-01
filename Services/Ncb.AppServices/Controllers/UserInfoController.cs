@@ -42,20 +42,30 @@ namespace Ncb.AppServices.Controllers
         }
 
         [HttpGet]
-        public async Task<JsonResult> GetAccount(string id)
+        public async Task<JsonResult> GetUserInfo(string id)
         {
             try
             {
                 var item = await _UserInfoModelManager.GetByIdAsync(id);
                 if (item == null)
-                    throw new Exception($"{id}无效！");
-
-                return Success(new
                 {
-                    item.ID,
-                    item.Name,
-                    item.PhoneNumber
-                });
+                    return Fail(ErrorCode.AuthFailError, "用户不存在！");
+                }
+                else
+                {
+                    item.LastLoginDate = DateTime.Now;
+                    await _UserInfoModelManager.SaveAsync(item);
+
+                    return Success(new
+                    {
+                        item.ID,
+                        item.Name,
+                        item.PhoneNumber,
+                        item.Amount,
+                        item.ExpiryDate,
+                        item.CategoryID
+                    });
+                }
             }
             catch (Exception e)
             {

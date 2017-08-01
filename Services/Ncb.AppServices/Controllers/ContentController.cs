@@ -9,7 +9,7 @@ using Framework.Common.Mvc;
 using Ncb.Data;
 using Ncb.AppViewModels;
 using Ncb.AppDataManager;
-
+using System.Threading.Tasks;
 
 namespace Ncb.AppServices.Controllers
 {
@@ -22,6 +22,7 @@ namespace Ncb.AppServices.Controllers
             _ContentModelManager = _ContentModelManager ?? new ContentModelManager();
         }
 
+        [HttpGet]
         public JsonResult GetList(DateTime? lastTime)
         {
             try
@@ -43,16 +44,23 @@ namespace Ncb.AppServices.Controllers
             }
         }
 
-        public JsonResult Get(string id)
+        [HttpGet]
+        public async Task<ContentResult> GetContent(string id)
         {
             try
             {
-                var result = _ContentModelManager.GetDetail(id);
-                return Success(result);
+                if (string.IsNullOrEmpty(id))
+                    throw new ArgumentNullException("参数无效");
+
+                var item = await _ContentModelManager.GetByIdAsync(id);
+                if (item == null)
+                    throw new Exception("内容不存在！");
+
+                return Content(item.Content);
             }
             catch (Exception e)
             {
-                return Fail(ErrorCode.ProcessError, e.Message);
+                return Content(e.Message);
             }
         }
     }

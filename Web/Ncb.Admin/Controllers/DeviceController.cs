@@ -21,7 +21,7 @@ namespace Ncb.Admin.Controllers
             _DeviceManager = _DeviceManager ?? new DeviceModelManager();
         }
 
-        public async Task<ActionResult> Index()
+        public ActionResult Index()
         {
             return View();
         }

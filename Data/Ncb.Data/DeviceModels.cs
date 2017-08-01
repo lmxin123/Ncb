@@ -17,6 +17,9 @@ namespace Ncb.Data
         [Display(Name = "手机型号")]
         [StringLength(10, ErrorMessage = LengthErrMsg)]
         public string Model { get; set; }
+        [Display(Name = "手机厂商")]
+        [StringLength(20, ErrorMessage = LengthErrMsg)]
+        public string Vendor { get; set; }
 
         [Display(Name = "UserAgent")]
         [StringLength(500, ErrorMessage = LengthErrMsg)]
@@ -42,8 +45,7 @@ namespace Ncb.Data
         public string OsVersion { get; set; }
 
         [DisplayName("网络类型")]
-        [StringLength(50, ErrorMessage = LengthErrMsg)]
-        public string Net { get; set; }
+        public NetTypes NetType { get; set; }
 
         [DisplayName("最后更新时间")]
         public DateTime LastUpdateDate { get; set; }

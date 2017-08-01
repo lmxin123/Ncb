@@ -180,7 +180,8 @@
 					"html/main.html",
 					"html/about.html",
 					"html/setting.html",
-					"js/ncb.app.js"
+					"js/ncb.app.js",
+					"js/ncb.userInfo.js"
 				],
 				"refer": [
 					"index-menu.html",

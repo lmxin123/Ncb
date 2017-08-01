@@ -15,42 +15,52 @@ namespace Ncb.AppServices.Controllers
     public class DeviceController : BaseController
     {
         private readonly DeviceModelManager _DeviceManager;
+        private readonly UserInfoModelManager _UserInfoModelManager;
 
         public DeviceController()
         {
             _DeviceManager = _DeviceManager ?? new DeviceModelManager();
+            _UserInfoModelManager = _UserInfoModelManager ?? new UserInfoModelManager();
         }
 
         [HttpPost]
-        public async Task<JsonResult> Create(CreateDeviceViewModel model)
+        public async Task<JsonResult> Create(CreateDeviceViewModel device)
         {
             try
             {
                 bool result = false;
-
-                var item = await _DeviceManager.GetByIdAsync(model.Id);
-
-                var device = new DeviceModel
+                var item = new DeviceModel
                 {
                     LastUpdateDate = DateTime.Now,
-                    AppVersion = model.AppVersion,
-                    Imei = model.Imei,
-                    Model = model.Model,
-                    Net = model.Net,
-                    OsVersion = model.OsVersion,
-                    PlusVersion = model.PlusVersion,
-                    UserAgent = model.UserAgent
+                    Imei = device.Imei,
+                    Model = device.Model,
+                    NetType = device.NetType,
+                    AppVersion = device.AppVersion,
+                    OsVersion = device.OsVersion,
+                    PlusVersion = device.PlusVersion,
+                    UserAgent = Request.UserAgent,
+                    Vendor = device.Vendor
                 };
-                if (item == null)
+                var existItem = await _DeviceManager.GetByIdAsync(device.Id);
+                if (existItem == null)
                 {
-                    result = await _DeviceManager.SaveAsync(device, model.Id);
+                    result = await _DeviceManager.SaveAsync(item, device.Id);
                 }
                 else
                 {
-                    device.ID = model.Id;
-                    result = await _DeviceManager.SaveAsync(device);
+                    item.ID = device.Id;
+                    item.LastUpdateDate = DateTime.Now;
+                    result = await _DeviceManager.SaveAsync(item);
                 }
-                return Success(true);
+
+                var user = await _UserInfoModelManager.GetByIdAsync(device.Id);
+                if (user == null)
+                {
+                    user = new UserInfoModel { CategoryID = 1, LastLoginDate = DateTime.Now };
+                    result = await _UserInfoModelManager.SaveAsync(user, device.Id);
+                }
+
+                return Success(result);
             }
             catch (Exception e)
             {
