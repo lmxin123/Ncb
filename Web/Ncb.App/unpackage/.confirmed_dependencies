@@ -122,7 +122,10 @@
 		"resources": [
 			"css/feedback.css",
 			"js/feedback.js",
-			"css/mui.min.css"
+			"css/mui.min.css",
+			"js/ncb.app.js",
+			"js/common.js",
+			"js/mui.min.js"
 		]
 	},
 	"html/setting-account.html": {

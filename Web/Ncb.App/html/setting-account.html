@@ -27,15 +27,15 @@
 					<div class="mui-input-group">
 						<div class="mui-input-row">
 							<label>名称</label>
-							<input type="text" id="txtName" class="mui-input-clear" placeholder="请输入名称">
+							<input type="text" id="userName" class="mui-input-clear" placeholder="请输入名称">
 						</div>
 						<div class="mui-input-row">
 							<label>手机号码</label>
-							<input type="text" id="txtPhone" class="mui-input-clear" placeholder="请输入手机号码">
+							<input type="text" id="phone" class="mui-input-clear" placeholder="请输入手机号码">
 						</div>
 					</div>
 					<br />
-					<button type="button" class="mui-btn mui-btn-primary mui-btn-block">
+					<button type="button" id="btnSave" class="mui-btn mui-btn-primary mui-btn-block">
 		        	保存</button>
 				</form>
 			</div>
@@ -44,46 +44,56 @@
 		<script type="text/javascript" src="../js/common.js"></script>
 		<script type="text/javascript" src="../js/ncb.app.js"></script>
 		<script type="text/javascript" src="../js/ncb.userInfo.js"></script>
-		<script>
-			mui.init();
-			var flag = false;
-			var name, phone;
-			var setAccount = function(callback) {
-				flag = true;
-				mui.post(common.config.apiUrl + '/userInfo/setAccount', {
-					id: common.USERINFO.id,
-					name: name.value,
-					phone: phone.value
-				}, function(rsp) {
-					if(rsp.Success) {
-						mui.toast('保存成功！');
-					} else {
-						mui.toast(rsp.Message);
-					}
-					callback && callback();
-				});
+		<script>(function(mui, common) {
+	mui.init();
+	var flag=false;
+	var name, phone;
+	var oldBack=mui.back;
+	var setAccount=function(callback) {
+		flag=true;
+		mui.post(common.config.apiUrl + '/userInfo/setAccount', {
+			id: common.USERINFO.id, name: name.value, phone: phone.value
+		}
+		, function(rsp) {
+			if(rsp.Success) {
+				mui.toast('保存成功！');
+				common.USERINFO.name=name.value;
+				common.USERINFO.phone=phone.value;
+				common.setUserInfo(common.USERINFO);
+				callback && callback();
 			}
-
-			;
-			mui.plusReady(function() {
-				name = document.getElementById('txtName');
-				phone = document.getElementById('txtPhone');
-				common.initUserInfo(function() {
-					name.value = common.USERINFO.name;
-					phone.value = common.USERINFO.phone;
-				});
-			});
-			var oldBack = mui.back;
-			mui.back = function() {
-				if(!flag) {
-					setAccount(oldBack);
-				} else {
-					oldBack();
-				}
+			else {
+				mui.toast(rsp.Message);
 			}
+		}
+		);
+	}
+	;
+	mui.plusReady(function() {
+		name=common.get('userName');
+		phone=common.get('phone');
+		common.initUserInfo(function() {
+			name.value=common.USERINFO.name;
+			phone.value=common.USERINFO.phone;
+		}
+		);
+		common.get('btnSave').addEventListener('tap', function() {
+			setAccount(oldBack);
+		},false);
+	}
+	);
+	mui.back=function() {
+		if(!flag) {
+			setAccount(oldBack);
+		}
+		else {
+			oldBack();
+		}
+	}
+	;
+}
 
-			;
-		</script>
+)(mui, common)</script>
 	</body>
 
 </html>

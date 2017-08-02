@@ -80,7 +80,12 @@
 			return mac;
 		}
 	}
-
+	
+	common.setUserInfo=function(user)
+	{
+		var str=JSON.stringify(user);
+		localStorage.setItem('USERINFO',str);
+	}
 	mui.plusReady(function() {
 		common.initUserInfo();
 	});

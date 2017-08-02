@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
+using System.Data.Entity.Validation;
 using System.Web.Mvc;
 
 namespace Ncb.AppServices.Controllers
@@ -34,6 +35,15 @@ namespace Ncb.AppServices.Controllers
                 var result = await _UserInfoModelManager.SaveAsync(item);
 
                 return Success(true);
+            }
+            catch(DbEntityValidationException e)
+            {
+                List<string> errMsg =new List<string>();
+                e.EntityValidationErrors.ToList().ForEach(a =>
+                {
+                    errMsg.AddRange( a.ValidationErrors.Select(b => b.ErrorMessage));
+                });
+                return Fail(ErrorCode.ModelValidateError, string.Join(";", errMsg));
             }
             catch (Exception e)
             {

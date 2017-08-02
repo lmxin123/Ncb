@@ -16,7 +16,7 @@
 		imageList: document.getElementById('image-list'),
 		submitBtn: document.getElementById('submit')
 	};
-	var url = common.config.apiUrl+'feedback/create';
+	var url = common.config.apiUrl+'/feeback/Create';
 	feedback.files = [];
 	feedback.uploader = null;  
 	/**
@@ -142,16 +142,20 @@
 		if(plus.networkinfo.getCurrentType()==plus.networkinfo.CONNECTION_NONE){
 			return mui.toast("连接网络失败，请稍后再试");
 		}
+		
 		feedback.send({
-			content: feedback.question.value,
+			mac:common.getMac(),
+			question: feedback.question.value,
 			contact: feedback.contact.value,
 			images: feedback.files,
-			score:''+starIndex
-		})) 
+			star:starIndex
+		});
+		
 	}, false)
 	feedback.send = function(content) {
 		feedback.uploader = plus.uploader.createUpload(url, {
-			method: 'POST'
+			method: 'POST',
+			timeout: 60000,
 		}, function(upload, status) {
 //			plus.nativeUI.closeWaiting()
 			console.log("upload cb:"+upload.responseText);
@@ -187,8 +191,8 @@
 		//开始上传任务
 		feedback.uploader.start();
 		mui.alert("感谢反馈，点击确定关闭","问题反馈","确定",function () {
-			feedback.clearForm();
-			mui.back();
+			//feedback.clearForm();
+			//mui.back();
 		});
 //		plus.nativeUI.showWaiting();
 	};
