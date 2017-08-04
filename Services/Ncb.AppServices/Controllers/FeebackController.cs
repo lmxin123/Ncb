@@ -1,4 +1,5 @@
-﻿using Framework.Common.Json;
+﻿using Framework.Common.IO;
+using Framework.Common.Json;
 using Framework.Common.Mvc;
 using Ncb.AppDataManager;
 using Ncb.AppViewModels;
@@ -28,23 +29,20 @@ namespace Ncb.AppServices.Controllers
             {
                 bool result = false;
 
-                var item = await _FeebackModelManager.GetByIdAsync(model.Mac);
-
-                var device = new FeeBackModel
+                var feeback = new FeeBackModel
                 {
-                   Contact=model.Contact,
-                   Mac=model.Mac,
-                   Question=model.Question,
-                   Star=model.Star
+                    Contact = model.Contact,
+                    Mac = model.Mac,
+                    Question = model.Question,
+                    Star = model.Star
                 };
-                if (item == null)
+                if (Request.Files.Count > 0)
                 {
-                    result = await _FeebackModelManager.SaveAsync(device, Guid.NewGuid().ToString());
+                    string[] nameList = FileHelper.SaveFile(Request, AppSetting.FeebackPath);
+                    feeback.Images = string.Join(",", nameList);
                 }
-                else
-                {
-                    result = await _FeebackModelManager.SaveAsync(device);
-                }
+                result = await _FeebackModelManager.SaveAsync(feeback, Guid.NewGuid().ToString());
+
                 return Success(true);
             }
             catch (Exception e)

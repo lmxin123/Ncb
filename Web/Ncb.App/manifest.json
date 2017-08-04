@@ -1143,7 +1143,8 @@
 					"css/mui.min.css",
 					"js/ncb.app.js",
 					"js/common.js",
-					"js/mui.min.js"
+					"js/mui.min.js",
+					"js/ncb.userInfo.js"
 				],
 				"refer": [],
 				"priority": 0

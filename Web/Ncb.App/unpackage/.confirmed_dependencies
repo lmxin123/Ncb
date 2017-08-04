@@ -125,7 +125,8 @@
 			"css/mui.min.css",
 			"js/ncb.app.js",
 			"js/common.js",
-			"js/mui.min.js"
+			"js/mui.min.js",
+			"js/ncb.userInfo.js"
 		]
 	},
 	"html/setting-account.html": {

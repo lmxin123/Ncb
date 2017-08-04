@@ -148,14 +148,14 @@
 			question: feedback.question.value,
 			contact: feedback.contact.value,
 			images: feedback.files,
-			star:starIndex
+			star:starIndex.toString()
 		});
 		
 	}, false)
 	feedback.send = function(content) {
 		feedback.uploader = plus.uploader.createUpload(url, {
 			method: 'POST',
-			timeout: 60000,
+			timeout: 60000*5,
 		}, function(upload, status) {
 //			plus.nativeUI.closeWaiting()
 			console.log("upload cb:"+upload.responseText);
@@ -191,10 +191,9 @@
 		//开始上传任务
 		feedback.uploader.start();
 		mui.alert("感谢反馈，点击确定关闭","问题反馈","确定",function () {
-			//feedback.clearForm();
-			//mui.back();
+			feedback.clearForm();
+			mui.back();
 		});
-//		plus.nativeUI.showWaiting();
 	};
 	
 	 //应用评分
