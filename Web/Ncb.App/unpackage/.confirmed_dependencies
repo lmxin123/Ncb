@@ -1,147 +1,167 @@
 {
-	"index.html": {
-		"resources": [
-			"js/mui.min.js",
-			"fonts/mui.ttf",
-			"css/mui.min.css",
-			"js/update.js",
-			"js/content.index.js",
-			"html/content-index.html",
-			"js/common.js",
-			"html/about.html",
-			"js/ncb.app.js",
-			"js/ncb.userInfo.js"
-		],
-		"refer": [
-			"index-menu.html",
-			"examples/best-practices/list-to-detail/listview.html",
-			"html/setting.html",
-			"html/content-detail.html",
-			"html/content-index.html",
-			"html/guide.html",
-			"html/main.html"
-		]
-	},
-	"examples/best-practices/list-to-detail/detail.html": {
-		"resources": [
-			"examples/best-practices/list-to-detail/list-to-detail.css",
-			"css/mui.min.css"
-		],
-		"refer": []
-	},
-	"examples/best-practices/list-to-detail/listview.html": {
-		"resources": [
-			"css/mui.min.css",
-			"examples/best-practices/list-to-detail/vue.min.js"
-		],
-		"refer": [
-			"examples/best-practices/list-to-detail/detail.html"
-		]
-	},
-	"html/content-detail.html": {
-		"resources": [
-			"css/mui.min.css",
-			"js/mui.min.js",
-			"css/content.detail.css",
-			"js/vue.min.js"
-		],
-		"refer": []
-	},
-	"html/content-index.html": {
-		"resources": [
-			"js/vue.min.js",
-			"css/mui.min.css"
-		],
-		"refer": [
-			"html/content-detail.html"
-		]
-	},
-	"html/setting.html": {
-		"resources": [
-			"css/mui.min.css",
-			"css/feedback.css",
-			"images/logo.png",
-			"js/feedback.js",
-			"js/mui.view.js",
-			"html/about.html",
-			"js/mui.min.js",
-			"js/ncb.app.js",
-			"js/common.js",
-			"js/ncb.base64Data.js"
-		],
-		"refer": [
-			"html/about.html",
-			"html/setting-about.html",
-			"html/setting-feedback.html",
-			"html/setting-account.html",
-			"html/setting-shared.html",
-			"html/setting-qrcode.html"
-		]
-	},
-	"html/tab-webview-subpage-contact.html": {
-		"resources": [
-			"images/60x60.gif"
-		],
-		"refer": []
-	},
-	"html/main.html": {
-		"resources": [
-			"html/tab-webview-subpage-about.html",
-			"css/mui.min.css",
-			"html/content-index.html"
-		],
-		"refer": [
-			"html/tab-webview-subpage-chat.html",
-			"html/tab-webview-subpage-contact.html",
-			"html/tab-webview-subpage-about.html",
-			"html/setting.html",
-			"html/content-index.html"
-		]
-	},
-	"html/tab-webview-subpage-about.html": {
-		"resources": [
-			"css/mui.min.css"
-		],
-		"refer": []
-	},
-	"html/about.html": {
-		"resources": [
-			"images/qrcode.png",
-			"css/mui.min.css",
-			"js/mui.min.js"
-		],
-		"refer": []
-	},
-	"html/setting-about.html": {
-		"resources": [
-			"images/qrcode.png",
-			"css/mui.min.css"
-		]
-	},
-	"html/setting-feedback.html": {
-		"resources": [
-			"css/feedback.css",
-			"js/feedback.js",
-			"css/mui.min.css",
-			"js/ncb.app.js",
-			"js/common.js",
-			"js/mui.min.js",
-			"js/ncb.userInfo.js"
-		]
-	},
-	"html/setting-account.html": {
-		"resources": [
-			"css/mui.min.css"
-		]
-	},
-	"html/setting-shared.html": {
-		"resources": [
-			"css/mui.min.css"
-		]
-	},
-	"html/setting-qrcode.html": {
-		"resources": [
-			"css/mui.min.css"
-		]
-	}
+  "index.html": {
+    "resources": [
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "js/update.js",
+      "js/content.index.js",
+      "html/content-index.html",
+      "js/common.js",
+      "html/about.html",
+      "js/ncb.app.js",
+      "js/ncb.userInfo.js"
+    ],
+    "refer": [
+      "index-menu.html",
+      "examples/best-practices/list-to-detail/listview.html",
+      "html/setting.html",
+      "html/content-detail.html",
+      "html/content-index.html",
+      "html/guide.html",
+      "html/main.html"
+    ]
+  },
+  "examples/best-practices/list-to-detail/detail.html": {
+    "resources": [
+      "examples/best-practices/list-to-detail/list-to-detail.css",
+      "css/mui.min.css"
+    ],
+    "refer": []
+  },
+  "examples/best-practices/list-to-detail/listview.html": {
+    "resources": [
+      "css/mui.min.css",
+      "examples/best-practices/list-to-detail/vue.min.js"
+    ],
+    "refer": [
+      "examples/best-practices/list-to-detail/detail.html"
+    ]
+  },
+  "html/content-detail.html": {
+    "resources": [
+      "css/mui.min.css",
+      "js/mui.min.js",
+      "css/content.detail.css",
+      "js/vue.min.js"
+    ],
+    "refer": []
+  },
+  "html/content-index.html": {
+    "resources": [
+      "js/vue.min.js",
+      "css/mui.min.css"
+    ],
+    "refer": [
+      "html/content-detail.html"
+    ]
+  },
+  "html/setting.html": {
+    "resources": [
+      "css/mui.min.css",
+      "css/feedback.css",
+      "images/logo.png",
+      "js/feedback.js",
+      "js/mui.view.js",
+      "html/about.html",
+      "js/mui.min.js",
+      "js/ncb.app.js",
+      "js/common.js",
+      "js/ncb.base64Data.js"
+    ],
+    "refer": [
+      "html/about.html",
+      "html/setting-about.html",
+      "html/setting-feedback.html",
+      "html/setting-account.html",
+      "html/setting-shared.html",
+      "html/setting-qrcode.html",
+      "html/setting-pay.html"
+    ]
+  },
+  "html/tab-webview-subpage-contact.html": {
+    "resources": [
+      "images/60x60.gif"
+    ],
+    "refer": []
+  },
+  "html/main.html": {
+    "resources": [
+      "html/tab-webview-subpage-about.html",
+      "css/mui.min.css",
+      "html/content-index.html"
+    ],
+    "refer": [
+      "html/tab-webview-subpage-chat.html",
+      "html/tab-webview-subpage-contact.html",
+      "html/tab-webview-subpage-about.html",
+      "html/setting.html",
+      "html/content-index.html"
+    ]
+  },
+  "html/tab-webview-subpage-about.html": {
+    "resources": [
+      "css/mui.min.css"
+    ],
+    "refer": []
+  },
+  "html/about.html": {
+    "resources": [
+      "images/qrcode.png",
+      "css/mui.min.css",
+      "js/mui.min.js"
+    ],
+    "refer": []
+  },
+  "html/setting-about.html": {
+    "resources": [
+      "images/qrcode.png",
+      "css/mui.min.css",
+      "js/mui.min.js"
+    ]
+  },
+  "html/setting-feedback.html": {
+    "resources": [
+      "css/feedback.css",
+      "js/feedback.js",
+      "css/mui.min.css",
+      "js/ncb.app.js",
+      "js/common.js",
+      "js/mui.min.js",
+      "js/ncb.userInfo.js"
+    ]
+  },
+  "html/setting-account.html": {
+    "resources": [
+      "css/mui.min.css",
+      "js/ncb.app.js",
+      "js/common.js",
+      "js/mui.min.js",
+      "js/ncb.userInfo.js"
+    ]
+  },
+  "html/setting-shared.html": {
+    "resources": [
+      "css/mui.min.css",
+      "js/ncb.app.js",
+      "js/common.js",
+      "js/mui.min.js",
+      "images/qrcode_dowload.png"
+    ]
+  },
+  "html/setting-qrcode.html": {
+    "resources": [
+      "css/mui.min.css"
+    ]
+  },
+  "html/setting-pay.html": {
+    "resources": [
+      "js/ncb.app.js",
+      "js/common.js",
+      "js/mui.min.js",
+      "css/mui.min.css",
+      "images/qrcode_wxpay.jpg",
+      "images/qrcode_alipay.jpg"
+    ]
+  }
 }

@@ -3,7 +3,7 @@
 
 	<head>
 		<meta charset="utf-8">
-		<title>Hello MUI</title>
+		<title>设置</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -40,11 +40,11 @@
 						检查更新
 					</a>
 				</li>
-						
+
 			</ul>
 			<ul class="mui-table-view" style="margin-top: 25px;">
 				<li class="mui-table-view-cell">
-					<a id="about" class="mui-navigate-right" href="setting-qrcode.html">
+					<a class="mui-navigate-right" href="setting-pay.html">
 						付款二维码
 					</a>
 				</li>
@@ -63,15 +63,25 @@
 	<script src="../js/mui.min.js"></script>
 	<script src="../js/ncb.base64Data.js"></script>
 	<script src="../js/common.js"></script>
+	<script src="../js/ncb.userInfo.js"></script>
 	<script src="../js/ncb.app.js"></script>
 	<script>
 		mui.init({
-			swipeBack: true //启用右滑关闭功能
-		});
+				swipeBack: true //启用右滑关闭功能
+			}
 
+		);
 		mui('.mui-table-view-cell').on('tap', 'a', function(e) {
-		common.openWebviewWithTile(this.getAttribute('href'), this.innerHTML.trim());
+				var href = this.getAttribute('href');				
+				if(href)
+				{
+					common.openWebviewWithTile(href, this.innerHTML.trim());
+				}else
+				{
+					 common.update();
+				}
 		});
+		
 	</script>
 
 </html>

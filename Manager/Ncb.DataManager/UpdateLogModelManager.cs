@@ -12,7 +12,7 @@ using Ncb.AdminViewModels;
 
 namespace Ncb.DataManager
 {
-    public class UpdateLogModelManager : BaseManager<NcbDbContext, UpdateModel, string>
+    public class UpdateLogModelManager : BaseManager<NcbDbContext, UpdateLogModel, string>
     {
 
     }

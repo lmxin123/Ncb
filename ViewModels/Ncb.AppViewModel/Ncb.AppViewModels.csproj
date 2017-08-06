@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="UpdateViewModels.cs" />
     <Compile Include="UserInfoViewModels.cs" />
     <Compile Include="CreateFeebackViewModels.cs" />
     <Compile Include="CreateDeviceViewModels.cs" />

@@ -3,15 +3,12 @@
 
 	<head>
 		<meta charset="utf-8">
-		<title>Hello MUI</title>
+		<title>分享推荐</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
-
 		<!--标准mui.css-->
 		<link rel="stylesheet" href="../css/mui.min.css">
-		<!--App自定义的css-->
-		<!-- <link rel="stylesheet" type="text/css" href="../css/app.css" /> -->
 		<style>
 			p {
 				text-indent: 22px;
@@ -41,23 +38,29 @@
 			.qrcode img {
 				margin: 0 auto;
 			}
-			
 		</style>
 	</head>
 
 	<body>
-<br />
+		<br />
 		<div class="mui-content">
 			<div class="mui-content-padded">
+				<p class="mui-text-center">扫码下载最新版app</p>
+<p class="mui-text-center">长按二维码可保存到相册</p>
 				<div class="qrcode">
-					<img id="qrcode" width="80%" />
+					<img id="qrcode" width="80%" src="../images/qrcode_dowload.png" />
 				</div>
-				<p>长按二维码保存到相册或者截图发送给朋友，朋友可以扫码下载最新版的app</p>
+
+			</div>
+			<br />
+			<div class="mui-content-padded">
+				<button type="button" disabled="disabled" class="mui-btn mui-btn-primary mui-btn-block">
+		        	分享(稍后开放)</button>
 			</div>
 		</div>
 		<script src="../js/mui.min.js"></script>
-		<script type="text/javascript" src="../js/common.js" ></script>
-		<script type="text/javascript" src="../js/ncb.app.js" ></script>
+		<script type="text/javascript" src="../js/common.js"></script>
+		<script type="text/javascript" src="../js/ncb.app.js"></script>
 		<script type="text/javascript" charset="utf-8">
 			mui.init({
 				gestureConfig: {
@@ -65,28 +68,58 @@
 				},
 				swipeBack: true //启用右滑关闭功能
 			});
-			
-			var qrcodeEl = document.getElementById("qrcode");
-			qrcodeEl.src=common.config.rootPath+'content/qrcode/dowload.png';
-			qrcodeEl.addEventListener('longtap', function() {
-				plus.nativeUI.actionSheet({
-					cancel: '取消',
-					buttons: [{
-						title: '保存到相册'
-					}]
-				}, function(e) {
-					var index = e.index;
-					if (e.index === 1) {
-						plus.gallery.save(qrcodeEl.src, function() {
-							mui.toast('保存成功');
-						}, function() {
-							mui.toast('保存失败，请重试！');
-						});
-					}
-				});
+
+			document.getElementById("qrcode").addEventListener('longtap', function() {
+			common.saveLocalPic(this.src);
 			});
+
 			
+			function shareSystem() {
+				var msg = {
+					//href:common.config.rootPath+'/u/d',
+					//title: '农村宝',
+					content: '农村宝，一个神奇的app，谁用谁知道，点击链接下载体验。' + common.config.rootPath + '/update/dowload',
+					//thumbs: [],
+					//pictures: []
+				};
+
+				plus.share.sendWithSystem ? plus.share.sendWithSystem(msg, function() {
+					mui.toast('分享成功!');
+				}, function(e) {
+					mui.toast('分享失败!' + JSON.stringify(e));
+				}) : shareSystemNativeJS();
+			}
+
+			function shareSystemNativeJS() {
+				if(plus.os.name !== 'Android') {
+					plus.nativeUI.alert('此平台暂不支持系统分享功能!');
+					return;
+				}
+				var intent = new Intent(Intent.ACTION_SEND);
+				if(pic && pic.realUrl) {
+					var p = '';
+					p = pic.realUrl;
+					if(p.substr(0, 7) === 'file://') {
+						p = p.substr(7);
+					} else if(p.sub(0) !== '/') {
+						p = plus.io.convertLocalFileSystemURL(p);
+					}
+				}
+				var f = new File(p);
+				var uri = Uri.fromFile(f);
+				if(f.exists() && f.isFile()) {
+					console.log('image/*');
+					intent.setType('image/*');
+					intent.putExtra(Intent.EXTRA_STREAM, uri);
+				} else {
+					console.log('text/plain');
+					intent.setType('text/plain');
+				}
+				intent.putExtra(Intent.EXTRA_SUBJECT, 'HelloH5');
+				intent.putExtra(Intent.EXTRA_TEXT, sharecontent.value);
+				intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				main.startActivity(Intent.createChooser(intent, '系统分享HelloH5'));
+			}
 		</script>
 	</body>
-
 </html>

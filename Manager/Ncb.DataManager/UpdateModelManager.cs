@@ -14,6 +14,17 @@ namespace Ncb.DataManager
 {
     public class UpdateModelManager : BaseManager<NcbDbContext, UpdateModel, string>
     {
+        public UpdateModel GetLast()
+        {
+            using (Db = new NcbDbContext())
+            {
+                var item = Db.Updates
+                    .OrderByDescending(a => a.CreateDate)
+                    .Take(1)
+                    .FirstOrDefault();
 
+                return item;
+            }
+        }
     }
 }

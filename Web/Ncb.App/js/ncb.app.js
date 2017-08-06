@@ -13,8 +13,6 @@
 		cdnUrl: '' //资源分发地址，如css，js，img等静态文件单独放在一个服务器上
 	};
 
-
-
 	$.ready(function() {
 		var title = doc.querySelector('title');
 		title.innerText = common.config.appName + '-' + title.innerText;
@@ -65,8 +63,12 @@
 		mui.openWindowWithTitle({
 			url: url,
 			id: url,
+			waiting: {
+				autoShow: false
+			},
 			extras: common.USERINFO
 		}, {
+
 			height: "65px", //导航栏高度值
 			backgroundColor: "#f7f7f7", //导航栏背景色
 			bottomBorderColor: "#cccccc", //底部边线颜色
@@ -98,7 +100,68 @@
 				click: callback
 			}
 		})
-	}
+	};
 
-	
+	common.saveRemotePic = function(picurl, name) {
+		var dtask = plus.downloader.createDownload(picurl, {
+			filename: "_downloads/" + name
+		}, function(d, status) {
+			// 下载完成
+			if(status == 200) {
+				plus.gallery.save(d.filename, function() {
+					mui.toast('保存成功!');
+				}, function() {
+					mui.toast('保存失败，请重试！');
+				});
+			} else {
+				mui.toast("图片下载失败: " + status);
+			}
+
+		});
+		dtask.start();
+	};
+
+	common.saveLocalPic = function(picurl) {
+		plus.nativeUI.actionSheet({
+			cancel: '取消',
+			buttons: [{
+				title: '保存到相册'
+			}]
+		}, function(e) {
+			var index = e.index;
+			if(e.index === 1) {
+				plus.gallery.save(picurl, function() {
+					mui.toast('保存成功');
+				}, function() {
+					mui.toast('保存失败，请重试！');
+				});
+			}
+		});
+	};
+
+	common.update = function() {
+		var server = common.config.apiUrl + "/update/check"; //获取升级描述文件服务器地址
+		mui.getJSON(server, {
+			mac: common.getMac(),
+			appid: plus.runtime.appid,
+			version: plus.runtime.version,
+			imei: plus.device.imei
+		}, function(rsp) {
+			if(rsp.Success) {
+				if(rsp.Data.Updated) {
+					plus.nativeUI.confirm(rsp.Data.Note, function(event) {
+						if(0 == event.index) {
+							var url = rsp.Data.url + '&mac=' + common.getMac();
+							plus.runtime.openURL(url);
+						}
+					}, rsp.Data.Title, ["立即更新", "取　　消"]);
+				} else {
+					mui.toast('己是最新版本！');
+				}
+			} else {
+				mui.toast(rsp.Message);
+			}
+		});
+	};
+
 })(mui, document, common);

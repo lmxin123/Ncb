@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FeebackModelManager.cs" />
+    <Compile Include="UpdateModelManager.cs" />
     <Compile Include="UserInfoModelManager.cs" />
     <Compile Include="ContentModelManager.cs" />
     <Compile Include="DeviceModelManager.cs" />
