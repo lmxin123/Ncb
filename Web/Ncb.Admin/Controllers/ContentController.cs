@@ -98,7 +98,7 @@ namespace Ncb.Admin.Controllers
                 model.Operator = User.Identity.Name;
 
                 var id = string.IsNullOrEmpty(model.ID) ? Guid.NewGuid().ToString() : model.ID;
-                if (Request.Files.Count > 0)
+                if (Request.Files.Count > 0 && !string.IsNullOrEmpty(Request.Files[0].FileName))
                 {
                     var banner = Request.Files[0];
                     var filePath = AppSetting.BannerPath;
@@ -152,7 +152,7 @@ namespace Ncb.Admin.Controllers
             }
         }
 
-        [HttpPost]
+       // [HttpPost]
         public async Task<JsonResult> Delete(string id)
         {
             try
@@ -160,10 +160,11 @@ namespace Ncb.Admin.Controllers
                 var model = await _ContentModelManager.GetByIdAsync(id);
 
                 model.Operator = UserId;
-                await _ContentModelManager.SaveAsync(model);
+                model.RecordState = RecordStates.Deleted;
 
-                await _ContentModelManager.DeleteAsync(id);
-                return Success(true);
+                var result = await _ContentModelManager.SaveAsync(model);
+
+                return Success(result);
             }
             catch (Exception e)
             {

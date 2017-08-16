@@ -25,14 +25,28 @@ namespace Ncb.AppDataManager
 
                 if (item != null)
                 {
-                    result.DowloadUrl = item.DowloadUrl;
-                    result.Note = item.Note;
-                    result.Title = item.Title;
-                    result.Size = item.Size;
-                    result.Updated = true;
+                    if (GetVersion(item.Version) > GetVersion(model.Version))
+                    {
+                        result.DowloadUrl = item.DowloadUrl;
+                        result.Note = item.Note;
+                        result.Title = item.Title;
+                        result.Size = item.Size;
+                        result.Updated = true;
+                    }
                 }
                 return result;
             }
+        }
+
+        public int GetVersion(string ver)
+        {
+            int version = 0;
+            if (!string.IsNullOrEmpty(ver))
+            {
+                ver = ver.Replace(".", string.Empty);
+                int.TryParse(ver, out version);
+            }
+            return version;
         }
     }
 

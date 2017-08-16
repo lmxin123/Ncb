@@ -43,7 +43,6 @@
 		<script src="../js/mui.min.js"></script>
 		<script type="text/javascript" src="../js/common.js"></script>
 		<script type="text/javascript" src="../js/ncb.app.js"></script>
-		<script type="text/javascript" src="../js/ncb.userInfo.js"></script>
 		<script>(function(mui, common) {
 	mui.init();
 	var flag=false;
@@ -52,14 +51,15 @@
 	var setAccount=function(callback) {
 		flag=true;
 		mui.post(common.config.apiUrl + '/userInfo/setAccount', {
-			id: common.USERINFO.id, name: name.value, phone: phone.value
-		}
-		, function(rsp) {
+			id: common.USERINFO.id, 
+			name: name.value, 
+			phone: phone.value
+		},function(rsp) {
 			if(rsp.Success) {
 				mui.toast('保存成功！');
 				common.USERINFO.name=name.value;
 				common.USERINFO.phone=phone.value;
-				common.setUserInfo(common.USERINFO);
+				common.setLocalObject(common.keys.USERINFO_KEY, common.USERINFO);
 				callback && callback();
 			}
 			else {
@@ -72,7 +72,7 @@
 	mui.plusReady(function() {
 		name=common.get('userName');
 		phone=common.get('phone');
-		common.initUserInfo(function() {
+		common.getUserInfo(false,function() {
 			name.value=common.USERINFO.name;
 			phone.value=common.USERINFO.phone;
 		}

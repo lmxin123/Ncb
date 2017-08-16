@@ -21,6 +21,6 @@ namespace Ncb.AdminViewModels
 
         [DisplayName("到期日期")]
         [Required(ErrorMessage = "请输入{0}")]
-        public string ExpiryDate { get; set; }
+        public DateTime ExpiryDate { get; set; }
     }
 }

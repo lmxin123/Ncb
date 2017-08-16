@@ -31,8 +31,7 @@ namespace Ncb.Data
         public AccessTypes AccessType { get; set; }
 
         [Display(Name = "免费日期")]
-        [StringLength(10, MinimumLength = 10, ErrorMessage = LengthErrMsg)]
-        public string FreeDate { get; set; }
+        public DateTime? FreeDate { get; set; }
 
         /// <summary>
         /// 封面图片的后缀
@@ -59,6 +58,16 @@ namespace Ncb.Data
             }
         }
 
+        [NotMapped]
+        public string FreeDateDisplay
+        {
+            get
+            {
+                return FreeDate?.ToString(DateFormetStr);
+            }
+        }
+
+        [NotMapped]
         public override string CreateDateDisplay
         {
             get

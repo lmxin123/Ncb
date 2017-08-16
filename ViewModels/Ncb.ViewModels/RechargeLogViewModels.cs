@@ -31,7 +31,7 @@ namespace Ncb.AdminViewModels
         [DisplayName("充值日期")]
         public DateTime RechargeDate { get; set; }
         [DisplayName("到期时间")]
-        public string ExpiryDate { get; set; }
+        public DateTime ExpiryDate { get; set; }
         [DisplayName("操作人")]
         public string Operator { get; set; }
     }

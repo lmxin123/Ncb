@@ -48,7 +48,7 @@ namespace Ncb.Data
 
         [DisplayName("更新包大小")]
         [Required(ErrorMessage = RequiredSelectErrMsg)]
-        public string Size { get; set; }
+        public string Size { get; set; }     
     }
 
     [Table("UpdateLogs")]

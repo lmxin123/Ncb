@@ -65,5 +65,33 @@
         });
 
         $scope.getList();
+
+        $scope.delete = function (id, e) {
+            var target = $(e.target);
+
+            if (!target.data('delete')) {
+                target.text('确定要删除吗');
+                target.data('delete', true).css({ 'color': 'red' });
+                return;
+            }
+
+            common.alert("正在删除...", function () {
+                $http.post('/content/delete?id=' + id + '&t=' + common.timestamp())
+                    .success(function (resp) {
+                        if (resp.Success) {
+                            common.alert('删除成功！');
+                            $scope.getList();
+                        } else {
+                            common.alert(resp.Message);
+                            target.text('删除');
+                            target.data('delete', false).css({ 'color': '' });
+                        }
+                    }).error(function (resp) {
+                        common.alert('出现错误或者网络异常！');
+                        $scope.List = [];
+                        $scope.totalItems = 0;
+                    });
+            });
+        };
     });
 })(window.angular, document);

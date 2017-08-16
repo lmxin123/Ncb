@@ -62,7 +62,7 @@ namespace Ncb.Data
         public DateTime? LastRechargeDate { get; set; }
 
         [DisplayName("到期日期")]
-        public string ExpiryDate { get; set; }
+        public DateTime? ExpiryDate { get; set; }
 
         [DisplayName("最后登录时间")]
         public DateTime LastLoginDate { get; set; }

@@ -19,9 +19,7 @@ namespace Ncb.AppViewModels
 
     public class UpdateCheckModel
     {
-        public string Mac { get; set; }
         public string AppId { get; set; }
         public string Version { get; set; }
-        public string Imei { get; set; }
     }
 }
