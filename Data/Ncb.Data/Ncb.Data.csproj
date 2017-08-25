@@ -42,6 +42,8 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -84,6 +86,7 @@
     <Compile Include="ContentModels.cs" />
     <Compile Include="NcbDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\View_UserDeviceInfos.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Framework\Libraries\Framework.Common\Framework.Common.csproj">

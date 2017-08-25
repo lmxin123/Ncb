@@ -6,7 +6,7 @@
     var states = EnumExtensions.GetDisplayNames<RecordStates, int>(requireAll: true).Where(m => new string[] { "", "4", "5", "6" }.Contains(m.Value));
     var editStates = states.Where(m => m.Value != string.Empty);
 }
-@model DeviceQueryViewModel
+@model UserInfoQueryViewModel
 @section styles{
     <link href="~/Content/bootstrap-datetimepicker.min.css" rel="stylesheet" />
     <link href="~/content/tables.css" type="text/css" rel="stylesheet" />
@@ -36,7 +36,6 @@
                         @Html.LabelFor(m => m.Region):
                         @Html.DropDownListFor(m => m.Region, new List<SelectListItem>(), new { @class = "form-control" })
                     </div>*@
-
                 <div class="form-group">
                     @Html.LabelFor(m => m.StartDate):
                     @Html.TextBoxFor(m => m.StartDate, new { @class = "form-control" })
@@ -89,19 +88,31 @@
                         </th>
                         <th width="200">
                             <span class="line"></span>
-                            @Html.DisplayNameFor(m => m.Amount)
-                        </th>
-                        <th width="200">
-                            <span class="line"></span>
-                            @Html.DisplayNameFor(m => m.CategoryID)
-                        </th>
-                        <th width="200">
-                            <span class="line"></span>
                             @Html.DisplayNameFor(m => m.PhoneNumber)
+                        </th>
+                        <th width="200">
+                            <span class="line"></span>
+                            @Html.DisplayNameFor(m => m.CategoryName)
+                        </th>
+                        <th width="200">
+                            <span class="line"></span>
+                            @Html.DisplayNameFor(m => m.Amount)
                         </th>
                         <th width="100">
                             <span class="line"></span>
-                            @Html.DisplayNameFor(m => m.UserAgent)
+                            @Html.DisplayNameFor(m => m.AppVersion)
+                        </th>
+                        <th width="100">
+                            <span class="line"></span>
+                            @Html.DisplayNameFor(m => m.OsVersion)
+                        </th>
+                        <th width="100">
+                            <span class="line"></span>
+                            @Html.DisplayNameFor(m => m.Model)
+                        </th>
+                        <th width="100">
+                            <span class="line"></span>
+                            @Html.DisplayNameFor(m => m.Vendor)
                         </th>
                         <th width="250">
                             <span class="line"></span>
@@ -115,13 +126,9 @@
                             <span class="line"></span>
                             @Html.DisplayNameFor(m => m.CreateDate)
                         </th>
-                        <th width="250">
-                            <span class="line"></span>
-                            状态
-                        </th>
                         <th width="300">
                             <span class="line"></span>
-                            @Html.DisplayNameFor(m => m.Remark)
+                            @Html.DisplayNameFor(m => m.RecordState)
                         </th>
                         <th width="300">
                             <span class="line"></span>
@@ -137,15 +144,17 @@
                             <td ng-bind="c.OpenAreaDisplay"></td>*@
                         <td ng-bind="c.ID"></td>
                         <td ng-bind="c.Name"></td>
-                        <td ng-bind="c.Amount"></td>
-                        <td ng-bind="c.CategoryName"></td>
                         <td ng-bind="c.PhoneNumber"></td>
-                        <td ng-bind="c.UserAgent"></td>
+                        <td ng-bind="c.CategoryName"></td>
+                        <td ng-bind="c.Amount"></td>
+                        <td ng-bind="c.AppVersion"></td>
+                        <td ng-bind="c.OsVersion"></td>
+                        <td ng-bind="c.Model"></td>
+                        <td ng-bind="c.Vendor"></td>
                         <td ng-bind="c.LastLoginDateDesplay"></td>
-                        <td ng-bind="c.ExpiryDate"></td>
+                        <td ng-bind="c.ExpiryDateDesplay"></td>
                         <td ng-bind="c.CreateDateDisplay"></td>
                         <td ng-bind="c.RecordStateDisplay"></td>
-                        <td ng-bind="c.Remark"></td>
                         <td>
                             <ul class="actions">
                                 @if (User.Identity.CheckActionRight("0301", ActionTypes.Update))
@@ -156,11 +165,14 @@
                                     <li>
                                         <a href="javascript:;" ng-click="deviceModal(c.ID)">修改</a>
                                     </li>
+                                    <li>
+                                        <a href="javascript:;" ng-click="deviceModal(c.ID)">启用</a>
+                                    </li>
                                 }
                                 @if (User.Identity.CheckActionRight("0301", ActionTypes.Delete))
                                 {
                                     <li class="last">
-                                        <a href="javascript:;" ng-click="delete(c.ID,$event)">删除</a>
+                                        <a href="javascript:;" ng-click="delete(c.ID,$event)">注销</a>
                                     </li>
                                 }
                             </ul>
@@ -233,7 +245,7 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">@Html.DisplayNameFor(m => m.CategoryID)<span class="hdy-red">*</span>：</label>
                             <div class="col-sm-7">
-                                @Html.DropDownListFor(m => m.CategoryID,null, new { @class = "form-control" })
+                                @Html.DropDownListFor(m => m.CategoryID, null, new { @class = "form-control" })
                                 @Html.ValidationMessageFor(m => m.CategoryID)
                             </div>
                         </div>
@@ -279,6 +291,6 @@
 @section scripts{
     @Scripts.Render("~/bundles/angular")
     @Html.Partial("_DatetimepickerPartial")
-    <script src="~/Scripts/jquery.area.js"></script>
-    <script src="~/Scripts/page/device.index.js"></script>
+    @*<script src="~/Scripts/jquery.area.js"></script>*@
+    <script src="~/Scripts/page/userInfo.index.js"></script>
 }

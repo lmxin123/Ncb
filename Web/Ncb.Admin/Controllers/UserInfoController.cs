@@ -14,15 +14,19 @@ namespace Ncb.Admin.Controllers
 {
     public class UserInfoController : AdminBaseController
     {
+        private readonly DeviceModelManager _DeviceManager;
         private readonly UserInfoModelManager _UserInfoModelManager;
         private readonly UserCategoryModelManager _UserCategoryManager;
         private readonly RechargeLogModelManager _RechargeLogModelManager;
+        private readonly UserDeviceInfoViewManager _UserDeviceInfoViewManager;
 
         public UserInfoController()
         {
+            _DeviceManager = _DeviceManager ?? new DeviceModelManager();
             _UserInfoModelManager = _UserInfoModelManager ?? new UserInfoModelManager();
             _UserCategoryManager = _UserCategoryManager ?? new UserCategoryModelManager();
             _RechargeLogModelManager = _RechargeLogModelManager ?? new RechargeLogModelManager();
+            _UserDeviceInfoViewManager = _UserDeviceInfoViewManager ?? new UserDeviceInfoViewManager();
         }
 
         public async Task<ActionResult> Index()
@@ -38,7 +42,7 @@ namespace Ncb.Admin.Controllers
         {
             try
             {
-                var result = await _UserInfoModelManager.QueryAsync(model, pageIndex, pageSize);
+                var result = await _UserDeviceInfoViewManager.QueryAsync(model, pageIndex, pageSize);
 
                 return Success(result);
             }

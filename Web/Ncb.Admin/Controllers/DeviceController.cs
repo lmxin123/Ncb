@@ -15,6 +15,9 @@ namespace Ncb.Admin.Controllers
     public class DeviceController : AdminBaseController
     {
         private readonly DeviceModelManager _DeviceManager;
+        private readonly UserInfoModelManager _UserInfoModelManager;
+        private readonly UserCategoryModelManager _UserCategoryManager;
+        private readonly RechargeLogModelManager _RechargeLogModelManager;
 
         public DeviceController()
         {
@@ -27,7 +30,7 @@ namespace Ncb.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<JsonResult> GetList(FeebackQueryViewModel model, int pageIndex, int pageSize)
+        public async Task<JsonResult> GetList(string name,string phoneNumber, int pageIndex, int pageSize)
         {
             try
             {

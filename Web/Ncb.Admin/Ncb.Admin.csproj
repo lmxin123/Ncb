@@ -193,7 +193,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ContentController.cs" />
-    <Compile Include="Controllers\DeviceCategoryController.cs" />
+    <Compile Include="Controllers\UserCategoryController.cs" />
     <Compile Include="Controllers\FeebackController.cs" />
     <Compile Include="Controllers\MediaBaseController.cs" />
     <Compile Include="Controllers\DeviceController.cs" />
@@ -708,12 +708,12 @@
       <DependentUpon>page.corpList.js</DependentUpon>
     </Content>
     <Content Include="Scripts\page\page.device.min.js">
-      <DependentUpon>device.index.js</DependentUpon>
+      <DependentUpon>userInfo.index.js</DependentUpon>
     </Content>
-    <Content Include="Scripts\page\device.category.js" />
-    <Content Include="Scripts\page\device.index.js" />
+    <Content Include="Scripts\page\userInfo.category.js" />
+    <Content Include="Scripts\page\userInfo.index.js" />
     <Content Include="Scripts\page\page.deviceCategory.min.js">
-      <DependentUpon>device.category.js</DependentUpon>
+      <DependentUpon>userInfo.category.js</DependentUpon>
     </Content>
     <Content Include="Scripts\page\page.merchant.create.js" />
     <Content Include="Scripts\page\page.corpAd.js" />
@@ -1056,7 +1056,7 @@
     <Content Include="Views\AdList\Index.cshtml" />
     <Content Include="Views\AdScheduling\Index.cshtml" />
     <Content Include="Views\AdScheduling\_CreatePartial.cshtml" />
-    <Content Include="Views\Device\Index.cshtml" />
+    <Content Include="Views\UserInfo\Index.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\CorpAd\Index.cshtml" />
     <Content Include="Views\AdList\Create.cshtml" />
@@ -1083,14 +1083,14 @@
     <Content Include="Views\Shared\AuthActionFaild.cshtml" />
     <Content Include="Views\CorpList\Index.cshtml" />
     <Content Include="Views\CorpList\Create.cshtml" />
-    <Content Include="Views\DeviceCategory\Index.cshtml" />
+    <Content Include="Views\UserCategory\Index.cshtml" />
     <Content Include="Views\CorpAd\Create.cshtml" />
     <Content Include="Views\AdList\_DetailAndAuditingPartial.cshtml" />
     <Content Include="Views\Content\Create.cshtml" />
     <Content Include="Views\Content\Index.cshtml" />
     <Content Include="Views\Content\_DetailPartial.cshtml" />
     <Content Include="Views\Content\Log.cshtml" />
-    <Content Include="Views\Device\_RechargePartial.cshtml" />
+    <Content Include="Views\UserInfo\_RechargePartial.cshtml" />
     <Content Include="Views\Shared\_DatetimepickerPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>

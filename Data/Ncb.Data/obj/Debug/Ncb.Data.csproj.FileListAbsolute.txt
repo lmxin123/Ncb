@@ -126,3 +126,4 @@ E:\github\Ncb\Data\Ncb.Data\obj\Debug\Ncb.Data.dll
 E:\github\Ncb\Data\Ncb.Data\obj\Debug\Ncb.Data.pdb
 E:\github\Ncb\Data\Ncb.Data\obj\Debug\Ncb.Data.Migrations.alterExpiryDate.resources
 E:\github\Ncb\Data\Ncb.Data\obj\Debug\Ncb.Data.Migrations._12312356.resources
+E:\github\Ncb\Data\Ncb.Data\obj\Debug\Ncb.Data.Migrations.dsfsd.resources
