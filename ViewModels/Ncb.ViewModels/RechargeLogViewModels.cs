@@ -21,7 +21,7 @@ namespace Ncb.AdminViewModels
     public class RechargeLogQueryResultViewModel
     {
         [DisplayName("Mac")]
-        public string DeviceID { get; set; }
+        public string ID { get; set; }
         [DisplayName("名称")]
         public string UserName { get; set; }
         [DisplayName("手机号码")]

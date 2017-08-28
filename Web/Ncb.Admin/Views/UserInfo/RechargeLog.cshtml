@@ -1,0 +1,101 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutTab.cshtml";
+    ViewBag.Title = "充值记录";
+}
+@model RechargeLogQueryViewModel
+@section styles{
+    <link href="~/Content/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+    <link href="~/content/tables.css" type="text/css" rel="stylesheet" />
+    <style>
+        .table-wrapper .table ul.actions {
+            float: none;
+        }
+
+        .table-wrapper, .table-wrapper .filter-block {
+            margin-bottom: 15px;
+        }
+    </style>
+}
+<div id="pad-wrapper" ng-app="rechargeLogApp" ng-controller="rechargeLogCtrl">
+    <div class="table-wrapper products-table section">
+        <form id="queryForm" class="form-inline">
+            <div class="row filter-block">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.StartDate):
+                    @Html.TextBoxFor(m => m.StartDate, new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.EndDate):
+                    @Html.TextBoxFor(m => m.EndDate, new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        @Html.TextBoxFor(m => m.QueryText, new { @class = "form-control", placeholder = "请输入用户相关信息" })
+                        <span class="input-group-btn">
+                            <a id="btnQuery" href="javascript:;" class="btn btn-primary" ng-click="getList($event)">搜  索</a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="row">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th width="200">
+                            <span class="line"></span>
+                            @Html.DisplayNameFor(m => m.ID)
+                        </th>
+                        <th width="150">
+                            <span class="line"></span>
+                            @Html.DisplayNameFor(m => m.Name)
+                        </th>
+                        <th width="200">
+                            <span class="line"></span>
+                            @Html.DisplayNameFor(m => m.PhoneNumber)
+                        </th>
+                        <th width="200">
+                            <span class="line"></span>
+                            @Html.DisplayNameFor(m => m.CategoryName)
+                        </th>
+                        <th width="200">
+                            <span class="line"></span>
+                            @Html.DisplayNameFor(m => m.Amount)
+                        </th>
+                        <th width="250">
+                            <span class="line"></span>
+                            @Html.DisplayNameFor(m => m.ExpiryDate)
+                        </th>
+                        <th width="330">
+                            <span class="line"></span>
+                            @Html.DisplayNameFor(m => m.CreateDate)
+                        </th>
+                        <th width="100">
+                            <span class="line"></span>
+                            @Html.DisplayNameFor(m => m.Operator)
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="c in List">
+                        <td ng-bind="c.ID"></td>
+                        <td ng-bind="c.Name"></td>
+                        <td ng-bind="c.PhoneNumber"></td>
+                        <td ng-bind="c.CategoryName"></td>
+                        <td><strong class='hdy-red'>{{c.Amount}}</strong></td>
+                        <td ng-bind="c.ExpiryDateDisplay"></td>
+                        <td ng-bind="c.CreateDateDisplay"></td>
+                        <td ng-bind="c.Operator"></td>
+                    </tr>
+                </tbody>
+            </table>
+            @Html.Partial("_PaginationPartial")
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    @Scripts.Render("~/bundles/angular")
+    @Html.Partial("_DatetimepickerPartial")
+    <script src="~/Scripts/page/userInfo.rechargeLog.js"></script>
+}

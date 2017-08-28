@@ -3,8 +3,8 @@
 @{
     Layout = "~/Views/Shared/_LayoutTab.cshtml";
     ViewBag.Title = "用户管理";
-    var states = EnumExtensions.GetDisplayNames<RecordStates, int>(requireAll: true).Where(m => new string[] { "", "4", "5", "6" }.Contains(m.Value));
-    var editStates = states.Where(m => m.Value != string.Empty);
+    var userStates = EnumExtensions.GetDisplayNames<UserInfoStateTypes, int>();
+    var editUserStates= EnumExtensions.GetDisplayNames<UserInfoStateTypes, int>(requireAll: false);
 }
 @model UserInfoQueryViewModel
 @section styles{
@@ -20,7 +20,7 @@
         }
     </style>
 }
-<div id="pad-wrapper" ng-app="deviceApp" ng-controller="DeviceCtrl">
+<div id="pad-wrapper" ng-app="userInfoApp" ng-controller="userInfoCtrl">
     <div class="table-wrapper products-table section">
         <form id="queryForm" class="form-inline">
             <div class="row filter-block">
@@ -46,7 +46,7 @@
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(m => m.RecordState):
-                    @Html.DropDownListFor(m => m.RecordState, states, new { @class = "form-control" })
+                    @Html.DropDownListFor(m => m.RecordState, userStates, new { @class = "form-control" })
                 </div>
                 <div class="form-group">
                     <div class="input-group">
@@ -62,27 +62,11 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        @*<th width="100">
-                                <span class="line"></span>
-                                @Html.DisplayNameFor(m => m.Province)
-                            </th>
-                            <th width="100">
-                                <span class="line"></span>
-                                @Html.DisplayNameFor(m => m.City)
-                            </th>
-                            <th width="100">
-                                <span class="line"></span>
-                                @Html.DisplayNameFor(m => m.Region)
-                            </th>
-                            <th width="100">
-                                <span class="line"></span>
-                                @Html.DisplayNameFor(m => m.OpenArea)
-                            </th>*@
                         <th width="200">
                             <span class="line"></span>
-                            Mac地址
+                            @Html.DisplayNameFor(m => m.ID)
                         </th>
-                        <th width="200">
+                        <th width="150">
                             <span class="line"></span>
                             @Html.DisplayNameFor(m => m.Name)
                         </th>
@@ -102,31 +86,23 @@
                             <span class="line"></span>
                             @Html.DisplayNameFor(m => m.AppVersion)
                         </th>
-                        <th width="100">
+                        <th width="120">
                             <span class="line"></span>
                             @Html.DisplayNameFor(m => m.OsVersion)
-                        </th>
-                        <th width="100">
-                            <span class="line"></span>
-                            @Html.DisplayNameFor(m => m.Model)
-                        </th>
-                        <th width="100">
-                            <span class="line"></span>
-                            @Html.DisplayNameFor(m => m.Vendor)
-                        </th>
-                        <th width="250">
-                            <span class="line"></span>
-                            @Html.DisplayNameFor(m => m.LastLoginDate)
                         </th>
                         <th width="250">
                             <span class="line"></span>
                             @Html.DisplayNameFor(m => m.ExpiryDate)
                         </th>
-                        <th width="250">
+                        <th width="330">
                             <span class="line"></span>
                             @Html.DisplayNameFor(m => m.CreateDate)
                         </th>
-                        <th width="300">
+                        <th width="330">
+                            <span class="line"></span>
+                            @Html.DisplayNameFor(m => m.LastLoginDate)
+                        </th>
+                        <th width="80">
                             <span class="line"></span>
                             @Html.DisplayNameFor(m => m.RecordState)
                         </th>
@@ -138,41 +114,26 @@
                 </thead>
                 <tbody>
                     <tr ng-repeat="c in List">
-                        @*<td ng-bind="c.Province  |areaFilter"></td>
-                            <td ng-bind="c.Province  |areaFilter:c.City"></td>
-                            <td ng-bind="c.Province  |areaFilter:c.City:c.Region"></td>
-                            <td ng-bind="c.OpenAreaDisplay"></td>*@
                         <td ng-bind="c.ID"></td>
                         <td ng-bind="c.Name"></td>
                         <td ng-bind="c.PhoneNumber"></td>
                         <td ng-bind="c.CategoryName"></td>
-                        <td ng-bind="c.Amount"></td>
+                        <td><strong class='hdy-red'>{{c.Amount}}</strong></td>
                         <td ng-bind="c.AppVersion"></td>
                         <td ng-bind="c.OsVersion"></td>
-                        <td ng-bind="c.Model"></td>
-                        <td ng-bind="c.Vendor"></td>
-                        <td ng-bind="c.LastLoginDateDesplay"></td>
-                        <td ng-bind="c.ExpiryDateDesplay"></td>
+                        <td ng-bind="c.ExpiryDateDisplay"></td>
                         <td ng-bind="c.CreateDateDisplay"></td>
+                        <td ng-bind="c.LastLoginDateDisplay"></td>
                         <td ng-bind="c.RecordStateDisplay"></td>
                         <td>
                             <ul class="actions">
                                 @if (User.Identity.CheckActionRight("0301", ActionTypes.Update))
                                 {
                                     <li>
-                                        <button ng-click="rechargeModal(c.ID)" class="btn btn-primary">充值</button>
+                                        <button ng-click="rechargeModal(c)" class="btn btn-primary">充值</button>
                                     </li>
                                     <li>
-                                        <a href="javascript:;" ng-click="deviceModal(c.ID)">修改</a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:;" ng-click="deviceModal(c.ID)">启用</a>
-                                    </li>
-                                }
-                                @if (User.Identity.CheckActionRight("0301", ActionTypes.Delete))
-                                {
-                                    <li class="last">
-                                        <a href="javascript:;" ng-click="delete(c.ID,$event)">注销</a>
+                                        <a href="javascript:;" ng-click="userInfoModal(c)">修改</a>
                                     </li>
                                 }
                             </ul>
@@ -183,15 +144,15 @@
             @Html.Partial("_PaginationPartial")
         </div>
     </div>
-    <div class="modal fade" id="deviceModal" tabindex="-1" role="dialog" aria-labelledby="deviceModal" aria-hidden="true">
+    <div class="modal fade" id="userInfoModal" tabindex="-1" role="dialog" aria-labelledby="userInfoModal" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">{{device.ID?'修改':'添加'}}用户信息</h4>
+                    <h4 class="modal-title">修改用户信息</h4>
                 </div>
                 <div class="modal-body">
-                    <form role="form" method="post" class="form-horizontal" id="deviceForm">
+                    <form role="form" method="post" class="form-horizontal" id="userInfoForm">
                         @*<div class="form-group">
                                 <label class="col-sm-3 control-label">@Html.DisplayNameFor(m => m.Province)<span class="hdy-red">*</span>：</label>
                                 <div class="col-sm-7">
@@ -223,22 +184,22 @@
                                 </div>
                             </div>*@
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">mac地址：</label>
+                            <label class="col-sm-3 control-label">@Html.DisplayNameFor(m=>m.ID)：</label>
                             <div class="col-sm-7">
-                                <p class="form-control-static" ng-bind="device.ID"></p>
+                                <p class="form-control-static" ng-bind="userInfo.ID"></p>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">@Html.DisplayNameFor(m => m.Name)：</label>
                             <div class="col-sm-7">
-                                @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @ng_model = "device.Name" })
+                                @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @ng_model = "userInfo.Name" })
                                 @Html.ValidationMessageFor(m => m.Name)
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">@Html.DisplayNameFor(m => m.PhoneNumber)：</label>
                             <div class="col-sm-7">
-                                @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control", @ng_model = "device.PhoneNumber" })
+                                @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control", @ng_model = "userInfo.PhoneNumber" })
                                 @Html.ValidationMessageFor(m => m.PhoneNumber)
                             </div>
                         </div>
@@ -250,30 +211,10 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">@Html.DisplayNameFor(m => m.Gender)<span class="hdy-red">*</span>：</label>
-                            <div class="col-sm-7">
-                                @Html.DropDownListFor(m => m.Gender, EnumExtensions.GetDisplayNames<GenderTypes, int>(), new { @class = "form-control" })
-                                @Html.ValidationMessageFor(m => m.Gender)
-                            </div>
-                        </div>
-                        <div class="form-group">
                             <label class="col-sm-3 control-label">@Html.DisplayNameFor(m => m.RecordState)<span class="hdy-red">*</span>：</label>
                             <div class="col-sm-7">
-                                @Html.DropDownListFor(m => m.RecordState, editStates, new { @class = "form-control" })
+                                @Html.DropDownListFor(m => m.RecordState, editUserStates, new { @class = "form-control" })
                                 @Html.ValidationMessageFor(m => m.RecordState)
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">@Html.DisplayNameFor(m => m.Address)：</label>
-                            <div class="col-sm-7">
-                                @Html.TextBoxFor(m => m.Address, new { @class = "form-control", @ng_model = "device.Address" })
-                                @Html.ValidationMessageFor(m => m.Address)
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">@Html.DisplayNameFor(m => m.Remark)：</label>
-                            <div class="col-sm-7">
-                                @Html.TextAreaFor(m => m.Remark, 4, 0, new { @class = "form-control", @ng_model = "device.Remark" })
                             </div>
                         </div>
                     </form>

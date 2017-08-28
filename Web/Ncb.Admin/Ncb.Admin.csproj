@@ -196,7 +196,6 @@
     <Compile Include="Controllers\UserCategoryController.cs" />
     <Compile Include="Controllers\FeebackController.cs" />
     <Compile Include="Controllers\MediaBaseController.cs" />
-    <Compile Include="Controllers\DeviceController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UpdateController.cs" />
     <Compile Include="Controllers\UserInfoController.cs" />
@@ -670,6 +669,10 @@
     <Content Include="Scripts\locale-all.js" />
     <Content Include="Scripts\locale\zh-cn.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\page\page.device.min - 复制.js">
+      <DependentUpon>userInfo.rechargeLog.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\page\userInfo.rechargeLog.js" />
     <Content Include="Scripts\page\utity.js" />
     <Content Include="Scripts\page\common.min.js">
       <DependentUpon>utity.js</DependentUpon>
@@ -1083,7 +1086,7 @@
     <Content Include="Views\Shared\AuthActionFaild.cshtml" />
     <Content Include="Views\CorpList\Index.cshtml" />
     <Content Include="Views\CorpList\Create.cshtml" />
-    <Content Include="Views\UserCategory\Index.cshtml" />
+    <Content Include="Views\UserInfoCategory\Index.cshtml" />
     <Content Include="Views\CorpAd\Create.cshtml" />
     <Content Include="Views\AdList\_DetailAndAuditingPartial.cshtml" />
     <Content Include="Views\Content\Create.cshtml" />
@@ -1092,6 +1095,7 @@
     <Content Include="Views\Content\Log.cshtml" />
     <Content Include="Views\UserInfo\_RechargePartial.cshtml" />
     <Content Include="Views\Shared\_DatetimepickerPartial.cshtml" />
+    <Content Include="Views\UserInfo\RechargeLog.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

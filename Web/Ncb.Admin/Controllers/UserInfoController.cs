@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity.Validation;
 using Ncb.DataManager;
 
 namespace Ncb.Admin.Controllers
@@ -102,7 +103,11 @@ namespace Ncb.Admin.Controllers
                     result = await _UserInfoModelManager.SaveAsync(item);
                 }
 
-                return Success(true);
+                return Success(result);
+            }
+            catch (DbEntityValidationException e)
+            {
+                return Fail(ErrorCode.ModelValidateError, e.EntityValidationErrors.FirstOrDefault()?.ValidationErrors.FirstOrDefault()?.ErrorMessage);
             }
             catch (Exception e)
             {
@@ -116,21 +121,36 @@ namespace Ncb.Admin.Controllers
         {
             try
             {
-                var device = await _UserInfoModelManager.GetByIdAsync(model.DeviceId);
+                var userInfo = await _UserInfoModelManager.GetByIdAsync(model.Id);
 
-                if (device == null) throw new Exception("用户不存在！");
+                if (userInfo == null) throw new Exception("用户不存在！");
 
-                device.Amount = model.Amount;
-                device.Operator = User.Identity.Name;
-                device.LastRechargeDate = DateTime.Now;
-                device.ExpiryDate = model.ExpiryDate;
+                userInfo.Amount = model.Amount;
+                userInfo.Operator = User.Identity.Name;
+                userInfo.LastRechargeDate = DateTime.Now;
+                userInfo.ExpiryDate = model.ExpiryDate;
+                switch (model.Month)
+                {
+                    case 1:
+                        userInfo.CategoryID = 2;
+                        break;
+                    case 3:
+                        userInfo.CategoryID = 3;
+                        break;
+                    case 6:
+                        userInfo.CategoryID = 4;
+                        break;
+                    case 12:
+                        userInfo.CategoryID = 5;
+                        break;
+                }
 
-                var result = await _UserInfoModelManager.SaveAsync(device);
+                var result = await _UserInfoModelManager.SaveAsync(userInfo);
 
                 var log = new RechargeLogModel
                 {
                     Amount = model.Amount,
-                    DeviceID = model.DeviceId,
+                    DeviceID = model.Id,
                     ExpiryDate = model.ExpiryDate,
                     Operator = User.Identity.Name
                 };

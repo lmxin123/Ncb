@@ -11,6 +11,16 @@ using Framework.Common;
 
 namespace Ncb.Data
 {
+    public enum UserInfoStateTypes
+    {
+        [Description("正常")]
+        Normal = 1,
+        [Description("注销")]
+        Locked = 4,
+        [Description("删除")]
+        Delete = 5
+    }
+
     [Table("UserInfos")]
     public partial class UserInfoModel : BaseModel<string>
     {
