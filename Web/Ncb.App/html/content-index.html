@@ -74,7 +74,7 @@
 		<div class="mui-content" id="news">
 			<!--顶部banner图 开始-->
 			<div class="banner">
-				<a href="javascript:;" :data-id="banner.id">
+				<a href="javascript:;" :data-id="banner.id" :data-isfree="banner.isFree" :data-freedate="banner.freeDate">
 					<img :src="banner.imageUrl" />
 					<h2 class="title mui-ellipsis-2">{{banner.title}}</h2>
 					<div style="display: none;">
@@ -88,7 +88,7 @@
 			<!--列表信息流 开始-->
 			<ul id="list" class="mui-table-view">
 				<li class="mui-table-view-cell mui-media" v-for="item in items">
-					<a href="javascript:;" :data-id="item.id">
+					<a href="javascript:;" :data-id="item.id" :data-isfree="item.isFree" :data-freedate="item.freeDate">
 						<img class="mui-media-object mui-pull-left" :src="item.imageUrl">
 						<div class="mui-media-body">
 							<div class="mui-ellipsis-2">{{item.title}}</div>
@@ -100,10 +100,10 @@
 					</a>
 				</li>
 			</ul>
-			<!--列表信息流 结束-->
 		</div>
 		<script src="../js/mui.min.js"></script>
 		<script src="../js/vue.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/ncb.base64Data.js"></script>
 		<script src="../js/common.js"></script>
 		<script src="../js/ncb.app.js"></script>
 		<script type="text/javascript">
@@ -146,14 +146,32 @@
 								mui('#list').pullRefresh().endPulldown();
 								if(rsp.Success) {
 									if(rsp.Data.length > 0) {
-										lastTime =rsp.Data[0].createTime;
-										news.banner = rsp.Data[0];
-										news.banner.createTime=dateUtils.format(news.banner.createTime) ;
-										rsp.Data.remove(rsp.Data[0]);
-										for(var i = 0; i < rsp.Data.length; i++) {
-											rsp.Data[i].createTime = dateUtils.format(rsp.Data[i].createTime)
+										var arrs=[],bannerPath='/content/banner/';
+										for(var i = 1; i < rsp.Data.length-1; i++) {
+											rsp.Data[i].createTime = dateUtils.format(rsp.Data[i].createTime);
+											
+											rsp.Data[i].imageUrl=common.config.rootPath+
+											bannerPath+
+											rsp.Data[i].id+
+											rsp.Data[i].imageUrl;
+											
+											arrs=arrs.concat(rsp.Data[i]);
 										}
-										news.items = news.items.concat(rsp.Data);
+										news.items=news.items.concat(arrs);
+										if(news.banner.id)
+										{
+											arrs.concat(news.banner);
+										}
+
+										lastTime = rsp.Data[0].createTime;
+										news.banner = rsp.Data[0];
+										news.banner.createTime = dateUtils.format(news.banner.createTime);
+										
+										news.banner.imageUrl=
+										common.config.rootPath+
+										bannerPath+
+										news.banner.id+
+										news.banner.imageUrl;
 									}
 								} else {
 									plus.nativeUI.toast(rsp.Message || '获取数据出现错误！', {
@@ -167,6 +185,7 @@
 			});
 
 			mui.plusReady(function() {
+				common.getUserInfo();
 				//预加载详情页
 				webview_detail = mui.preload({
 					url: 'content-detail.html',
@@ -179,6 +198,8 @@
 						"titleNView": titleNView
 					}
 				});
+
+				common.update();
 			});
 
 			//点击列表，打开详情
@@ -189,15 +210,24 @@
 				var author = this.querySelector(".author").innerHTML;
 				var time = this.querySelector(".time").innerHTML;
 				var imageUrl = this.querySelector("img").getAttribute("src");
-				open_detail(id, title, author, time, imageUrl);
+				var isFree=this.getAttribute('data-isfree');
+				var freedate=this.getAttribute('data-freedate');
+
+				if(isFree || (common.USERINFO.IsPaid && !common.USERINFO.IsExpired)) {
+					open_detail(id,title,author,time,imageUrl);
+				} else {
+					var note=freedate?'您还不是付费用户，本条内容在【'+freedate+'】之后可免费查看。':
+					'您还不是付费用户，暂不能查看，请先付费后再看。';
+
+					plus.nativeUI.confirm(note, function(event) {
+						if(0 == event.index) {
+							common.openWebviewWithTile('setting-pay.html', '转账');
+						}
+					}, '温馨提示', ["立即付费", "我不看了"]);
+				}
+
 			});
 
-			/**
-			 * 打开新闻详情
-			 * 
-			 * @param {String} guid 新闻ID
-			 * @param {String} title  新闻标题
-			 */
 			function open_detail(id, title, author, time, imageUrl) {
 				//若详情页尚未预加载完成，则延时等待再执行
 				if(!webview_detail) {
@@ -251,7 +281,7 @@
 					var date = this.parse(dateStr)
 					var diff = Date.now() - date.getTime();
 					//if(diff < this.UNITS['天']) {
-						return this.humanize(diff);
+					return this.humanize(diff);
 					//}
 
 					//var _format = function(number) {

@@ -43,17 +43,24 @@
       "css/mui.min.css",
       "js/mui.min.js",
       "css/content.detail.css",
-      "js/vue.min.js"
+      "js/vue.min.js",
+      "js/ncb.app.js",
+      "js/common.js"
     ],
     "refer": []
   },
   "html/content-index.html": {
     "resources": [
       "js/vue.min.js",
-      "css/mui.min.css"
+      "css/mui.min.css",
+      "js/ncb.app.js",
+      "js/common.js",
+      "js/mui.min.js",
+      "js/ncb.base64Data.js"
     ],
     "refer": [
-      "html/content-detail.html"
+      "html/content-detail.html",
+      "html/setting-pay.html"
     ]
   },
   "html/setting.html": {
@@ -67,7 +74,9 @@
       "js/mui.min.js",
       "js/ncb.app.js",
       "js/common.js",
-      "js/ncb.base64Data.js"
+      "js/ncb.base64Data.js",
+      "fonts/mui.ttf",
+      "js/ncb.userInfo.js"
     ],
     "refer": [
       "html/about.html",
@@ -118,7 +127,8 @@
       "images/qrcode.png",
       "css/mui.min.css",
       "js/mui.min.js"
-    ]
+    ],
+    "refer": []
   },
   "html/setting-feedback.html": {
     "resources": [
@@ -129,7 +139,8 @@
       "js/common.js",
       "js/mui.min.js",
       "js/ncb.userInfo.js"
-    ]
+    ],
+    "refer": []
   },
   "html/setting-account.html": {
     "resources": [
@@ -138,7 +149,8 @@
       "js/common.js",
       "js/mui.min.js",
       "js/ncb.userInfo.js"
-    ]
+    ],
+    "refer": []
   },
   "html/setting-shared.html": {
     "resources": [
@@ -147,12 +159,14 @@
       "js/common.js",
       "js/mui.min.js",
       "images/qrcode_dowload.png"
-    ]
+    ],
+    "refer": []
   },
   "html/setting-qrcode.html": {
     "resources": [
       "css/mui.min.css"
-    ]
+    ],
+    "refer": []
   },
   "html/setting-pay.html": {
     "resources": [
@@ -162,6 +176,7 @@
       "css/mui.min.css",
       "images/qrcode_wxpay.jpg",
       "images/qrcode_alipay.jpg"
-    ]
+    ],
+    "refer": []
   }
 }

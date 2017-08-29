@@ -96,7 +96,14 @@
             onSuccess: function (result, $ajaxBtn) {
                 if (result.Success) {
                     common.alert('保存成功！');
-                    location.reload();
+                    var p = common.getUrlParameToJSON();
+                    if (common.isEmptyObject(p)) {
+                        $ajaxBtn.reset();
+                    }
+                    else {
+                        $ajaxBtn.setLoadingText('保存成功,正在刷新界面...');
+                        setTimeout(location.reload, 3000);
+                    }
                 }
                 else {
                     common.alert(result.Message);

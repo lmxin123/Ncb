@@ -24,6 +24,7 @@ namespace Ncb.Admin.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<ActionResult> Dowload(string mac)
         {
             try
@@ -43,7 +44,7 @@ namespace Ncb.Admin.Controllers
                     await _UpdateLogModelManager.SaveAsync(log, Guid.NewGuid().ToString());
                 }
                 var path = Server.MapPath("/content/package/") + item.AppName;
-                return File(path, "application/vnd.android.package-archive");
+                return File(path, "application/vnd.android.package-archive", item.AppName);
             }
             catch (Exception e)
             {

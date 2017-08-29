@@ -27,18 +27,18 @@
 				<span class="mui-tab-label">设置</span>
 			</a>
 		</nav>
+
 		<body>
 			<script src="js/mui.min.js"></script>
 			<script src="js/common.js"></script>
 			<script src="js/ncb.app.js"></script>
-			<script src="js/ncb.userInfo.js"></script>
 			<script>
 				mui.init({
 					statusBarBackground: '#f7f7f7'
 				});
 				var aniShow = {};
 				var self;
-				var subpages = [ 'html/content-index.html','html/setting.html'];
+				var subpages = ['html/content-index.html', 'html/setting.html'];
 				var _self;
 				//只有ios支持的功能需要在Android平台隐藏；
 				if(mui.os.android) {
@@ -53,10 +53,18 @@
 						aniShow = "slide-in-right";
 					}
 				}
-
+				var showNote = function() {
+					if(common.USERINFO.isExpiring)
+					{
+						plus.nativeUI.confirm('您的会员有效期为：'+common.USERINFO.expiryDate, function(event) {
+						if(0 == event.index) {
+							common.openWebviewWithTile('setting-pay.html','转账');
+						}
+					}, '温馨提示', ["现在续期", "取　　消"]);
+					}
+				};
 				mui.plusReady(function() {
-					common.getUserInfo();
-					common.update();
+					common.getUserInfo(true,showNote);
 					//读取本地存储，检查是否为首次启动
 					var showGuide = plus.storage.getItem("lauchFlag");
 					//仅支持竖屏显示
@@ -66,7 +74,6 @@
 						//关闭splash页面；
 						plus.navigator.closeSplashscreen();
 						plus.navigator.setFullscreen(false);
-
 					} else {
 						//显示启动导航
 						mui.openWindow({
@@ -85,11 +92,11 @@
 					}
 
 					self = plus.webview.currentWebview();
-					
+
 					for(var i = 0; i < subpages.length; i++) {
 						var temp = {};
-						var title=document.querySelector('a[href="'+subpages[i]+'"]').querySelector('.mui-tab-label').innerHTML;
-						var sub =common.createWebview(subpages[i],title,false);
+						var title = document.querySelector('a[href="' + subpages[i] + '"]').querySelector('.mui-tab-label').innerHTML;
+						var sub = common.createWebview(subpages[i], title, false);
 						if(i > 0) {
 							sub.hide();
 						} else {

@@ -11,6 +11,16 @@ using Framework.Common;
 
 namespace Ncb.Data
 {
+    public enum UserInfoStateTypes
+    {
+        [Description("正常")]
+        Normal = 1,
+        [Description("注销")]
+        Locked = 4,
+        [Description("删除")]
+        Delete = 5
+    }
+
     [Table("UserInfos")]
     public partial class UserInfoModel : BaseModel<string>
     {
@@ -62,7 +72,7 @@ namespace Ncb.Data
         public DateTime? LastRechargeDate { get; set; }
 
         [DisplayName("到期日期")]
-        public string ExpiryDate { get; set; }
+        public DateTime? ExpiryDate { get; set; }
 
         [DisplayName("最后登录时间")]
         public DateTime LastLoginDate { get; set; }

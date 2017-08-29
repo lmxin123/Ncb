@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="AccountModelManager.cs" />
     <Compile Include="DeviceCategoryModelManager.cs" />
+    <Compile Include="UserDeviceInfoModelManager.cs" />
     <Compile Include="UserInfoModelManager.cs" />
     <Compile Include="UpdateLogModelManager.cs" />
     <Compile Include="UpdateModelManager.cs" />

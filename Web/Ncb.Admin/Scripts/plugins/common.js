@@ -125,6 +125,12 @@ String.prototype.isUrl = function () {
             return false;
     };
 
+    Com.isEmptyObject=function (e) {
+        var t;
+        for (t in e)
+            return !1;
+        return !0
+    }  
     /*
     *创建Ajax请求数据包
     *@param {Object} data 数据对象

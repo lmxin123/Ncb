@@ -15,11 +15,11 @@ namespace Ncb.AppDataManager
 {
     public class ContentModelManager : BaseManager<NcbDbContext, ContentModel, string>
     {
-        public GeneralResponseModel<List<ContentModel>> GetList(DateTime? lastTime, int pageIndex, int pageSize)
+        public GeneralResponseModel<List<ContentListViewModel>> GetList(DateTime? lastTime, int pageIndex, int pageSize)
         {
             using (Db = new NcbDbContext())
             {
-                var query = Db.Contents.AsQueryable();
+                var query = Db.Contents.Where(a=>a.RecordState==RecordStates.AuditPass);
                 if (lastTime.HasValue)
                 {
                     query = query.Where(a => DateTime.Compare(a.CreateDate, lastTime.Value) > 0);
@@ -27,28 +27,23 @@ namespace Ncb.AppDataManager
 
                 var query1 = query
                               .OrderByDescending(f => f.CreateDate)
-                              .Select(c => new
-                              {
-                                  ID = c.ID,
-                                  Operator = c.Operator,
-                                  Title = c.Title,
-                                  Suffix = c.Suffix,
-                                  CreateDate = c.CreateDate
-                              })
                               .Skip(pageSize * (pageIndex - 1))
                               .Take(pageSize)
                               .ToList();
 
-                var items = query1.Select(a => new ContentModel
+                var items = query1.Select(c => new ContentListViewModel
                 {
-                    ID = a.ID,
-                    Operator = a.Operator,
-                    CreateDate = a.CreateDate,
-                    Title = a.Title,
-                    Suffix = a.Suffix
+                    Id = c.ID,
+                    Author = c.Operator,
+                    CreateTime = c.CreateDateDisplay,
+                    Title = c.Title,
+                    ImageUrl = c.Suffix,
+                    IsFree = CheckIsFree(c.AccessType, c.FreeDate),
+                    AccessType = c.AccessType,
+                    FreeDate = c.FreeDateDisplay
                 }).ToList();
 
-                var result = new GeneralResponseModel<List<ContentModel>>
+                var result = new GeneralResponseModel<List<ContentListViewModel>>
                 {
                     Data = items,
                     TotalCount = Db.Contents.Count()
@@ -58,6 +53,19 @@ namespace Ncb.AppDataManager
             }
         }
 
+        bool CheckIsFree(AccessTypes t, DateTime? freeDate)
+        {
+            switch (t)
+            {
+                case AccessTypes.Free:
+                    return true;
+                case AccessTypes.Pay:
+                    return false;
+                default:
+                    bool isFree = DateTime.Today > freeDate.Value;
+                    return isFree;
+            }
+        }
         public string GetDetail(string id)
         {
             using (Db = new NcbDbContext())

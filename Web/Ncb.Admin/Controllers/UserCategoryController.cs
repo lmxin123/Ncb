@@ -10,12 +10,12 @@ using Ncb.DataManager;
 
 namespace Ncb.Admin.Controllers
 {
-    public class UserCategoryController : AdminBaseController
+    public class UserInfoCategoryController : AdminBaseController
     {
         private readonly UserInfoModelManager _UserModelManager;
         private readonly UserCategoryModelManager _UserCategoryModelManager;
 
-        public UserCategoryController()
+        public UserInfoCategoryController()
         {
             _UserModelManager = _UserModelManager ?? new UserInfoModelManager();
             _UserCategoryModelManager = _UserCategoryModelManager ?? new UserCategoryModelManager();

@@ -12,7 +12,7 @@ namespace Ncb.AdminViewModels
     public class RechargeViewModel
     {
         [DisplayName("Mac地址")]
-        public string DeviceId { get; set; }
+        public string Id { get; set; }
 
         [DisplayName("充值金额")]
         [Required(ErrorMessage = "请输入{0}")]
@@ -21,6 +21,8 @@ namespace Ncb.AdminViewModels
 
         [DisplayName("到期日期")]
         [Required(ErrorMessage = "请输入{0}")]
-        public string ExpiryDate { get; set; }
+        public DateTime ExpiryDate { get; set; }
+
+        public int Month { get; set; }
     }
 }

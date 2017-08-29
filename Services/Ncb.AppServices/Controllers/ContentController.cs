@@ -27,15 +27,8 @@ namespace Ncb.AppServices.Controllers
         {
             try
             {
-                var items = _ContentModelManager.GetList(lastTime, 1, 30);
-                var result = items.Data.Select(a => new ContentListViewModel
-                {
-                    Id = a.ID,
-                    Author = a.Operator,
-                    CreateTime = a.CreateDateDisplay,
-                    Title = a.Title,
-                    ImageUrl = AppSetting.BannerUrl + a.Banner
-                }).ToList();
+                var result = _ContentModelManager.GetList(lastTime, 1, 30);
+               
                 return Success(result);
             }
             catch (Exception e)

@@ -20,13 +20,5 @@ namespace Ncb.AppServices
                 return settings["FeebackPath"];
             }
         }
-
-        public static string BannerUrl
-        {
-            get
-            {
-                return settings["BannerUrl"];
-            }
-        }
     }
 }

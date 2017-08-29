@@ -21,7 +21,7 @@ namespace Ncb.AdminViewModels
     public class RechargeLogQueryResultViewModel
     {
         [DisplayName("Mac")]
-        public string DeviceID { get; set; }
+        public string ID { get; set; }
         [DisplayName("名称")]
         public string UserName { get; set; }
         [DisplayName("手机号码")]
@@ -31,7 +31,7 @@ namespace Ncb.AdminViewModels
         [DisplayName("充值日期")]
         public DateTime RechargeDate { get; set; }
         [DisplayName("到期时间")]
-        public string ExpiryDate { get; set; }
+        public DateTime ExpiryDate { get; set; }
         [DisplayName("操作人")]
         public string Operator { get; set; }
     }

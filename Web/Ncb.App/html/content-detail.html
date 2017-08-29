@@ -14,7 +14,7 @@
 			<!--顶部banner图 开始-->
 			<div id="article-banner" class="kr-article-banner">
 				<div id="article-cover" class="kr-article-cover">
-					<img :src="cover">
+					<img :src="imageUrl">
 				</div>
 				<h2 id="article-title" class="kr-article-title">{{title}}</h2>
 			</div>
@@ -28,7 +28,7 @@
 					<div id="article-time" class="kr-article-time">{{time}}</div>
 				</div>
 				<!--文章详细内容-->
-				<div id="article-article" class="kr-article-article" v-html="content"></div>
+				<div id="article" class="kr-article-article" v-html="content"></div>
 			</div>
 		</div>
 
@@ -41,7 +41,7 @@
 
 			function getDefaultData() {
 				return {
-					cover: '',
+					imageUrl: '',
 					title: '',
 					author: '',
 					time: '',
@@ -79,6 +79,7 @@
 						if(rsp.indexOf('<')>-1)
 						{
 						vm.content = rsp;
+						setArticleImg();
 						}
 						else{
 							mui.toast(rsp);
@@ -99,6 +100,15 @@
 					window.scrollTo(0, 0);
 					vm.resetData();
 				}, 300);
+			}
+			
+			function setArticleImg(){
+				setTimeout(function() {
+				var imgList=mui('#article img');
+				mui.each(imgList,function(index,img){
+					img.src=common.config.rootPath+img.src.replace('file://','');
+				});
+				},100);
 			}
 		</script>
 	</body>

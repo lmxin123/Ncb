@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
 using System.Data.Linq;
+using Ncb.Data.Views;
 
 namespace Ncb.Data
 {
@@ -27,6 +28,5 @@ namespace Ncb.Data
         public DbSet<FeeBackModel> FeeBacks { get; set; }
         public DbSet<UpdateModel> Updates { get; set; }
         public DbSet<UpdateLogModel> UpdateLogs { get; set; }
-
     }
 }

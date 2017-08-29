@@ -1,33 +1,38 @@
 ﻿; +(function (angular, doc) {
     'use strict'
 
-    angular.module('deviceApp', ['ui.bootstrap']).controller('DeviceCtrl', function ($scope, $http) {
+    angular.module('userInfoApp', ['ui.bootstrap']).controller('userInfoCtrl', function ($scope, $http) {
         $scope.pageSize = 20;
         $scope.totalItems = 0;
         $scope.currentPage = 1;
-        $scope.device = {};
+        $scope.userInfo = {};
         $scope.rec = {};
         $scope.List = [];
         var ui = {
             btnQuery: $('#btnQuery'),
-            deviceForm: $('#deviceForm'),
+            userInfoForm: $('#userInfoForm'),
             rechargeForm: $('#rechargeForm'),
-            deviceModal: $('#deviceModal'),
-            rechargeModal: $('#rechargeModal')
+            userInfoModal: $('#userInfoModal'),
+            rechargeModal: $('#rechargeModal'),
+            radioContainer: $('#radioContainer'),
+            expiryDate: $('#ExpiryDate')
         };
 
-        $('#StartDate,#EndDate,#ExpiryDate').datetimepicker({
+        var defaultDateOptions = {
             minView: 2,
             maxView: 3,
             format: 'yyyy-mm-dd',
             language: 'zh-CN',
             autoclose: true,
-        });
+        };
+
+        $('#StartDate,#EndDate').datetimepicker(defaultDateOptions);
+
         $scope.getList = function () {
             ui.btnQuery.button('loading');
 
             $http({
-                url: '/device/getList',
+                url: '/userinfo/getList',
                 method: 'POST',
                 headers: { 'Content-Type': undefined },
                 transformRequest: function (data) {
@@ -52,29 +57,22 @@
                 ui.btnQuery.button('reset');
             });
         };
-        $scope.deviceModal = function (id) {
-            for (var i = 0; i < $scope.List.length; i++) {
-                if ($scope.List[i].ID === id) {
-                    $scope.device.ID = id;
-                    $scope.device.Name = $scope.List[i].Name;
-                    $scope.device.Address = $scope.List[i].Address;
-                    $scope.device.CategoryID = $scope.List[i].CategoryID;
-                    $scope.device.PhoneNumber = $scope.List[i].PhoneNumber;
-                    $scope.device.Gender = $scope.List[i].Gender;
-                    $scope.device.RecordState = $scope.List[i].RecordState;
-                    $scope.device.Remark = $scope.List[i].Remark;
+        $scope.userInfoModal = function (userInfo) {
+            $scope.userInfo = userInfo;
 
-                    ui.deviceForm.find('#CategoryID').val($scope.device.CategoryID);
-                    ui.deviceForm.find('#Gender').val($scope.device.Gender);
-                    ui.deviceForm.find('#RecordState').val($scope.device.RecordState);
+            ui.userInfoForm.find('#CategoryID').val(userInfo.CategoryID);
+            ui.userInfoForm.find('#Gender').val($scope.userInfo.Gender);
+            ui.userInfoForm.find('#RecordState').val(userInfo.RecordState);
 
-                    ui.deviceModal.modal('show');
-                    break;
-                }
-            }
+            ui.userInfoModal.modal('show');
         };
-        $scope.rechargeModal = function (id) {
-            $scope.rec.DeviceId = id;
+        $scope.rechargeModal = function (userInfo) {
+            $scope.rec.id = userInfo.ID;
+            $scope.rec.name =  userInfo.Name;
+            $scope.rec.ExpiryDate = userInfo.ExpiryDate;
+
+            $scope.userInfo = userInfo;
+            ui.radioContainer.find('input:checked').trigger('click');
             ui.rechargeModal.modal('show');
         };
         $scope.delete = function (id, e) {
@@ -86,7 +84,7 @@
                 return;
             }
             common.alert("正在删除...", function () {
-                $http.post('/device/delete', { id: id })
+                $http.post('/userinfo/delete', { id: id })
                     .success(function (resp) {
                         if (resp.Success) {
                             common.alert('删除成功！');
@@ -104,25 +102,25 @@
             });
         };
         $scope.save = function (e) {
-            if (!ui.deviceForm.valid()) return;
+            if (!ui.userInfoForm.valid()) return;
 
             var btn = $(e.target);
             btn.button('loading');
 
             $http({
-                url: '/device/update',
+                url: '/userinfo/update',
                 method: 'POST',
                 headers: { 'Content-Type': undefined },
                 transformRequest: function (data) {
-                    data = new FormData(ui.deviceForm[0]);
-                    data.append('ID', $scope.device.ID);
+                    data = new FormData(ui.userInfoForm[0]);
+                    data.append('ID', $scope.userInfo.ID);
                     return data;
                 }
             }).success(function (resp) {
                 if (resp.Success) {
                     $scope.getList();
                     common.alert("保存成功");
-                    ui.deviceModal.modal('hide');
+                    ui.userInfoModal.modal('hide');
                 } else {
                     common.alert(resp.Message);
                 }
@@ -138,12 +136,13 @@
             var btn = $(e.target).button('loading');
 
             $http({
-                url: '/device/recharge',
+                url: '/userinfo/recharge',
                 method: 'POST',
                 headers: { 'Content-Type': undefined },
                 transformRequest: function (data) {
                     data = new FormData(ui.rechargeForm[0]);
-                    data.append('DeviceId', $scope.rec.DeviceId);
+                    data.append('id', $scope.rec.id);
+                    data.append('Month', ui.radioContainer.find('input:checked').attr('id'));
                     return data;
                 }
             }).success(function (resp) {
@@ -160,8 +159,22 @@
                 btn.button('reset');
             });
         };
-        ui.deviceModal.on('hide.bs.modal', function () {
-            $scope.device = {};
+        ui.userInfoModal.on('hide.bs.modal', function () {
+            $scope.userInfo = {};
         });
+        ui.radioContainer.find('input').click(function () {
+            var index = parseInt(this.id),
+                expiryDate = $scope.userInfo.ExpiryDate,
+                date = new Date();
+
+            if (expiryDate != null) {
+                date = new Date(expiryDate);
+            }
+            date.setMonth(date.getMonth() + index);
+            $scope.rec.ExpiryDate = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+            ui.expiryDate.val($scope.rec.ExpiryDate);
+        });
+
+        $scope.getList();
     });
 })(window.angular, document);

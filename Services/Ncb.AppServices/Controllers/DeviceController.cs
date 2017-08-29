@@ -53,13 +53,6 @@ namespace Ncb.AppServices.Controllers
                     result = await _DeviceManager.SaveAsync(item);
                 }
 
-                var user = await _UserInfoModelManager.GetByIdAsync(device.Id);
-                if (user == null)
-                {
-                    user = new UserInfoModel { CategoryID = 1, LastLoginDate = DateTime.Now };
-                    result = await _UserInfoModelManager.SaveAsync(user, device.Id);
-                }
-
                 return Success(result);
             }
             catch (Exception e)

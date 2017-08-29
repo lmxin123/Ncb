@@ -36,7 +36,7 @@
                         </span>
                     </div>
                 </div>
-                @if (User.Identity.CheckActionRight("0502", ActionTypes.Create))
+                @if (User.Identity.CheckActionRight("0902", ActionTypes.Create))
                 {
                     <div class="form-group">
                         <a class="btn btn-primary" href="javascript:;" ng-click="userModal()">
@@ -69,7 +69,7 @@
                         </th>
                         <th width="200">
                             <span class="line"></span>
-                            @Html.DisplayNameFor(m => m.PhoneNumber)
+                            联系电话
                         </th>
                         <th  width="200">
                             <span class="line"></span>
@@ -101,7 +101,7 @@
                         <td ng-bind="c.Remark"></td>
                         <td>
                             <ul class="actions" ng-hide="c.UserName === 'sa'">
-                                @if (User.Identity.CheckActionRight("0502", ActionTypes.Update))
+                                @if (User.Identity.CheckActionRight("0902", ActionTypes.Update))
                                 {
                                     <li ng-show="c.UserState===0">
                                         <a ng-click="userModal(c.Id)" href="javascript:;">修改</a>
@@ -113,7 +113,7 @@
                                         <a ng-click="operate('UpdateState',c.Id,1,$event,'锁定')" href="javascript:;">锁定</a>
                                     </li>
                                 }
-                                @if (User.Identity.CheckActionRight("0502", ActionTypes.Delete))
+                                @if (User.Identity.CheckActionRight("0902", ActionTypes.Delete))
                                 {
                                     <li ng-show="c.UserState!=1">
                                         <a ng-click="operate('delete',c.Id,2,$event,'删除')" href="javascript:;">删除</a>

@@ -16,10 +16,16 @@ namespace Ncb.AppServices.Controllers
     public class UserInfoController : BaseController
     {
         private readonly UserInfoModelManager _UserInfoModelManager;
-
+        private readonly DeviceModelManager _DeviceModelManager;
+        private readonly DeviceController _DeviceController;
         public UserInfoController()
         {
+            _DeviceModelManager = _DeviceModelManager ?? new DeviceModelManager();
             _UserInfoModelManager = _UserInfoModelManager ?? new UserInfoModelManager();
+            _DeviceController = new DeviceController
+            {
+                ControllerContext = this.ControllerContext
+            };
         }
 
         [HttpPost]
@@ -36,12 +42,12 @@ namespace Ncb.AppServices.Controllers
 
                 return Success(true);
             }
-            catch(DbEntityValidationException e)
+            catch (DbEntityValidationException e)
             {
-                List<string> errMsg =new List<string>();
+                List<string> errMsg = new List<string>();
                 e.EntityValidationErrors.ToList().ForEach(a =>
                 {
-                    errMsg.AddRange( a.ValidationErrors.Select(b => b.ErrorMessage));
+                    errMsg.AddRange(a.ValidationErrors.Select(b => b.ErrorMessage));
                 });
                 return Fail(ErrorCode.ModelValidateError, string.Join(";", errMsg));
             }
@@ -51,31 +57,15 @@ namespace Ncb.AppServices.Controllers
             }
         }
 
-        [HttpGet]
-        public async Task<JsonResult> GetUserInfo(string id)
+        [HttpPost]
+        public async Task<JsonResult> GetUserInfo(CreateDeviceViewModel device)
         {
             try
             {
-                var item = await _UserInfoModelManager.GetByIdAsync(id);
-                if (item == null)
-                {
-                    return Fail(ErrorCode.AuthFailError, "用户不存在！");
-                }
-                else
-                {
-                    item.LastLoginDate = DateTime.Now;
-                    await _UserInfoModelManager.SaveAsync(item);
+                var result = await _UserInfoModelManager.GetUserInfoAsync(device.Id);
 
-                    return Success(new
-                    {
-                        item.ID,
-                        item.Name,
-                        item.PhoneNumber,
-                        item.Amount,
-                        item.ExpiryDate,
-                        item.CategoryID
-                    });
-                }
+                await _DeviceController.Create(device);
+                return Success(result);
             }
             catch (Exception e)
             {

@@ -9,22 +9,32 @@
             <div class="modal-body">
                 <form role="form" method="post" class="form-horizontal" id="rechargeForm">
                     <div class="form-group">
-                        <label class="col-sm-3 control-label">@Html.LabelFor(m=>m.DeviceId)：</label>
+                        <label class="col-sm-3 control-label">@Html.LabelFor(m => m.Id)：</label>
                         <div class="col-sm-7">
-                            <p class="form-control-static" ng-bind="rec.DeviceId"></p>
+                            <p class="form-control-static" ng-bind="rec.id + '【' + rec.name + '】'"></p>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label">@Html.LabelFor(m => m.Amount)<span class="hdy-red">*</span>：</label>
-                        <div class="col-sm-7">
-                            @Html.TextBoxFor(m => m.Amount, new { type = "number", step = "1", min = "0", @class = "form-control", ng_model = "rec.Amount" })
-                            @Html.ValidationMessageFor(m => m.Amount)
+                        <div class="col-sm-7" id="radioContainer">
+                            <label class="radio-inline">
+                                <input type="radio" name="Amount" value="9.9" id="1"><strong class="hdy-red"> 9.9</strong>元/月
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="Amount" value="29" id="3" checked><strong class="hdy-red"> 29</strong>元/3个月
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="Amount" value="58" id="6"><strong class="hdy-red"> 58</strong> 元/6个月
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="Amount" value="98" id="12"><strong class="hdy-red">98 </strong> 元/一年
+                            </label>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label">@Html.DisplayNameFor(m => m.ExpiryDate)<span class="hdy-red">*</span>：</label>
                         <div class="col-sm-7">
-                            @Html.TextBoxFor(m => m.ExpiryDate, new { @class = "form-control", ng_model = "rec.ExpiryDate" })
+                            @Html.TextBoxFor(m => m.ExpiryDate, new { @class = "form-control", @readonly = true, ng_model = "rec.ExpiryDate" })
                             @Html.ValidationMessageFor(m => m.ExpiryDate)
                         </div>
                     </div>

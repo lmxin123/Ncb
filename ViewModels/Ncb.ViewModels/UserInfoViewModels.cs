@@ -1,6 +1,7 @@
 ﻿using Framework.Common;
 using Framework.Data;
 using Ncb.Data;
+using Ncb.Data.Views;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Ncb.AdminViewModels
 {
-    public class UserInfoQueryViewModel : UserInfoModel
+    public class UserInfoQueryViewModel : View_UserDeviceInfos
     {
         public string QueryText { get; set; }
         [Display(Name ="注册日期")]

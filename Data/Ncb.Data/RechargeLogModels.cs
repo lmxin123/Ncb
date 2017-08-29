@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Framework.Data;
@@ -18,8 +19,7 @@ namespace Ncb.Data
 
         [Display(Name = "到期日期")]
         [Required(ErrorMessage = RequiredErrMsg)]
-        [StringLength(10, ErrorMessage = LengthErrMsg)]
-        public string ExpiryDate { get; set; }
+        public DateTime ExpiryDate { get; set; }
 
         [ForeignKey("DeviceID")]
         protected virtual IEnumerable<DeviceModel> Devices { get; set; }

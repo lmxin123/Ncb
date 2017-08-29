@@ -18,7 +18,7 @@
 <div id="pad-wrapper" ng-app="roleApp" ng-controller="RoleCtrl">
     <div class="table-wrapper products-table section">
         <div class="row filter-block">
-            @if (User.Identity.CheckActionRight("0503", ActionTypes.Create))
+            @if (User.Identity.CheckActionRight("0903", ActionTypes.Create))
             {
                 <div class="pull-left">
                     <a class="btn btn-primary" href="javascript:;" ng-click="roleModal()">
@@ -62,13 +62,13 @@
                         <td ng-bind="c.Remark"></td>
                         <td>
                             <ul class="actions" ng-hide="c.Name=='Admin'">
-                                @if (User.Identity.CheckActionRight("0503", ActionTypes.Update))
+                                @if (User.Identity.CheckActionRight("0903", ActionTypes.Update))
                                 {
                                     <li>
                                         <a href="javascript:;" ng-click="roleModal(c.Id)">修改</a>
                                     </li>
                                 }
-                                @if (User.Identity.CheckActionRight("0503", ActionTypes.Delete))
+                                @if (User.Identity.CheckActionRight("0903", ActionTypes.Delete))
                                 {
                                     <li class="last">
                                         <a href="javascript:;" ng-click="delete(c.Id,$event)">删除</a>
