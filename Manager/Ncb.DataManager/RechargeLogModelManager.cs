@@ -43,7 +43,7 @@ namespace Ncb.DataManager
                           .Select(m => new RechargeLogQueryResultViewModel
                           {
                               Amount = m.Amount,
-                              DeviceID = m.DeviceID,
+                              ID = m.DeviceID,
                               ExpiryDate = m.ExpiryDate,
                               PhoneNumber = m.PhoneNumber,
                               Operator = m.Operator,

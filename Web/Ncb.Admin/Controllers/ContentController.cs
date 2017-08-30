@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Framework.Common;
+using Framework.Auth;
 
 namespace Ncb.Admin.Controllers
 {
@@ -152,7 +153,7 @@ namespace Ncb.Admin.Controllers
             }
         }
 
-       // [HttpPost]
+        // [HttpPost]
         public async Task<JsonResult> Delete(string id)
         {
             try
@@ -172,6 +173,7 @@ namespace Ncb.Admin.Controllers
             }
         }
 
+        [ActionAuthorize(ActionType = ActionTypes.Select)]
         public ActionResult Log()
         {
             return View();

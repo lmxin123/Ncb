@@ -1,7 +1,7 @@
 ﻿; +(function (angular, doc) {
     'use strict'
 
-    angular.module('categoryApp', ['ui.bootstrap']).controller('CategoryCtrl', function ($scope, $http) {
+    angular.module('userInfoApp', ['ui.bootstrap']).controller('UserInfoCtrl', function ($scope, $http) {
         $scope.pageSize = 20;
         $scope.totalItems = 0;
         $scope.currentPage = 1;
@@ -9,7 +9,7 @@
         $scope.List = [];
         $scope.getList = function () {
             $http({
-                url: '/deviceCategory/getList',
+                url: '/userInfoCategory/getList',
                 method: 'POST',
                 data: {
                     pageSize: $scope.pageSize,
@@ -59,7 +59,7 @@
             }
 
             common.alert("正在删除...", function () {
-                $http.post('/deviceCategory/delete', { id: id })
+                $http.post('/userInfoCategory/delete', { id: id })
                     .success(function (resp) {
                         if (resp.Success) {
                             common.alert('删除成功！');
@@ -80,7 +80,7 @@
         $('#btnCheck').ajaxClick({
             formSelector: '#categoryForm',
             onBefore: function (self) {
-                self.$form.attr('action', '/deviceCategory/' + ($scope.category.ID ? 'update' : 'create'));
+                self.$form.attr('action', '/userInfoCategory/' + ($scope.category.ID ? 'update' : 'create'));
             },
             onCompleted: function (result, $ajaxBtn) {
                 if (result.Success) {

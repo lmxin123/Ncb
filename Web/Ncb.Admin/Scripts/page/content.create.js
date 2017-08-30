@@ -102,7 +102,9 @@
                     }
                     else {
                         $ajaxBtn.setLoadingText('保存成功,正在刷新界面...');
-                        setTimeout(location.reload, 3000);
+                        setTimeout(function () {
+                            location.reload();
+                        }, 3000);
                     }
                 }
                 else {

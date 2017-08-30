@@ -10,7 +10,8 @@ namespace Ncb.Data.Migrations
         public Configuration()
         {
             //Update-Database ¨CTargetMigration: $InitialDatabase
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
+            //AutomaticMigrationDataLossAllowed = true;
         }
 
         protected override void Seed(Ncb.Data.NcbDbContext context)
