@@ -53,29 +53,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccountModels.cs" />
-    <Compile Include="Migrations\201707290417577_addnewtable.cs" />
-    <Compile Include="Migrations\201707290417577_addnewtable.Designer.cs">
-      <DependentUpon>201707290417577_addnewtable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201707290507419_alterUserCategoryName.cs" />
-    <Compile Include="Migrations\201707290507419_alterUserCategoryName.Designer.cs">
-      <DependentUpon>201707290507419_alterUserCategoryName.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201707290735027_adddeviceCloumn.cs" />
-    <Compile Include="Migrations\201707290735027_adddeviceCloumn.Designer.cs">
-      <DependentUpon>201707290735027_adddeviceCloumn.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201707290916591_123123.cs" />
-    <Compile Include="Migrations\201707290916591_123123.Designer.cs">
-      <DependentUpon>201707290916591_123123.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201708101350304_alterExpiryDate.cs" />
-    <Compile Include="Migrations\201708101350304_alterExpiryDate.Designer.cs">
-      <DependentUpon>201708101350304_alterExpiryDate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201708111520300_12312356.cs" />
-    <Compile Include="Migrations\201708111520300_12312356.Designer.cs">
-      <DependentUpon>201708111520300_12312356.cs</DependentUpon>
+    <Compile Include="Migrations\201708300945468_1221312.cs" />
+    <Compile Include="Migrations\201708300945468_1221312.Designer.cs">
+      <DependentUpon>201708300945468_1221312.cs</DependentUpon>
     </Compile>
     <Compile Include="UserInfoModels.cs" />
     <Compile Include="UpdateModels.cs" />
@@ -103,23 +83,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201707290417577_addnewtable.resx">
-      <DependentUpon>201707290417577_addnewtable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201707290507419_alterUserCategoryName.resx">
-      <DependentUpon>201707290507419_alterUserCategoryName.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201707290735027_adddeviceCloumn.resx">
-      <DependentUpon>201707290735027_adddeviceCloumn.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201707290916591_123123.resx">
-      <DependentUpon>201707290916591_123123.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201708101350304_alterExpiryDate.resx">
-      <DependentUpon>201708101350304_alterExpiryDate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201708111520300_12312356.resx">
-      <DependentUpon>201708111520300_12312356.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201708300945468_1221312.resx">
+      <DependentUpon>201708300945468_1221312.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

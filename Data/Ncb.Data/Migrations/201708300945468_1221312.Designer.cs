@@ -7,13 +7,13 @@ namespace Ncb.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class adddeviceCloumn : IMigrationMetadata
+    public sealed partial class _1221312 : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(adddeviceCloumn));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(_1221312));
         
         string IMigrationMetadata.Id
         {
-            get { return "201707290735027_adddeviceCloumn"; }
+            get { return "201708300945468_1221312"; }
         }
         
         string IMigrationMetadata.Source

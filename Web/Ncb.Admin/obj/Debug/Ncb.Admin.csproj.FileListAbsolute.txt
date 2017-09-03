@@ -468,3 +468,6 @@ E:\github\Ncb\Web\Ncb.Admin\bin\zh-Hans\System.Web.Http.Owin.resources.dll
 E:\github\Ncb\Web\Ncb.Admin\obj\Debug\Ncb.Admin.csprojResolveAssemblyReference.cache
 E:\github\Ncb\Web\Ncb.Admin\obj\Debug\Ncb.Admin.dll
 E:\github\Ncb\Web\Ncb.Admin\obj\Debug\Ncb.Admin.pdb
+F:\project\Ncb\Web\Ncb.Admin\bin\System.Diagnostics.DiagnosticSource.dll
+F:\project\Ncb\Web\Ncb.Admin\bin\Ncb.AdminViewModels.dll.config
+F:\project\Ncb\Web\Ncb.Admin\bin\System.Diagnostics.DiagnosticSource.xml

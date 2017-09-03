@@ -78,8 +78,6 @@ F:\project\Ncb\Data\Ncb.Data\obj\Debug\Ncb.Data.csprojResolveAssemblyReference.c
 F:\project\Ncb\Data\Ncb.Data\obj\Debug\Ncb.Data.dll
 F:\project\Ncb\Data\Ncb.Data\obj\Debug\Ncb.Data.pdb
 F:\project\Ncb\Data\Ncb.Data\bin\Debug\Framework.Common.dll.config
-F:\project\Ncb\Data\Ncb.Data\obj\Debug\Ncb.Data.Migrations.addFeeback.resources
-F:\project\Ncb\Data\Ncb.Data\obj\Debug\Ncb.Data.csproj.GenerateResource.Cache
 E:\github\Ncb\Data\Ncb.Data\bin\Debug\Ncb.Data.dll.config
 E:\github\Ncb\Data\Ncb.Data\bin\Debug\Ncb.Data.dll
 E:\github\Ncb\Data\Ncb.Data\bin\Debug\Ncb.Data.pdb
@@ -126,3 +124,5 @@ E:\github\Ncb\Data\Ncb.Data\obj\Debug\Ncb.Data.dll
 E:\github\Ncb\Data\Ncb.Data\obj\Debug\Ncb.Data.pdb
 E:\github\Ncb\Data\Ncb.Data\obj\Debug\Ncb.Data.Migrations.alterExpiryDate.resources
 E:\github\Ncb\Data\Ncb.Data\obj\Debug\Ncb.Data.Migrations._12312356.resources
+F:\project\Ncb\Data\Ncb.Data\obj\Debug\Ncb.Data.Migrations._1221312.resources
+F:\project\Ncb\Data\Ncb.Data\obj\Debug\Ncb.Data.csproj.GenerateResource.Cache
