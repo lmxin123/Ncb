@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Data.Entity.Validation;
 using System.Web.Mvc;
+using System.Web.Routing;
 
 namespace Ncb.AppServices.Controllers
 {
@@ -17,15 +18,20 @@ namespace Ncb.AppServices.Controllers
     {
         private readonly UserInfoModelManager _UserInfoModelManager;
         private readonly DeviceModelManager _DeviceModelManager;
-        private readonly DeviceController _DeviceController;
+        private DeviceController _DeviceController;
         public UserInfoController()
         {
             _DeviceModelManager = _DeviceModelManager ?? new DeviceModelManager();
             _UserInfoModelManager = _UserInfoModelManager ?? new UserInfoModelManager();
+        }
+
+        protected override void Initialize(RequestContext requestContext)
+        {
             _DeviceController = new DeviceController
             {
                 ControllerContext = this.ControllerContext
             };
+            base.Initialize(requestContext);
         }
 
         [HttpPost]

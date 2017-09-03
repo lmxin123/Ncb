@@ -72,7 +72,6 @@
 					if(showGuide) {
 						//有值，说明已经显示过了，无需显示；
 						//关闭splash页面；
-						plus.navigator.closeSplashscreen();
 						plus.navigator.setFullscreen(false);
 					} else {
 						//显示启动导航
@@ -102,6 +101,8 @@
 						} else {
 							temp[subpages[i]] = "true";
 							mui.extend(aniShow, temp);
+								//触发子窗口加载列表
+							mui.fire(sub, 'getList');
 						}
 						self.append(sub);
 					}
