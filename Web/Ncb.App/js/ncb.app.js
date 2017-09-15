@@ -159,7 +159,7 @@
 		}
 		return mac;
 	};
-	common.update = function() {
+	common.update = function(showToast) {
 		var server = common.config.apiUrl + "/update/check"; //获取升级描述文件服务器地址
 		mui.getJSON(server, {
 			mac: common.getMac(),
@@ -175,7 +175,8 @@
 							plus.runtime.openURL(url);
 						}
 					}, rsp.Data.Title, ["立即更新", "取　　消"]);
-				} else {
+				}
+				else if(showToast){
 					mui.toast('己是最新版本！');
 				}
 			} else {
