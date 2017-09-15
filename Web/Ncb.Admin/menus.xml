@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Menus>
-  <Menu Code="01" Name="首页" Url="/home/index" Icon="icon-home"/>
+  <Menu Code="01" Name="首页" Url="javascript:;" Icon="icon-home"/>
   <Menu Code="02" Name="内容管理" Icon="icon-reorder">
     <SubMenu SubCode="0201" Name="添加内容" Url="/content/create" Select="true" Create="true" Update="true" Delete="false" Auditing="false"/>
     <SubMenu SubCode="0202" Name="内容列表" Url="/content/index" Select="true" Create="true" Update="true" Delete="true" Auditing="false"/>

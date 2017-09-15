@@ -9,6 +9,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Framework.Common;
 
 namespace Ncb.Admin.Controllers
 {
@@ -36,9 +37,10 @@ namespace Ncb.Admin.Controllers
 
                 if (string.IsNullOrEmpty(mac))
                 {
+                    mac = Utility.GetMACAddress();
                     var log = new UpdateLogModel
                     {
-                        Mac = mac,
+                        Mac = mac ?? "get mac faild",
                         Version = item.Version
                     };
                     await _UpdateLogModelManager.SaveAsync(log, Guid.NewGuid().ToString());
