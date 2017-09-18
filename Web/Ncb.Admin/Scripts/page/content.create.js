@@ -90,7 +90,8 @@
                 }
 
                 return {
-                    Content: ueditor.getContent()
+                    Content: ueditor.getContent(),
+                    rightCode: '0201'
                 };
             },
             onSuccess: function (result, $ajaxBtn) {

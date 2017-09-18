@@ -18,7 +18,7 @@ namespace Ncb.DataManager
                 return await base.QueryAsync(pageIndex, pageSize);
             using (Db = new NcbDbContext())
             {
-                var query = Db.Contents.AsQueryable();
+                var query = Db.Contents.Where(a => a.RecordState == state);
 
                 if (!string.IsNullOrEmpty(model.ID))
                     query = query.Where(m => m.ID.Contains(model.ID));

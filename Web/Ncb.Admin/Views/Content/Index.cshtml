@@ -81,9 +81,9 @@
                             @Html.DisplayNameFor(m => m.Operator)
                         </th>
                         @*<th class="col-md-1">
-                            <span class="line"></span>
-                            @Html.DisplayNameFor(m => m.RecordState)
-                        </th>*@
+                                <span class="line"></span>
+                                @Html.DisplayNameFor(m => m.RecordState)
+                            </th>*@
                         <th class="col-md-1">
                             <span class="line"></span>
                             @Html.DisplayNameFor(m => m.Remark)
@@ -108,10 +108,10 @@
                                 <li>
                                     <button class="btn btn-primary" ng-click="viewDetail(c.ID,$event)">详情</button>
                                 </li>
-                                @if (User.Identity.CheckActionRight("0201", ActionTypes.Update))
+                                @if (User.Identity.CheckActionRight("0202", ActionTypes.Update))
                                 {
                                     <li ng-show="c.RecordState===1">
-                                        <a href="/content/update?id={{c.ID}}">修改</a>
+                                        <a href="/content/update?id={{c.ID}}&rightCode=0202">修改</a>
                                     </li>
                                 }
                                 @if (User.Identity.CheckActionRight("0202", ActionTypes.Delete))
@@ -128,11 +128,10 @@
             @Html.Partial("_PaginationPartial")
         </div>
     </div>
-    
+
     @Html.Partial("_DetailPartial")
 </div>
 @section scripts{
-    @Scripts.Render("~/bundles/angular")
     <script src="~/Scripts/angular/angular-sanitize.min.js"></script>
     <script src="~/Scripts/page/content.index.js"></script>
 }

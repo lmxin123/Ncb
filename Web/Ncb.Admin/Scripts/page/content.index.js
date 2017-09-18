@@ -1,10 +1,12 @@
 ﻿(function (angular, doc) {
     'use strict'
 
-    angular.module('contentApp', ['ui.bootstrap', 'ngSanitize']).controller('ContentCtrl', function ($scope, $http, $sce) {
-        $scope.pageSize = 20;
+    angular.module('contentApp', ['ui.bootstrap', 'ngSanitize', 'common']).controller('ContentCtrl', ['$scope', '$http', 'httpServices','$sce', function ($scope, $http, httpServices, $sce) {
+        httpServices.rightCode = '0202';
+        $scope.pageSize = httpServices.pageSize;
+        $scope.currentPage = httpServices.pageIndex;
+
         $scope.totalItems = 0;
-        $scope.currentPage = 1;
         $scope.content = {};
         $scope.detailHtml = '';
         $scope.getList = function (e) {
@@ -13,18 +15,7 @@
                 btn = $(e.target);
                 btn.button('loading');
             }
-
-            $http({
-                method: 'POST',
-                url: '/content/GetList',
-                headers: { 'Content-Type': undefined },
-                transformRequest: function (data) {
-                    data = new FormData(doc.getElementById('queryForm'));
-                    data.append('pageIndex', $scope.currentPage);
-                    data.append('pageSize', $scope.pageSize);
-                    return data;
-                }
-            }).success(function (resp) {
+            httpServices.get('/content/GetList', null, function (resp) {
                 if (resp.Success) {
                     resp.Data.length === 0 && common.alert('未查到数据！');
                     $scope.List = resp.Data;
@@ -33,16 +24,16 @@
                     common.alert(resp.Message || '获取数据失败！');
                 }
                 btn && btn.button('reset');
-            }).error(function () {
-                common.alert('出现错误或者网络异常');
+            }, function () {
                 $scope.totalItems = 0;
                 btn && btn.button('reset');
-            });
+            }, 'queryForm');
+
         };
         $scope.viewDetail = function (id, e) {
             var btn = $(e.target);
             btn.button('loading');
-            $http.get('/content/getContent?id=' + id).success(function (resp) {
+            httpServices.get('/content/getContent?id=' + id, null, function (resp) {
                 if (resp.indexOf('>') > 0) {
                     $scope.detailHtml = $sce.trustAsHtml(resp);
                     ui.detailModel.modal('show');
@@ -50,14 +41,14 @@
                     common.alert(resp);
                 }
                 btn.button('reset');
-            }).error(function () {
-                common.alert('出现错误或者网络异常');
+            }, function () {
+                common.alert('出现错误或者网络异常！');
                 btn.button('reset');
             });
         };
 
         var ui = {
-            detailModel: $('#detailModal'),
+            detailModel: $('#detailModal')
         };
 
         ui.detailModel.on('hidden.bs.modal', function () {
@@ -76,22 +67,17 @@
             }
 
             common.alert("正在删除...", function () {
-                $http.post('/content/delete?id=' + id + '&t=' + common.timestamp())
-                    .success(function (resp) {
-                        if (resp.Success) {
-                            common.alert('删除成功！');
-                            $scope.getList();
-                        } else {
-                            common.alert(resp.Message);
-                            target.text('删除');
-                            target.data('delete', false).css({ 'color': '' });
-                        }
-                    }).error(function (resp) {
-                        common.alert('出现错误或者网络异常！');
-                        $scope.List = [];
-                        $scope.totalItems = 0;
-                    });
+                httpServices.delete('/content/delete', { id: id, t: common.timestamp() }, function (resp) {
+                    if (resp.Success) {
+                        common.alert('删除成功！');
+                        $scope.getList();
+                    } else {
+                        common.alert(resp.Message || '出现错误或者网络异常！');
+                        target.text('删除');
+                        target.data('delete', false).css({ 'color': '' });
+                    }
+                });
             });
         };
-    });
+    }]);
 })(window.angular, document);

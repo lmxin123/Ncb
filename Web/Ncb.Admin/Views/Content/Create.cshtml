@@ -187,9 +187,8 @@
     {% } %}
 </script>
 @section scripts{
-    <script src="~/Scripts/bootstrap-datetimepicker.min.js"></script>
-    <script src="~/Scripts/bootstrap-datetimepicker.zh-CN.js"></script>
-    <script src="~/ueditor/ueditor.config.js"></script>
-    <script src="~/ueditor/ueditor.all.min.js"></script>
-    <script src="~/Scripts/page/content.create.js"></script>
+    @Html.Partial("_DatetimepickerPartial")
+        <script src="~/ueditor/ueditor.config.js"></script>
+        <script src="~/ueditor/ueditor.all.min.js"></script>
+        <script src="~/Scripts/page/content.create.js"></script>
 }

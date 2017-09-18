@@ -153,14 +153,20 @@ namespace Ncb.Admin.Controllers
             }
         }
 
-        // [HttpPost]
+        [HttpDelete]
         public async Task<JsonResult> Delete(string id)
         {
             try
             {
+                if (string.IsNullOrEmpty(id))
+                    id = Request["id"];
+
+                if (string.IsNullOrEmpty(id))
+                    throw new ArgumentNullException("参数无效！");
+
                 var model = await _ContentModelManager.GetByIdAsync(id);
 
-                model.Operator = UserId;
+                model.Operator = User.Identity.Name;
                 model.RecordState = RecordStates.Deleted;
 
                 var result = await _ContentModelManager.SaveAsync(model);
@@ -179,7 +185,7 @@ namespace Ncb.Admin.Controllers
             return View();
         }
 
-        [HttpPost]
+        [HttpGet]
         public async Task<JsonResult> GetLogs()
         {
             return Success();

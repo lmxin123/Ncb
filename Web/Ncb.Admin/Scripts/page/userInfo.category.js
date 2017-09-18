@@ -1,21 +1,19 @@
 ﻿; +(function (angular, doc) {
     'use strict'
 
-    angular.module('userInfoApp', ['ui.bootstrap']).controller('UserInfoCtrl', function ($scope, $http) {
-        $scope.pageSize = 20;
+    angular.module('userInfoApp', ['ui.bootstrap', 'common']).controller('UserInfoCtrl', ['$scope', '$http', 'httpServices', function ($scope, $http, httpServices) {
+        httpServices.rightCode = '0302';
+        $scope.pageSize = httpServices.pageSize;
+        $scope.currentPage = httpServices.pageIndex;
+
         $scope.totalItems = 0;
-        $scope.currentPage = 1;
         $scope.category = {};
         $scope.List = [];
         $scope.getList = function () {
-            $http({
-                url: '/userInfoCategory/getList',
-                method: 'POST',
-                data: {
-                    pageSize: $scope.pageSize,
-                    pageIndex: $scope.currentPage
-                }
-            }).success(function (resp) {
+            httpServices.post('/userInfoCategory/getList', {
+                pageSize: $scope.pageSize,
+                pageIndex: $scope.currentPage
+            }, function (resp) {
                 if (resp.Success) {
                     resp.Data.length === 0 && common.alert('未查到数据！');
                     $scope.List = resp.Data;
@@ -23,12 +21,12 @@
                 } else {
                     common.alert(resp.Message);
                 }
-            }).error(function (resp) {
-                common.alert('出现错误或者网络异常！');
+            }, function (resp) {
                 $scope.List = [];
                 $scope.totalItems = 0;
             });
         };
+
         $scope.getList();
 
         var ui = {
@@ -59,21 +57,20 @@
             }
 
             common.alert("正在删除...", function () {
-                $http.post('/userInfoCategory/delete', { id: id })
-                    .success(function (resp) {
-                        if (resp.Success) {
-                            common.alert('删除成功！');
-                            $scope.getList();
-                        } else {
-                            common.alert(resp.Message);
-                            target.text('删除');
-                            target.data('delete', false).css({ 'color': '' });
-                        }
-                    }).error(function (resp) {
-                        common.alert('出现错误或者网络异常！');
-                        $scope.List = [];
-                        $scope.totalItems = 0;
-                    });
+                httpServices.delete('/userInfoCategory/delete', { id: id }, function (resp) {
+                    if (resp.Success) {
+                        common.alert('删除成功！');
+                        $scope.getList();
+                    } else {
+                        common.alert(resp.Message);
+                        target.text('删除');
+                        target.data('delete', false).css({ 'color': '' });
+                    }
+                }, function (resp) {
+                    common.alert(resp.Message || '出现错误或者网络异常！');
+                    $scope.List = [];
+                    $scope.totalItems = 0;
+                });
             });
         };
 
@@ -81,6 +78,9 @@
             formSelector: '#categoryForm',
             onBefore: function (self) {
                 self.$form.attr('action', '/userInfoCategory/' + ($scope.category.ID ? 'update' : 'create'));
+                return {
+                    rightCode: httpService.rightCode
+                };
             },
             onCompleted: function (result, $ajaxBtn) {
                 if (result.Success) {
@@ -98,5 +98,5 @@
         ui.categroyModal.on('hide.bs.modal', function () {
             $scope.category = {};
         });
-    });
+    }]);
 })(window.angular, document);

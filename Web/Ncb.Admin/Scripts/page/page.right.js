@@ -1,29 +1,23 @@
 ﻿; +(function (angular, doc) {
     'use strict'
 
-    angular.module('rightApp', []).controller('RightCtrl', function ($scope, $http) {
+    angular.module('rightApp', ['common']).controller('RightCtrl', ['$scope', '$http', 'httpServices', function ($scope, $http, httpServices) {
+        httpServices.rightCode = '0904';
+
         $scope.rights = [];
         $scope.getRight = function () {
-            $http({
-                url: '/right/get',
-                method: 'POST',
-                headers: { 'Content-Type': undefined },
-                transformRequest: function (data) {
-                    data = new FormData(common.get('queryForm'));
-                    return data;
-                }
-            }).success(function (resp) {
+            httpServices.get('/right/get', null, function (resp) {
                 if (resp.Success) {
                     resp.Data.length === 0 && common.alert('未查到数据！');
                     $scope.rights = resp.Data;
                 } else {
-                  //  common.alert(resp.Message);
+                    common.alert(resp.Message);
                     $scope.rights = [];
                 }
-            }).error(function () {
+            }, function () {
                 common.alert("网络异常或者请求出错了！");
                 $scope.rights = [];
-            });
+            }, 'queryForm');
         };
 
         $('#roleId').change(function () {
@@ -50,12 +44,12 @@
         $scope.actionChange = function (a) {
             var length = $scope.rights[a].SubRightList.length, count = length;
 
-            for (var i = 0; i < length ; i++) {
+            for (var i = 0; i < length; i++) {
                 if (($scope.rights[a].SubRightList[i].Select !== null && $scope.rights[a].SubRightList[i].Select) ||
-                   ($scope.rights[a].SubRightList[i].Create !== null && $scope.rights[a].SubRightList[i].Create) ||
-                   ($scope.rights[a].SubRightList[i].Update !== null && $scope.rights[a].SubRightList[i].Update) ||
-                   ($scope.rights[a].SubRightList[i].Delete !== null && $scope.rights[a].SubRightList[i].Delete) ||
-                   ($scope.rights[a].SubRightList[i].Auditing !== null && $scope.rights[a].SubRightList[i].Auditing)) {
+                    ($scope.rights[a].SubRightList[i].Create !== null && $scope.rights[a].SubRightList[i].Create) ||
+                    ($scope.rights[a].SubRightList[i].Update !== null && $scope.rights[a].SubRightList[i].Update) ||
+                    ($scope.rights[a].SubRightList[i].Delete !== null && $scope.rights[a].SubRightList[i].Delete) ||
+                    ($scope.rights[a].SubRightList[i].Auditing !== null && $scope.rights[a].SubRightList[i].Auditing)) {
                     $scope.rights[a].All = $scope.rights[a].SubRightList[i].All = true;
                 }
                 else {
@@ -82,15 +76,14 @@
                 $scope.rights[i].SubRightList[j].Auditing = chk;
         };
         var save = function () {
-            $http.post('/right/create',
-                {
-                    roleId: $('#roleId').val(),
-                    roleJsonStr: JSON.stringify($scope.rights)
-                }).success(function (resp) {
-                    common.alert(resp.Success ? '数据己保存！' : '保存失败：' + resp.Message);
-                }).error(function (resp) {
-                    common.alert("网络异常！");
-                });
+            httpServices.post('/right/create', {
+                roleId: $('#roleId').val(),
+                roleJsonStr: JSON.stringify($scope.rights)
+            }, function (resp) {
+                common.alert(resp.Success ? '数据己保存！' : '保存失败：' + resp.Message);
+            }, function (resp) {
+                common.alert("网络异常！");
+            })
         };
-    });
+    }]);
 })(window.angular, document);

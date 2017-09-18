@@ -25,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -756,6 +757,7 @@
     </Content>
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\service\commonServices.js" />
     <Content Include="Scripts\theme.js" />
     <Content Include="ueditor\net\config.json" />
     <Content Include="ueditor\net\controller.ashx" />
@@ -1056,17 +1058,10 @@
     <Content Include="Scripts\jquery-3.1.1.min.map" />
     <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
     <Content Include="Views\AdDowload\Index.cshtml" />
-    <Content Include="Views\AdList\Index.cshtml" />
-    <Content Include="Views\AdScheduling\Index.cshtml" />
-    <Content Include="Views\AdScheduling\_CreatePartial.cshtml" />
     <Content Include="Views\UserInfo\Index.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\CorpAd\Index.cshtml" />
-    <Content Include="Views\AdList\Create.cshtml" />
-    <Content Include="Views\CorpInfo\Index.cshtml" />
     <Content Include="Views\OpenArea\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\CorpAd\_DetailPartial.cshtml" />
     <Content Include="Views\Shared\_AreaSelectorPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\_PanelPartial.cshtml" />
@@ -1084,11 +1079,7 @@
     <Content Include="Views\Shared\_LayoutTab.cshtml" />
     <Content Include="Views\Shared\_PaginationPartial.cshtml" />
     <Content Include="Views\Shared\AuthActionFaild.cshtml" />
-    <Content Include="Views\CorpList\Index.cshtml" />
-    <Content Include="Views\CorpList\Create.cshtml" />
     <Content Include="Views\UserInfoCategory\Index.cshtml" />
-    <Content Include="Views\CorpAd\Create.cshtml" />
-    <Content Include="Views\AdList\_DetailAndAuditingPartial.cshtml" />
     <Content Include="Views\Content\Create.cshtml" />
     <Content Include="Views\Content\Index.cshtml" />
     <Content Include="Views\Content\_DetailPartial.cshtml" />

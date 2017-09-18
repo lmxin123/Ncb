@@ -1,10 +1,10 @@
 ﻿; +(function (angular, doc) {
     'use strict'
+    angular.module('userInfoApp', ['ui.bootstrap', 'common']).controller('userInfoCtrl', ['$scope', '$http', 'httpServices', function ($scope, $http, httpServices) {
+        httpServices.rightCode = '0301';
+        $scope.pageSize = httpServices.pageSize;
+        $scope.currentPage = httpServices.pageIndex;
 
-    angular.module('userInfoApp', ['ui.bootstrap']).controller('userInfoCtrl', function ($scope, $http) {
-        $scope.pageSize = 20;
-        $scope.totalItems = 0;
-        $scope.currentPage = 1;
         $scope.userInfo = {};
         $scope.rec = {};
         $scope.List = [];
@@ -29,19 +29,8 @@
         $('#StartDate,#EndDate').datetimepicker(defaultDateOptions);
 
         $scope.getList = function () {
-            ui.btnQuery.button('loading');
-
-            $http({
-                url: '/userinfo/getList',
-                method: 'POST',
-                headers: { 'Content-Type': undefined },
-                transformRequest: function (data) {
-                    data = new FormData(doc.getElementById('queryForm'));
-                    data.append('pageIndex', $scope.currentPage);
-                    data.append('pageSize', $scope.pageSize);
-                    return data;
-                }
-            }).success(function (resp) {
+            var btn = ui.btnQuery.button('loading');
+            httpServices.post('/userinfo/getList', null, function (resp) {
                 if (resp.Success) {
                     resp.Data.length === 0 && common.alert('未查到数据！');
                     $scope.List = resp.Data;
@@ -49,26 +38,27 @@
                 } else {
                     common.alert(resp.Message);
                 }
-                ui.btnQuery.button('reset');
-            }).error(function (resp) {
+                btn.button('reset');
+            }, function (resp) {
                 common.alert('出现错误或者网络异常！');
                 $scope.List = [];
                 $scope.totalItems = 0;
-                ui.btnQuery.button('reset');
-            });
+                btn.button('reset');
+            }, 'queryForm');
+
         };
         $scope.userInfoModal = function (userInfo) {
             $scope.userInfo = userInfo;
 
             ui.userInfoForm.find('#CategoryID').val(userInfo.CategoryID);
-            ui.userInfoForm.find('#Gender').val($scope.userInfo.Gender);
+            ui.userInfoForm.find('#Gender').val(userInfo.Gender);
             ui.userInfoForm.find('#RecordState').val(userInfo.RecordState);
 
             ui.userInfoModal.modal('show');
         };
         $scope.rechargeModal = function (userInfo) {
             $scope.rec.id = userInfo.ID;
-            $scope.rec.name =  userInfo.Name;
+            $scope.rec.name = userInfo.Name;
             $scope.rec.ExpiryDate = userInfo.ExpiryDate;
 
             $scope.userInfo = userInfo;
@@ -84,21 +74,20 @@
                 return;
             }
             common.alert("正在删除...", function () {
-                $http.post('/userinfo/delete', { id: id })
-                    .success(function (resp) {
-                        if (resp.Success) {
-                            common.alert('删除成功！');
-                            $scope.getList();
-                        } else {
-                            common.alert(resp.Message);
-                            target.text('删除');
-                            target.data('delete', false).css({ 'color': '' });
-                        }
-                    }).error(function () {
-                        common.alert('出现错误或者网络异常！');
-                        $scope.List = [];
-                        $scope.totalItems = 0;
-                    });
+                httpServices.delete('/userinfo/delete', { id: id, t: common.timestamp() }, function (resp) {
+                    if (resp.Success) {
+                        common.alert('删除成功！');
+                        $scope.getList();
+                    } else {
+                        common.alert(resp.Message);
+                        target.text('删除');
+                        target.data('delete', false).css({ 'color': '' });
+                    }
+                }, function (resp) {
+                    common.alert(resp.Message || '出现错误或者网络异常！');
+                    $scope.List = [];
+                    $scope.totalItems = 0;
+                });
             });
         };
         $scope.save = function (e) {
@@ -106,17 +95,7 @@
 
             var btn = $(e.target);
             btn.button('loading');
-
-            $http({
-                url: '/userinfo/update',
-                method: 'POST',
-                headers: { 'Content-Type': undefined },
-                transformRequest: function (data) {
-                    data = new FormData(ui.userInfoForm[0]);
-                    data.append('ID', $scope.userInfo.ID);
-                    return data;
-                }
-            }).success(function (resp) {
+            httpServices.post('/userinfo/update', null, function (resp) {
                 if (resp.Success) {
                     $scope.getList();
                     common.alert("保存成功");
@@ -125,27 +104,18 @@
                     common.alert(resp.Message);
                 }
                 btn.button('reset');
-            }).error(function (resp) {
-                common.alert('出现错误或者网络异常！');
+            }, function (resp) {
+                common.alert(resp.Message || '出现错误或者网络异常！');
                 btn.button('reset');
-            });
+                }, ui.userInfoForm[0].id);
         }
+
         $scope.recharge = function (e) {
             if (!ui.rechargeForm.valid()) return;
 
             var btn = $(e.target).button('loading');
 
-            $http({
-                url: '/userinfo/recharge',
-                method: 'POST',
-                headers: { 'Content-Type': undefined },
-                transformRequest: function (data) {
-                    data = new FormData(ui.rechargeForm[0]);
-                    data.append('id', $scope.rec.id);
-                    data.append('Month', ui.radioContainer.find('input:checked').attr('id'));
-                    return data;
-                }
-            }).success(function (resp) {
+            httpServices.post('/userinfo/recharge', null, function (resp) {
                 if (resp.Success) {
                     $scope.getList();
                     common.alert("充值成功!");
@@ -154,11 +124,12 @@
                     common.alert(resp.Message);
                 }
                 btn.button('reset');
-            }).error(function (resp) {
-                common.alert('出现错误或者网络异常！');
+            }, function (resp) {
+                common.alert(resp.Message || '出现错误或者网络异常！');
                 btn.button('reset');
-            });
+            }, ui.rechargeForm[0].id);
         };
+
         ui.userInfoModal.on('hide.bs.modal', function () {
             $scope.userInfo = {};
         });
@@ -176,5 +147,5 @@
         });
 
         $scope.getList();
-    });
+    }]);
 })(window.angular, document);
